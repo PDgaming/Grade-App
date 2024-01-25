@@ -2,6 +2,7 @@
 	import Navbar from "./components/navbar.svelte";
 	import "./index.css";
 	import { goto } from "$app/navigation";
+	import laptop from "./images/laptop.png"
 
 	function loginPage() {
 		goto("/login");
@@ -18,6 +19,7 @@
 
 <div class="main">
 	<Navbar />
+	<img class="laptopImg" src={laptop} alt="laptop.img">
 	<div class="home" id="home">
 		<h7>Grade App - Educational App</h7>
 		<p>
