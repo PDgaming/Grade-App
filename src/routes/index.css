@@ -1,0 +1,203 @@
+body {
+    height: 100vh;
+}
+
+/* Bootstrap css */
+
+.btn {
+    font-size: 14px;
+    padding: 6px 12px;
+    margin-bottom: 0;
+
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+
+    width: 120px;
+    margin-top: 10px;
+    margin-bottom: 25%;
+}
+
+.homeNav {
+    margin-left: 90px;
+}
+
+.brandName {
+    display: none;
+}
+
+.nav-item {
+    margin-top: 10px;
+    margin-right: 40px;
+    font-size: 20px;
+}
+
+.nav-link,
+h7 {
+    display: block;
+}
+
+h7,
+p {
+    margin-left: 10px;
+}
+
+.loginButton {
+    margin-left: 20px;
+}
+
+.signUpButton {
+    margin-left: 40px;
+}
+
+.title {
+    margin-top: 1px;
+    margin-left: 90px;
+    font-size: 30px;
+    height: 40px;
+}
+
+.navbar {
+    background-attachment: fixed;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #333;
+}
+
+.home {
+    width: 50%;
+}
+
+p {
+    font-size: 25px;
+    color: #1c6fa1;
+}
+
+h7 {
+    font-size: 40px;
+    color: #f25e22;
+}
+
+.laptopImg {
+    width: 35%;
+    margin-left: 750px;
+    margin-top: 60px;
+}
+
+/* Responsive for img */
+@media screen and (max-width: 990px) {
+
+    .main,
+    .laptopImg {
+        display: none;
+    }
+
+    .home {
+        margin-top: 55px;
+    }
+}
+
+/* Responsive for nav */
+@media screen and (max-width: 1170px) {
+    .nav-item {
+        margin-top: 10px;
+        margin-right: 40px;
+        font-size: 20px;
+    }
+
+    .homeNav {
+        margin-left: 20px;
+    }
+}
+
+/* Responsive for nav */
+@media screen and (max-width: 1090px) {
+    .homeNav {
+        margin-left: -10px;
+    }
+}
+
+/* Responsive for nav */
+@media screen and (max-width: 1060px) {
+    .homeNav {
+        margin-left: -30px;
+    }
+}
+
+/* Responsive for nav */
+@media screen and (max-width: 990px) {
+    .laptopImg {
+        display: none;
+    }
+
+    .brandName {
+        display: block;
+        color: black;
+        font-size: 40px;
+        margin-left: 40%;
+        margin-top: 20px;
+    }
+
+    .home {
+        margin-top: 55px;
+        width: auto;
+    }
+}
+
+/* Responsive for tablets */
+@media screen and (max-width: 800px) {
+
+    .main,
+    .laptopImg {
+        display: none;
+    }
+
+    .brandName {
+        font-size: 35px;
+        margin-left: 35%;
+    }
+
+    .home {
+        margin-top: 55px;
+        width: auto;
+    }
+}
+
+/* Responsive for mobiles */
+@media screen and (max-width: 400px) {
+    .home {
+        margin-top: 45px;
+        width: auto;
+    }
+
+    .brandName {
+        font-size: 35px;
+        margin-left: 30%;
+    }
+
+    h7 {
+        font-size: 200%;
+        ;
+    }
+
+    p {
+        font-size: 23px;
+    }
+
+    .btn {
+        margin-bottom: 60%;
+    }
+
+    .loginButton {
+        margin-left: 15px;
+    }
+
+    .signUpButton {
+        margin-left: 55px;
+    }
+}
