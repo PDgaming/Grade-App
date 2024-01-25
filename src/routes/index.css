@@ -1,4 +1,6 @@
 body {
+    background: #c8e8ea;
+    background-attachment: fixed;
     height: 100vh;
 }
 
@@ -70,6 +72,7 @@ p {
 }
 
 .home {
+    margin-top: 70px;
     width: 50%;
 }
 

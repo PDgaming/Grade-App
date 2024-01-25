@@ -1,3 +1,7 @@
+<script>
+    import "./login.css"
+</script>
+
 <div class="container">
     <h1>Login</h1>
     <form>

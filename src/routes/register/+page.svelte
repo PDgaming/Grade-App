@@ -1,3 +1,7 @@
+<script>
+    import "./register.css"
+</script>
+
 <div class="container">
     <h1>Sign Up</h1>
     <form>
