@@ -1,17 +1,23 @@
 <script>
     import "./chatWindowStyle.css";
     import { GoogleGenerativeAI } from "@google/generative-ai";
-    
-    let userInputs = [];
-    let GeminiResponses = [];
+
+    let messages = [];
+    let userInput = "";
+
+    let GeminiInput = "";
+
     function sendMessage() {
         const userInput = document.getElementById("userInput").value.trim();
-        userInputs = [...userInputs, userInput];
+        messages = [
+            ...messages,
+            { content: userInput, sender: "user" },
+        ];
         document.getElementById("userInput").value = "";
         run(userInput);
     }
 
-    const API_KEY="AIzaSyD3pylacar54cPdqHQDPc1bWHBEU_-97uE";
+    const API_KEY = "AIzaSyD3pylacar54cPdqHQDPc1bWHBEU_-97uE";
 
     const genAI = new GoogleGenerativeAI(API_KEY);
 
@@ -21,23 +27,23 @@
         const result = await model.generateContent(prompt);
         const response = await result.response;
         const text = response.text();
-        GeminiResponses = [...GeminiResponses, text];
+        messages = [
+            ...messages,
+            { content: text, sender: "Gemini" },
+        ];
     }
 </script>
 
 <div class="main">
     <div class="title">
-        <text style="position: relative; top: 8px;">Grade App</text>
+        <text style="position: relative; top: -2px;">Grade App</text>
     </div>
-    <div class="chat">
-        <p>
-            {#each userInputs as userInput}
-                {userInput}
-            {/each}<br>
-            {#each GeminiResponses as GeminiResponse}
-                {GeminiResponse}
-            {/each}<br>
-        </p>
+    <div class="chat-container">
+        {#each messages as userMessage}
+            <div class={userMessage.sender}>
+                {userMessage.content}
+            </div>
+        {/each}
     </div>
     <div class="typebox">
         <input type="text" id="userInput" placeholder="Type your question..." />
