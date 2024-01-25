@@ -6,15 +6,6 @@
         const userInput = document.getElementById("userInput").value.trim();
         console.log(userInput);
     }
-
-    // Event listener for when the user presses Enter in the input field
-    document
-        .getElementById("userInput")
-        .addEventListener("keydown", function (event) {
-            if (event.key === "Enter") {
-                sendMessage();
-            }
-        });
 </script>
 
 <div class="main">
