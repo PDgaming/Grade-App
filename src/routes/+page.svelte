@@ -19,7 +19,6 @@
 
 <div class="main">
 	<Navbar />
-	<img class="laptopImg" src="./laptop.png" alt="" />
 	<div class="home" id="home">
 		<h7>Grade App - Educational App</h7>
 		<p>
