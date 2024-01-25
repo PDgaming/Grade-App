@@ -1,5 +1,6 @@
 <script>
     import "./login.css";
+    import { goto } from '$app/navigation';
 
     const emails = ["produnyadehingia12345@gmail.com"];
     const passwords = ["PDgrade12345"];
@@ -7,7 +8,7 @@
     function login(event) {
         event.preventDefault();
         const email = document.getElementById("email").value;
-        // const password = document.getElementById("password").value;
+        const password = document.getElementById("password").value;
 
         const emailInEmails = emails.includes(email);
         const passwordInPasswords = passwords.includes(password);
@@ -15,8 +16,7 @@
         if (emailInEmails && passwordInPasswords) {
             console.log("Login Successfull!!");
             alert("Login Successfull!!");
-            window.location.href =
-                "https://widget.getcody.ai/public/9ad004cc-1220-4070-900d-4493e82fcb8b";
+            goto("/grade-app.ai");
         } else if (!emailInEmails && !passwordInPasswords) {
             console.log("Both email and password are wrong");
             alert("Both email and password are wrong");
