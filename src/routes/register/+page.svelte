@@ -1,6 +1,14 @@
 <script>
     import "./register.css"
+
+    function signUp() {
+        console.log("")
+    }
 </script>
+
+<svelte:head>
+	<title>Grade App - Register</title>
+</svelte:head>
 
 <div class="container">
     <h1>Sign Up</h1>
@@ -21,7 +29,7 @@
             />
             <span class="showPassword" id="showPassword">Show</span><br />
 
-            <button onclick="signUp()">Sign Up</button>
+            <button on:click={signUp}>Sign Up</button>
             <h1 style="font-size: 20px;">
                 Already have an account? <a href="/login">Login</a>
             </h1>

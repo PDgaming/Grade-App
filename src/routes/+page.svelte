@@ -1,20 +1,19 @@
 <script>
 	import Navbar from "./components/navbar.svelte";
 	import "./index.css";
-	import { goto } from '$app/navigation';
+	import { goto } from "$app/navigation";
 
 	function loginPage() {
-		goto('/login');
+		goto("/login");
 	}
 
 	function registerPage() {
-		goto('/register')
+		goto("/register");
 	}
 </script>
 
 <svelte:head>
 	<title>Grade App</title>
-	<meta name="description" content="Svelte demo app" />
 </svelte:head>
 
 <div class="main">

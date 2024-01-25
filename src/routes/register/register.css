@@ -21,8 +21,6 @@ body {
     background-color: azure;
     padding: 20px;
     border-radius: 30px;
-    width: 33%;
-    height: 72%;
 }
 
 h1 {
@@ -87,8 +85,7 @@ a {
 /* Responsive for tablets */
 @media screen and (max-width: 1280px) {
     .container {
-        width: 45%;
-        height: 70%;
+        width: 100%;
     }
 
     .emailInput {
