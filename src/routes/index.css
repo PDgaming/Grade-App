@@ -72,7 +72,7 @@ p {
 }
 
 .home {
-    margin-top: -30px;
+    margin-top: -300px;
     width: 50%;
 }
 
@@ -92,23 +92,10 @@ h7 {
     margin-top: 60px;
 }
 
-/* Responsive for img */
-@media screen and (max-width: 990px) {
-    .laptopImg {
-        display: none;
-    }
-
-    .home {
-        margin-top: 55px;
-    }
-}
-
 /* Responsive for nav */
 @media screen and (max-width: 1170px) {
     .nav-item {
-        margin-top: 10px;
         margin-right: 40px;
-        font-size: 20px;
     }
 
     .homeNav {
@@ -118,29 +105,47 @@ h7 {
 
 /* Responsive for nav */
 @media screen and (max-width: 1090px) {
+    .laptopImg {
+        margin-left: 700px;
+    }
+
     .homeNav {
-        margin-left: 5px;
+        margin-left: 40px;
+    }
+
+    .nav-item {
+        margin-right: 30px;
     }
 }
 
 /* Responsive for nav */
 @media screen and (max-width: 1060px) {
+    .laptopImg {
+        margin-left: 670px;
+    }
+
     .homeNav {
-        margin-left: -8px
+        margin-left: 20px
+    }
+
+    .home {
+        width: 55%;
+        ;
     }
 }
 
 /* Responsive for nav */
 @media screen and (max-width: 990px) {
-    .homeNav,
+
+    .navbar,
     .laptopImg {
         display: none;
     }
 
     .brandName {
         display: block;
-        color: black;
-        font-size: 40px;
+        color: rgb(241, 163, 46);
+        font-size: 50px;
         margin-left: 40%;
         margin-top: 20px;
     }
@@ -153,14 +158,11 @@ h7 {
 
 /* Responsive for tablets */
 @media screen and (max-width: 800px) {
-
-    .main,
     .laptopImg {
         display: none;
     }
 
     .brandName {
-        font-size: 35px;
         margin-left: 35%;
     }
 
@@ -178,8 +180,7 @@ h7 {
     }
 
     .brandName {
-        font-size: 35px;
-        margin-left: 30%;
+        margin-left: 20%;
     }
 
     h7 {
