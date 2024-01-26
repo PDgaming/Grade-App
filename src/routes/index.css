@@ -72,7 +72,7 @@ p {
 }
 
 .home {
-    margin-top: -300px;
+    margin-top: -30px;
     width: 50%;
 }
 
@@ -94,8 +94,6 @@ h7 {
 
 /* Responsive for img */
 @media screen and (max-width: 990px) {
-
-    .main,
     .laptopImg {
         display: none;
     }
@@ -121,19 +119,20 @@ h7 {
 /* Responsive for nav */
 @media screen and (max-width: 1090px) {
     .homeNav {
-        margin-left: -10px;
+        margin-left: 5px;
     }
 }
 
 /* Responsive for nav */
 @media screen and (max-width: 1060px) {
     .homeNav {
-        margin-left: -30px;
+        margin-left: -8px
     }
 }
 
 /* Responsive for nav */
 @media screen and (max-width: 990px) {
+    .homeNav,
     .laptopImg {
         display: none;
     }
