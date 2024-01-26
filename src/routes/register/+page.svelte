@@ -27,7 +27,6 @@
                 id="password"
                 placeholder="Password"
             />
-            <span class="showPassword" id="showPassword">Show</span><br />
 
             <button on:click={signUp}>Sign Up</button>
             <h1 style="font-size: 20px;">

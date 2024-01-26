@@ -2,13 +2,14 @@ body {
 	font-family: Arial, sans-serif;
 	margin: 0;
 	padding: 0;
+	background-color: #ccc;
 }
 
 .title {
 	background-color: lightblue;
 	text-align: center;
 	font-size: 24px;
-	padding: 10px;
+	padding: 5px;
 	border-bottom: 1px;
 	border-style: solid;
 	border-color: black;
@@ -24,9 +25,8 @@ body {
 	left: 0;
 	width: 100%;
 	padding: 10px;
-	background-color: #fff;
-	border-top: 1px solid #ccc;
-	border-radius: 10px;
+	background-color: transparent;
+	margin-top: 10px;
 }
 
 .typebox input {
@@ -34,7 +34,7 @@ body {
 	width: 94%;
 	padding: 10px;
 	border: none;
-	border-radius: 5px;
+	border-radius: 8px;
 	border: 1px solid #ccc;
 }
 
@@ -47,4 +47,26 @@ body {
 
 .chat-container {
 	font-size : 30px;
+}
+
+.user {
+	padding: 10px;
+	background-color: #aad5ec;
+	border-radius: 10px;
+	border: 3px solid black;
+	width: 95%;
+	margin-top: 10px;
+	margin-left: 10px;
+	margin-bottom: 10px;
+	padding-bottom: 57px;
+}
+
+.Gemini {
+	padding: 10px;
+	background-color: #aad5ec;
+	border-radius: 10px;
+	border: 3px solid black;
+	width: 95%;
+	margin-left: 10px;
+	padding-bottom: 55px;
 }

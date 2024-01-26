@@ -9,10 +9,7 @@
 
     function sendMessage() {
         const userInput = document.getElementById("userInput").value.trim();
-        messages = [
-            ...messages,
-            { content: userInput, sender: "user" },
-        ];
+        messages = [...messages, { content: userInput, sender: "user" }];
         document.getElementById("userInput").value = "";
         run(userInput);
     }
@@ -27,21 +24,18 @@
         const result = await model.generateContent(prompt);
         const response = await result.response;
         const text = response.text();
-        messages = [
-            ...messages,
-            { content: text, sender: "Gemini" },
-        ];
+        messages = [...messages, { content: text, sender: "Gemini" }];
     }
 </script>
 
 <div class="main">
     <div class="title">
-        <text style="position: relative; top: -2px;">Grade App</text>
+        <h1>Grade App</h1>
     </div>
     <div class="chat-container">
         {#each messages as userMessage}
             <div class={userMessage.sender}>
-                {userMessage.content}
+                <h1>{userMessage.sender}</h1> <p>{userMessage.content}</p>
             </div>
         {/each}
     </div>
@@ -50,8 +44,5 @@
         <button type="button" class="btn btn-primary" on:click={sendMessage}
             >Send</button
         >
-    </div>
-    <div class="messagingArea">
-        <div class="chatLog" id="chatLog"></div>
     </div>
 </div>

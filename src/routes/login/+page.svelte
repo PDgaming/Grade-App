@@ -1,6 +1,6 @@
 <script>
     import "./login.css";
-    import { goto } from '$app/navigation';
+    import { goto } from "$app/navigation";
 
     const emails = ["produnyadehingia12345@gmail.com"];
     const passwords = ["PDgrade12345"];
@@ -9,7 +9,7 @@
         event.preventDefault();
         const email = document.getElementById("email").value;
         const password = document.getElementById("password").value;
-
+        
         const emailInEmails = emails.includes(email);
         const passwordInPasswords = passwords.includes(password);
 
