@@ -2,7 +2,9 @@
     import "./register.css"
 
     function signUp() {
-        console.log("")
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+        console.log(email, password);
     }
 </script>
 
@@ -11,7 +13,7 @@
 </svelte:head>
 
 <div class="container">
-    <h1>Sign Up</h1>
+    <h1>Register</h1>
     <form>
         <div id="SignUpForm">
             <input
@@ -28,7 +30,7 @@
                 placeholder="Password"
             />
 
-            <button on:click={signUp}>Sign Up</button>
+            <button on:click={signUp}>Register</button>
             <h1 style="font-size: 20px;">
                 Already have an account? <a href="/login">Login</a>
             </h1>
