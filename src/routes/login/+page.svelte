@@ -71,7 +71,7 @@
             />
             <button id="loginButton" on:click={login}>Login</button>
             <h1 style="font-size: 20px;">
-                Don't have an account? <a href="/register">Sign Up</a>
+                Don't have an account? <a href="/register">Register</a>
             </h1>
         </div>
     </form>
