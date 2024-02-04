@@ -31,6 +31,10 @@
     }
 </script>
 
+<svelte:head>
+    <title>Grade-App AI (powered by Bard)</title>
+</svelte:head>
+
 <div class="main">
     <h3>Bard</h3>
     <div class="chatWindow">

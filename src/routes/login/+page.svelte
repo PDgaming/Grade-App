@@ -1,34 +1,42 @@
 <script>
     import "./login.css";
     import { goto } from "$app/navigation";
+    import { initializeApp } from "firebase/app";
+    import { getAuth, signInWithEmailAndPassword} from "firebase/auth";
+    // https://firebase.google.com/docs/web/setup#available-libraries
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyB_MSh9YlBu7GGN5wxZjY7kGN4bU697GO4",
 
-    const emails = ["produnyadehingia12345@gmail.com"];
-    const passwords = ["PDgrade12345"];
+        authDomain: "grade-app-16e2d.firebaseapp.com",
 
-    function login(event) {
+        projectId: "grade-app-16e2d",
+
+        storageBucket: "grade-app-16e2d.appspot.com",
+
+        messagingSenderId: "942886540823",
+
+        appId: "1:942886540823:web:29caeac2695fecc3d4ee52",
+
+        measurementId: "G-WD1M20G6LX",
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    const login = async (event) => {
         event.preventDefault();
         const email = document.getElementById("email").value;
         const password = document.getElementById("password").value;
-        
-        const emailInEmails = emails.includes(email);
-        const passwordInPasswords = passwords.includes(password);
 
-        if (emailInEmails && passwordInPasswords) {
-            console.log("Login Successfull!!");
-            alert("Login Successfull!!");
+        try {
+            const userCredential = await signInWithEmailAndPassword(auth, email, password);
+            console.log(userCredential.user);
+            alert("Login Successfill!!");
             goto("/grade-app.ai");
-        } else if (!emailInEmails && !passwordInPasswords) {
-            console.log("Both email and password are wrong");
-            alert("Both email and password are wrong");
-        } else if (!emailInEmails) {
-            console.log("Wrong email");
-            alert("Wrong email");
-        } else if (!passwordInPasswords) {
-            console.log("Wrong password");
-            alert("Wrong password");
-        } else if (!emailInEmails && !passwordInPasswords) {
-            console.log("Both email and password are wrong");
-            alert("Both email and password are wrong");
+        } catch(error) {
+            console.log(error);
+            alert("Sorry, it seems like there was an error, please re-check your credentials")
         }
     }
 </script>
