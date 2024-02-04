@@ -19,7 +19,7 @@ Grade App is an educational chatting application that leverages the power of GPT
 1. Clone the repository to your local machine:
 
    ```shell
-   git clone https://github.com/yourusername/grade-app.git
+   git clone https://github.com/PDgaming/Grade-App
    ```
 
 2. Navigate to the project directory:
@@ -30,19 +30,9 @@ Grade App is an educational chatting application that leverages the power of GPT
 
    or through a file explorer.
 
-### Usage
-
-1. Open the index.html file in any web browser:
-
-2. Click on "Login" and enter your credentials.
-
-3. Start a conversation with the AI assistant by typing in your questions and receive responses based on NCERT books.
-
-4. Enjoy the benefits of instant, accurate, and reliable academic assistance!
-
 ## Contributing
 
-We welcome contributions to improve Grade App. Feel free to open issues, submit pull requests, or suggest new features to enhance the app's functionality.
+We welcome contributions to improve or suggest new features to enhance the app's functionality.
 
 ## License
 
