@@ -2,7 +2,8 @@
     import "./login.css";
     import { goto } from "$app/navigation";
     import { initializeApp } from "firebase/app";
-    import { getAuth, signInWithEmailAndPassword} from "firebase/auth";
+    import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+
     const firebaseConfig = {
         apiKey: "AIzaSyB_MSh9YlBu7GGN5wxZjY7kGN4bU697GO4",
 
@@ -28,15 +29,21 @@
         const password = document.getElementById("password").value;
 
         try {
-            const userCredential = await signInWithEmailAndPassword(auth, email, password);
+            const userCredential = await signInWithEmailAndPassword(
+                auth,
+                email,
+                password,
+            );
             console.log(userCredential.user);
             alert("Login Successfill!!");
             goto("/grade-app.ai");
-        } catch(error) {
+        } catch (error) {
             console.log(error);
-            alert("Sorry, it seems like there was an error, please re-check your credentials")
+            alert(
+                "Sorry, it seems like there was an error, please re-check your credentials",
+            );
         }
-    }
+    };
 </script>
 
 <svelte:head>
