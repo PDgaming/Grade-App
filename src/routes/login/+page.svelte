@@ -44,7 +44,7 @@
         } catch (error) {
             console.log(error.code);
             if (error.code == AuthErrorCodes.INVALID_LOGIN_CREDENTIALS) {
-                alert(error.code)
+                alert(error.code, "Please recheck your credentials")
             } else {
                 alert("Something went wrong please try again.")
             }
