@@ -1,38 +1,60 @@
-# create-svelte
+# Grade App - Educational Chatting App
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+Grade App is an educational chatting application that leverages the power of GPT-3.5 to provide answers to academic questions based on NCERT (National Council of Educational Research and Training) books. It's designed to help students and educators easily access accurate and reliable information related to their studies in a conversational format.
 
-## Creating a project
+## Features
 
-If you're seeing this, you've probably already done this step. Congrats!
+- **Chat with an AI Assistant**: Have real-time conversations with the AI-powered assistant that is trained on NCERT textbooks.
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+- **Get Accurate Answers**: Receive accurate and contextually relevant answers to your academic questions, ensuring you have the right information at your fingertips.
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+- **Educational Resource**: Use Grade App as a supplementary resource to aid your studies, providing clarification and support on a wide range of academic topics.
 
-## Developing
+- **User-Friendly Interface**: The user interface is designed to be intuitive and easy to use, making it accessible to students of all ages.
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+## Getting Started
 
-```bash
-npm run dev
+### Installation
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+1. Clone the repository to your local machine:
 
-## Building
+   ```shell
+   git clone https://github.com/yourusername/grade-app.git
+   ```
 
-To create a production version of your app:
+2. Navigate to the project directory:
 
-```bash
-npm run build
-```
+   ```shell
+   cd grade-app
+   ```
 
-You can preview the production build with `npm run preview`.
+   or through a file explorer.
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+### Usage
+
+1. Open the index.html file in any web browser:
+
+2. Click on "Login" and enter your credentials.
+
+3. Start a conversation with the AI assistant by typing in your questions and receive responses based on NCERT books.
+
+4. Enjoy the benefits of instant, accurate, and reliable academic assistance!
+
+## Contributing
+
+We welcome contributions to improve Grade App. Feel free to open issues, submit pull requests, or suggest new features to enhance the app's functionality.
+
+## License
+
+More details soon.
+
+## Acknowledgments
+
+- Thanks to CodyAI for providing the GPT-3 API.
+- The Grade App team for their hard work and dedication in developing this educational tool.
+
+## Contact
+
+If you have any questions or feedback, please feel free to reach out at [email@gmail.com](mailto:email@gmail.com).
+
+Happy learning with Grade App! 📚🤖🚀
