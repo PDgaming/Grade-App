@@ -45,6 +45,6 @@ More details soon.
 
 ## Contact
 
-If you have any questions or feedback, please feel free to reach out at [email@gmail.com](mailto:email@gmail.com).
+If you have any questions or feedback, please feel free to reach out at [gradeappbyapp@gmail.com](mailto:	gradeappbyapp@gmail.com).
 
 Happy learning with Grade App! 📚🤖🚀
