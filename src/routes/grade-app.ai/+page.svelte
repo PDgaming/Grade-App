@@ -7,9 +7,10 @@
 
     let GeminiInput = "";
 
+    let shouldShowWelcomeMessage = true;
+
     function sendMessage() {
-    //     document.getElementById("hello-message").remove();
-    //     document.getElementById("how-to").remove();
+        shouldShowWelcomeMessage = false;
         const userInput = document.getElementById("userInput").value.trim();
         messages = [...messages, { content: userInput, sender: "user" }];
         document.getElementById("userInput").value = "";
@@ -34,8 +35,13 @@
     <h3>Bard</h3>
     <div class="chatWindow">
         <div class="chatLog">
-            <!-- <h1 id="hello-message">Hello There!</h1>
-            <p id="how-to">Start a conversation with Bard by typing in a prompt in the text input below.</p> -->
+            {#if shouldShowWelcomeMessage}
+                <h1 id="hello-message">Hello There!</h1>
+                <p id="how-to">
+                    Start a conversation with Bard by typing in a prompt in the
+                    text input below.
+                </p>
+            {/if}
             {#each messages as userMessage}
                 <div class={userMessage.sender}>
                     <h1>{userMessage.sender}:</h1>
