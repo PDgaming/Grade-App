@@ -43,7 +43,11 @@
             goto("/grade-app.ai");
         } catch (error) {
             console.log(error.code);
-            alert("Something went wrong please try again.")
+            if (error.code == AuthErrorCodes.INVALID_LOGIN_CREDENTIALS) {
+                alert(error.code)
+            } else {
+                alert("Something went wrong please try again.")
+            }
         }
     };
 </script>
