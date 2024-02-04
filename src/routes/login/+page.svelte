@@ -2,7 +2,11 @@
     import "./login.css";
     import { goto } from "$app/navigation";
     import { initializeApp } from "firebase/app";
-    import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+    import {
+        AuthErrorCodes,
+        getAuth,
+        signInWithEmailAndPassword,
+    } from "firebase/auth";
 
     const firebaseConfig = {
         apiKey: "AIzaSyB_MSh9YlBu7GGN5wxZjY7kGN4bU697GO4",
@@ -38,10 +42,8 @@
             alert("Login Successfill!!");
             goto("/grade-app.ai");
         } catch (error) {
-            console.log(error);
-            alert(
-                "Sorry, it seems like there was an error, please re-check your credentials",
-            );
+            console.log(error.code);
+            alert("Something went wrong please try again.")
         }
     };
 </script>
