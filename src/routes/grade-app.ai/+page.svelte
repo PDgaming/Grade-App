@@ -69,6 +69,9 @@
         color: white;
         font-size: 25px;
         margin-left: 15px;
+        background-color: #1e1f20;
+        border-radius: 30px;
+        border-top-left-radius: 10px;
     }
 
     .Gemini {
