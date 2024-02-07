@@ -2,7 +2,7 @@
 	import Navbar from "./components/navbar.svelte";
 	import "./index.css";
 	import { goto } from "$app/navigation";
-	import laptop from "./images/laptop.png";
+	import laptop from "./images/laptop.webp";
 
 	function loginPage() {
 		goto("/login");
