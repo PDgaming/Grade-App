@@ -2,9 +2,9 @@
     import "./register.css"
 
     function signUp() {
-        const email = document.getElementById("email").value;
-        const password = document.getElementById("password").value;
-        console.log(email, password);
+        const email = document.getElementById("email").value; // gets email from input field
+        const password = document.getElementById("password").value; // gets password from input field
+        console.log(email, password); // logs email and password
     }
 </script>
 

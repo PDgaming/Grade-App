@@ -2,7 +2,7 @@
     import "./chatWindow.css";
     import { GoogleGenerativeAI } from "@google/generative-ai";
 
-    let messages = [];
+    let messages = []; //array to store user and ai messases
     let userInput = "";
 
     let GeminiInput = "";
@@ -11,23 +11,23 @@
 
     function sendMessage() {
         shouldShowWelcomeMessage = false;
-        const userInput = document.getElementById("userInput").value.trim();
-        messages = [...messages, { content: userInput, sender: "user" }];
-        document.getElementById("userInput").value = "";
-        run(userInput);
+        const userInput = document.getElementById("userInput").value.trim();  // gets user input
+        messages = [...messages, { content: userInput, sender: "user" }]; // add user input to messages
+        document.getElementById("userInput").value = ""; // removes old message from the input
+        run(userInput); // sends user message to ai to get response
     }
 
     const API_KEY = "AIzaSyD3pylacar54cPdqHQDPc1bWHBEU_-97uE";
 
-    const genAI = new GoogleGenerativeAI(API_KEY);
+    const genAI = new GoogleGenerativeAI(API_KEY); // generates a new ai to using the api key to get responses
 
     async function run(prompt) {
-        const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+        const model = genAI.getGenerativeModel({ model: "gemini-pro" }); // generates a new model using genAI
 
-        const result = await model.generateContent(prompt);
-        const response = await result.response;
-        const text = response.text();
-        messages = [...messages, { content: text, sender: "Gemini" }];
+        const result = await model.generateContent(prompt); // takes in promt and generates a result
+        const response = await result.response; // takes result and generates a response
+        const text = response.text(); //takes the text of the response and puts in "text"
+        messages = [...messages, { content: text, sender: "Gemini" }]; // adds text to messages.
     }
 </script>
 
@@ -39,12 +39,14 @@
     <h3>Bard</h3>
     <div class="chatWindow">
         <div class="chatLog">
-            {#if shouldShowWelcomeMessage}
+            <!-- Shows welcome message -->
+            {#if shouldShowWelcomeMessage} 
                 <h1 id="hello-message">Hello There!</h1>
                 <p id="how-to">
                     Start a conversation with Bard by typing in a prompt in the
                     text input below.
                 </p>
+            <!-- Addes messages to the DOM -->
             {/if}
             {#each messages as userMessage}
                 <div class={userMessage.sender}>

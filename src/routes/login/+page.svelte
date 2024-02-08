@@ -8,6 +8,7 @@
         signInWithEmailAndPassword,
     } from "firebase/auth";
 
+    // config for firebase 
     const firebaseConfig = {
         apiKey: "AIzaSyB_MSh9YlBu7GGN5wxZjY7kGN4bU697GO4",
 
@@ -24,29 +25,29 @@
         measurementId: "G-WD1M20G6LX",
     };
 
-    const app = initializeApp(firebaseConfig);
+    const app = initializeApp(firebaseConfig); // initializes app using config info
     const auth = getAuth(app);
 
     const login = async (event) => {
-        event.preventDefault();
-        const email = document.getElementById("email").value;
-        const password = document.getElementById("password").value;
+        event.preventDefault(); // prevents the site from reloading on button click
+        const email = document.getElementById("email").value; // gets email from the input field
+        const password = document.getElementById("password").value; // gets password from the input field
 
         try {
             const userCredential = await signInWithEmailAndPassword(
                 auth,
                 email,
                 password,
-            );
-            console.log(userCredential.user);
-            alert("Login Successfill!!");
-            goto("/grade-app.ai");
+            ); // creates user credentials with email and password to sign in
+            console.log(userCredential.user); // logs user credentials
+            alert("Login Successfill!!"); // shows success message
+            goto("/grade-app.ai"); // redirects user to chat window
         } catch (error) {
-            console.log(error.code);
+            console.log(error.code); // logs error code
             if (error.code == AuthErrorCodes.INVALID_LOGIN_CREDENTIALS) {
-                alert("Error: "+error.code+". Please recheck your credentials")
+                alert("Error: "+error.code+". Please recheck your credentials") // shows error message if user credentials are wrong
             } else {
-                alert("Error: "+error.code+". Something went wrong please try again.")
+                alert("Error: "+error.code+". Something went wrong please try again.") // shows error message if somthing else went wrong
             }
         }
     };

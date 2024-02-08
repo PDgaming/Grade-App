@@ -4,10 +4,12 @@
 	import { goto } from "$app/navigation";
 	import laptop from "./images/laptop.webp";
 
+	// Takes to login page
 	function loginPage() {
 		goto("/login");
 	}
 
+	// Takes to register page
 	function registerPage() {
 		goto("/register");
 	}
