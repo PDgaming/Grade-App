@@ -12,7 +12,7 @@
   function sendMessage() {
     shouldShowWelcomeMessage = false;
     const userInput = document.getElementById("userInput").value.trim(); // gets user input
-    messages = [...messages, { content: userInput, sender: "user" }]; // add user input to messages
+    messages = [...messages, { content: userInput, sender: "User" }]; // add user input to messages
     document.getElementById("userInput").value = ""; // removes old message from the input
     run(userInput); // sends user message to ai to get response
   }
@@ -142,5 +142,6 @@
     height: 85vh;
     width: 85vw;
     background-color: transparent;
+    padding-bottom: 100px;
   }
 </style>
