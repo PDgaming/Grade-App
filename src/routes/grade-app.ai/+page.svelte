@@ -9,6 +9,12 @@
 
   let shouldShowWelcomeMessage = true;
 
+  function handleKeyDown(event) {
+    if (event.key === "Enter") {
+        sendMessage();
+    }
+  }
+
   function sendMessage() {
     shouldShowWelcomeMessage = false;
     const userInput = document.getElementById("userInput").value.trim(); // gets user input
@@ -27,11 +33,22 @@
     const result = await model.generateContent(prompt); // takes in promt and generates a result
     const response = await result.response; // takes result and generates a response
     const text = response.text(); //takes the text of the response and puts in "text"
-    const lines = text.split(/\*\*/); // Split text at "**" symbol
-    messages = [
-      ...messages,
-      ...lines.map((line) => ({ content: line, sender: "Gemini" })),
-    ];
+
+    // Remove "*" characters from the text
+    const cleanText = text.replace(/\*/g, "");
+
+    // Split text at "**" (optional, only if line breaks needed)
+    const messageLines = cleanText.split(/\*\*/).map((line) => {
+      return line.startsWith("Gemini:") ? line : `Gemini: ${line}`;
+    });
+
+    // Create a single message (keep as single message or split for line breaks)
+    const message = {
+      content: messageLines.join("\n") || cleanText, // Adjust based on line break logic
+      sender: "Gemini",
+    };
+
+    messages = [...messages, message];
   }
 </script>
 
@@ -61,7 +78,7 @@
     {/each}
   </div>
   <div class="input-area">
-    <input type="text" id="userInput" placeholder="Enter a prompt here" />
+    <input type="text" id="userInput" placeholder="Enter a prompt here" on:keydown={handleKeyDown}/>
     <button type="button" on:click={sendMessage}>Send</button>
   </div>
   <h6 style="position: relative; top:-10px; left:23vw; z-index:1; color:white">
