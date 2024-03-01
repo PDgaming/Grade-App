@@ -27,7 +27,11 @@
     const result = await model.generateContent(prompt); // takes in promt and generates a result
     const response = await result.response; // takes result and generates a response
     const text = response.text(); //takes the text of the response and puts in "text"
-    messages = [...messages, { content: text, sender: "Gemini" }]; // adds text to messages.
+    const lines = text.split(/\*\*/); // Split text at "**" symbol
+    messages = [
+      ...messages,
+      ...lines.map((line) => ({ content: line, sender: "Gemini" })),
+    ];
   }
 </script>
 
@@ -68,7 +72,7 @@
 
 <style>
   .header {
-    height:50px;
+    height: 50px;
   }
   .user {
     color: white;
@@ -128,7 +132,7 @@
   .input-area {
     position: fixed;
     top: 78vh;
-    left:8vw;
+    left: 8vw;
     height: 100px;
     width: 85vw;
     z-index: 1;
