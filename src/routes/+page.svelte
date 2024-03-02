@@ -27,7 +27,7 @@
     <h8>Grade App</h8><br />
     <p style="font-size: 22px;font-weight:600;">
       Grade App is an educational chatting application that leverages the power
-      of Google's Bard to provide answers to academic questions based on NCERT
+      of Google's AI Gemini to provide answers to academic questions based on NCERT
       (National Council of Educational Research and Training) books.
     </p>
     <p>
@@ -88,19 +88,10 @@
       by our AI ChatBot by typing in your questions
     </p>
   </div>
-  <div id="contributing">
-    <h7>Contributing</h7>
-
-    <p>
-      We welcome contributions to improve Grade App. Feel free to open issues,
-      submit pull requests, or suggest new features to enhance the app's
-      functionality.
-    </p>
-  </div>
   <div id="acknowledgments">
     <h7>Acknowledgments</h7>
 
-    <p>- Thanks to Google for providing the Bard API.</p>
+    <p>- Thanks to Google for providing the API for Gemini.</p>
     <p>
       - The Grade App team(including PD) for their hard work and dedication in
       developing this educational tool.
