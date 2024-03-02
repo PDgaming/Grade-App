@@ -5,6 +5,7 @@
         const email = document.getElementById("email").value; // gets email from input field
         const password = document.getElementById("password").value; // gets password from input field
         console.log(email, password); // logs email and password
+        alert("We are still working on this page! Please contant us at gradeappbyapp@gmail.com to register an account")
     }
 </script>
 

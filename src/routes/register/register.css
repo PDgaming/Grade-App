@@ -9,7 +9,7 @@ button {
 }
 
 body {
-    background-color: #fff;
+    background-color: #131314;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -18,13 +18,14 @@ body {
 }
 
 .container {
-    background-color: #c8e8ea;;
+    background-color: #1e1f20;
     padding: 20px;
     border-radius: 30px;
 }
 
 h1 {
-    font-size: 50px
+    font-size: 50px;
+    color: white;
 }
 
 button,
@@ -83,7 +84,7 @@ a {
 /* Responsive for tablets */
 @media screen and (max-width: 1280px) {
     .container {
-        width: 100%;
+        width: 90%;
     }
 
     .emailInput {
@@ -106,7 +107,7 @@ a {
 /* Responsive for tablets */
 @media screen and (max-width: 800px) {
     .container {
-        width: 65%;
+        width: 80%;
         height: 70%;
     }
 
@@ -130,7 +131,7 @@ a {
 /* Responsive for tablets */
 @media screen and (max-width: 770px) {
     .container {
-        width: 80%;
+        width: 90%;
         height: 80%;
     }
 
@@ -158,24 +159,25 @@ a {
 /* Responsive for mobiles */
 @media screen and (max-width: 400px) {
     .container {
-        width: 80%;
-        height: 80%;
+        width: 100%;
+        height: 100vh;
+        border-radius: 0px;
     }
 
     h1 {
-        font-size: 30px;
+        font-size: 60px;
     }
 
     .emailInput {
         margin-top: 45px;
-        margin-left: 27px;
+        margin-left: 15px;
         margin-bottom: 70px;;
-        width: 77%;
+        width: 90%;
     }
     
     .passwordInput {
         margin-bottom: 50px;
-        width: 75%;
+        width: 90%;
     }
     
     button {
