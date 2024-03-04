@@ -33,3 +33,50 @@
     </div>
   </nav>
 </div>
+
+<style>
+  .homeNav {
+    margin-left: 16vh;
+  }
+  .nav-item {
+    margin-top: 10px;
+    margin-right: 120px;
+    font-size: 20px;
+  }
+  .navbar {
+    background-attachment: fixed;
+  }
+  .nav-link {
+    text-decoration: none;
+    color: #333;
+  }
+  /* Responsive for nav */
+  @media screen and (max-width: 1170px) {
+    .nav-item {
+      margin-right: 100px;
+    }
+    .homeNav {
+      margin-left: 10vw;
+    }
+  }
+  /* Responsive for nav */
+  @media screen and (max-width: 1090px) {
+    .homeNav {
+      margin-left: 7vw;
+    }
+  }
+
+  /* Responsive for nav */
+  @media screen and (max-width: 1060px) {
+    .homeNav {
+      margin-left: 5vw;
+    }
+  }
+
+  /* Responsive for nav */
+  @media screen and (max-width: 990px) {
+    .navbar {
+      display: none;
+    }
+  }
+</style>
