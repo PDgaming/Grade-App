@@ -260,13 +260,19 @@
     input {
       left: -4vw;
       height: 8vh;
-      width: 65vw;
+      width: 66vw;
       border-radius: 20px;
     }
     #gemini-safety {
       text-align: center;
       font-size: 12px;
       left: 0vw;
+    }
+  }
+  /* Responsive for vivo 1724 */
+  @media screen and (max-width: 390px) {
+    input {
+      width: 64vw;
     }
   }
 </style>
