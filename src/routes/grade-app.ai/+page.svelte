@@ -87,8 +87,8 @@
     <button type="button" on:click={sendMessage}>Send</button>
   </div>
   <h6 id="gemini-safety">
-    Gemini may display inaccurate info, including about people, so double-check
-    its responses.
+    Gemini may display inaccurate info about people, so double-check its
+    responses.
   </h6>
 </div>
 
@@ -169,7 +169,7 @@
   #gemini-safety {
     position: relative;
     top: -10px;
-    left: 23vw;
+    left: 26vw;
     color: white;
   }
   :root {
@@ -183,20 +183,16 @@
       font-size: 22px;
     }
     input {
-      top: 15px;
-      left: 9vw;
+      left: 8vw;
       height: 10vh;
       width: 65vw;
-      padding-left: 20px;
-    }
-    .input-area {
-      left: 8vw;
-      height: 100px;
-      width: 85vw;
     }
     button {
       top: 17px;
-      left: 10vw;
+      left: 9vw;
+    }
+    #gemini-safety {
+      left: 23vw;
     }
   }
   @media screen and (max-width: 1090px) {
@@ -205,12 +201,31 @@
     }
     button {
       top: 16px;
+      left: 7vw;
+    }
+    input {
+      left: 6vw;
+      width: 66vw;
+    }
+    #gemini-safety {
+      left: 20vw;
     }
   }
 
   @media screen and (max-width: 1060px) {
     p {
       font-size: 24px;
+    }
+    button {
+      top: 16px;
+      left: 6vw;
+    }
+    input {
+      left: 5vw;
+      width: 72vw;
+    }
+    #gemini-safety {
+      left: 21vw;
     }
   }
 
@@ -219,8 +234,16 @@
     p {
       font-size: 25px;
     }
+    button {
+      top: 16px;
+      left: 1vw;
+    }
+    input {
+      left: 0vw;
+      width: 75vw;
+    }
     #gemini-safety {
-      font-size: 15px;
+      font-size: 13px;
       left: 15vw;
     }
   }
@@ -229,6 +252,21 @@
   @media screen and (max-width: 400px) {
     p {
       font-size: 22px;
+    }
+    button {
+      top: 16px;
+      left: -3vw;
+    }
+    input {
+      left: -4vw;
+      height: 8vh;
+      width: 66vw;
+      border-radius: 20px;
+    }
+    #gemini-safety {
+      text-align: center;
+      font-size: 12px;
+      left: 0vw;
     }
   }
 </style>
