@@ -1,4 +1,5 @@
 <script>
+  import Loader from "../components/loader.svelte";
   import "./chatWindow.css";
   import { GoogleGenerativeAI } from "@google/generative-ai";
 
@@ -8,6 +9,7 @@
   let GeminiInput = "";
 
   let shouldShowWelcomeMessage = true;
+  let shouldload = false;
 
   function handleKeyDown(event) {
     if (event.key === "Enter") {
@@ -29,10 +31,11 @@
 
   async function run(prompt) {
     const model = genAI.getGenerativeModel({ model: "gemini-pro" }); // generates a new model using genAI
-
+    shouldload = true;
     const result = await model.generateContent(prompt); // takes in prompt and generates a result
     const response = await result.response; // takes result and generates a response
     const text = response.text(); //takes the text of the response and puts in "text"
+    shouldload = false;
 
     // Remove "*" characters from the text
     const cleanText = text.replace(/\*/g, "");
@@ -68,6 +71,7 @@
         Start a conversation with Bard by typing in a prompt in the text input
         below.
       </p>
+
       <!-- Adds messages to the DOM -->
     {/if}
     {#each messages as userMessage}
@@ -75,6 +79,9 @@
         <h3>{userMessage.sender}:</h3>
         <p style="margin-left:35px;">{userMessage.content}</p>
       </div>
+      {#if shouldload}
+        <Loader />
+      {/if}
     {/each}
   </div>
   <div class="input-area">
