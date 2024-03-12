@@ -30,7 +30,7 @@
   async function run(prompt) {
     const model = genAI.getGenerativeModel({ model: "gemini-pro" }); // generates a new model using genAI
 
-    const result = await model.generateContent(prompt); // takes in promt and generates a result
+    const result = await model.generateContent(prompt); // takes in prompt and generates a result
     const response = await result.response; // takes result and generates a response
     const text = response.text(); //takes the text of the response and puts in "text"
 
@@ -260,7 +260,7 @@
     input {
       left: -4vw;
       height: 8vh;
-      width: 66vw;
+      width: 65vw;
       border-radius: 20px;
     }
     #gemini-safety {
