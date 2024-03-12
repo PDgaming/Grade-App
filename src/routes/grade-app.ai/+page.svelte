@@ -2,7 +2,7 @@
   import "./chatWindow.css";
   import { GoogleGenerativeAI } from "@google/generative-ai";
 
-  let messages = []; //array to store user and ai messases
+  let messages = []; //array to store user and ai messages
   let userInput = "";
 
   let GeminiInput = "";
@@ -11,7 +11,7 @@
 
   function handleKeyDown(event) {
     if (event.key === "Enter") {
-        sendMessage();
+      sendMessage();
     }
   }
 
@@ -39,7 +39,7 @@
 
     // Split text at "**" (optional, only if line breaks needed)
     const messageLines = cleanText.split(/\*\*/).map((line) => {
-      return line.startsWith("Gemini:") ? line : `Gemini: ${line}`;
+      return line.startsWith("Gemini:") ? line : line;
     });
 
     // Create a single message (keep as single message or split for line breaks)
@@ -68,7 +68,7 @@
         Start a conversation with Bard by typing in a prompt in the text input
         below.
       </p>
-      <!-- Addes messages to the DOM -->
+      <!-- Adds messages to the DOM -->
     {/if}
     {#each messages as userMessage}
       <div class={userMessage.sender}>
@@ -78,7 +78,12 @@
     {/each}
   </div>
   <div class="input-area">
-    <input type="text" id="userInput" placeholder="Enter a prompt here" on:keydown={handleKeyDown}/>
+    <input
+      type="text"
+      id="userInput"
+      placeholder="Enter a prompt here"
+      on:keydown={handleKeyDown}
+    />
     <button type="button" on:click={sendMessage}>Send</button>
   </div>
   <h6 style="position: relative; top:-10px; left:23vw; z-index:1; color:white">
@@ -91,28 +96,26 @@
   .header {
     height: 50px;
   }
-  .user {
+  .User {
     color: white;
     font-size: 25px;
-    margin-left: 15px;
+    margin-left: 1vw;
   }
 
   .Gemini {
     color: white;
     font-size: 25px;
-    margin-left: 15px;
+    margin-left: 1vw;
   }
   h1 {
     color: white;
     margin-top: 50px;
-    margin-left: 20px;
     font-weight: bold;
   }
 
   p {
     color: white;
-    font-size: 20px;
-    margin-left: 20px;
+    font-size: 21px;
   }
 
   h3 {
@@ -152,17 +155,52 @@
     left: 8vw;
     height: 100px;
     width: 85vw;
-    z-index: 1;
     background-color: transparent;
   }
 
   .chatLog {
     overflow-y: scroll;
     overflow-x: hidden;
-    margin-left: 8vw;
+    margin-left: 8%;
     height: 85vh;
     width: 85vw;
     background-color: transparent;
     padding-bottom: 100px;
+  }
+  :root {
+    @media (prefers-reduced-motion: no-preference) {
+      overflow: hidden;
+    }
+  }
+
+  @media screen and (max-width: 1170px) {
+    p {
+      font-size: 22px;
+    }
+  }
+  @media screen and (max-width: 1090px) {
+    p {
+      font-size: 23px;
+    }
+  }
+
+  @media screen and (max-width: 1060px) {
+    p {
+      font-size: 24px;
+    }
+  }
+
+  /* Responsive for tablets */
+  @media screen and (max-width: 800px) {
+    p {
+      font-size: 25px;
+    }
+  }
+
+  /* Responsive for mobiles */
+  @media screen and (max-width: 400px) {
+    p {
+      font-size: 22px;
+    }
   }
 </style>
