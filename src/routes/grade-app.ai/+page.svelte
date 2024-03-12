@@ -73,7 +73,7 @@
     {#each messages as userMessage}
       <div class={userMessage.sender}>
         <h3>{userMessage.sender}:</h3>
-        <p>{userMessage.content}</p>
+        <p style="margin-left:35px;">{userMessage.content}</p>
       </div>
     {/each}
   </div>
@@ -86,7 +86,7 @@
     />
     <button type="button" on:click={sendMessage}>Send</button>
   </div>
-  <h6 style="position: relative; top:-10px; left:23vw; z-index:1; color:white">
+  <h6 id="gemini-safety">
     Gemini may display inaccurate info, including about people, so double-check
     its responses.
   </h6>
@@ -99,13 +99,11 @@
   .User {
     color: white;
     font-size: 25px;
-    margin-left: 1vw;
   }
 
   .Gemini {
     color: white;
     font-size: 25px;
-    margin-left: 1vw;
   }
   h1 {
     color: white;
@@ -127,9 +125,9 @@
   input {
     position: relative;
     top: 15px;
-    left: 13vw;
+    left: 9vw;
     height: 9vh;
-    width: 55vw;
+    width: 65vw;
     border: 1px solid white;
     border-radius: 25px;
     background-color: #1e1f20;
@@ -139,8 +137,8 @@
 
   button {
     position: relative;
-    top: 20px;
-    left: 13vw;
+    top: 15px;
+    left: 10vw;
     background-color: #131314;
     color: white;
     height: 40px;
@@ -166,6 +164,13 @@
     width: 85vw;
     background-color: transparent;
     padding-bottom: 100px;
+    align-items: center;
+  }
+  #gemini-safety {
+    position: relative;
+    top: -10px;
+    left: 23vw;
+    color: white;
   }
   :root {
     @media (prefers-reduced-motion: no-preference) {
@@ -177,10 +182,29 @@
     p {
       font-size: 22px;
     }
+    input {
+      top: 15px;
+      left: 9vw;
+      height: 10vh;
+      width: 65vw;
+      padding-left: 20px;
+    }
+    .input-area {
+      left: 8vw;
+      height: 100px;
+      width: 85vw;
+    }
+    button {
+      top: 17px;
+      left: 10vw;
+    }
   }
   @media screen and (max-width: 1090px) {
     p {
       font-size: 23px;
+    }
+    button {
+      top: 16px;
     }
   }
 
@@ -194,6 +218,10 @@
   @media screen and (max-width: 800px) {
     p {
       font-size: 25px;
+    }
+    #gemini-safety {
+      font-size: 15px;
+      left: 15vw;
     }
   }
 
