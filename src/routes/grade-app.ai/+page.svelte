@@ -37,17 +37,11 @@
     const text = response.text(); //takes the text of the response and puts in "text"
     shouldload = false;
 
-    // Remove "*" characters from the text
-    const cleanText = text.replace(/\*/g, "");
+    const formattedText = text.replace(/\*\*/g, "<br>").replace(/\./g, "<br>");
 
-    // Split text at "**" (optional, only if line breaks needed)
-    const messageLines = cleanText.split(/\*\*/).map((line) => {
-      return line.startsWith("Gemini:") ? line : line;
-    });
-
-    // Create a single message (keep as single message or split for line breaks)
+    // Create a single message with line breaks
     const message = {
-      content: messageLines.join("\n") || cleanText, // Adjust based on line break logic
+      content: formattedText,
       sender: "Gemini",
     };
 
@@ -77,7 +71,7 @@
     {#each messages as userMessage}
       <div class={userMessage.sender}>
         <h3>{userMessage.sender}:</h3>
-        <p style="margin-left:35px;">{userMessage.content}</p>
+        <p style="margin-left:35px;">{@html userMessage.content}</p>
       </div>
       {#if shouldload}
         <Loader />
