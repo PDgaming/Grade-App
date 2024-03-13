@@ -30,6 +30,7 @@
   const genAI = new GoogleGenerativeAI(API_KEY); // generates a new ai to using the api key to get responses
 
   async function run(prompt) {
+    // TODO: add condition if prompt is emtpy then don't send it to model instead return error message
     const model = genAI.getGenerativeModel({ model: "gemini-pro" }); // generates a new model using genAI
     shouldload = true;
     const result = await model.generateContent(prompt); // takes in prompt and generates a result
