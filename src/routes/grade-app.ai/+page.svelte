@@ -1,55 +1,66 @@
 <script>
-  import Loader from "../components/loader.svelte";
-  import "./chatWindow.css";
-  import { GoogleGenerativeAI } from "@google/generative-ai";
+  import Loader from "../components/loader.svelte"; // imports Loader from components
+  import "./chatWindow.css"; // imports css stylesheet
+  import { GoogleGenerativeAI } from "@google/generative-ai"; // imports GoogleGenerativeAI
 
-  let messages = []; //array to store user and ai messages
-  let userInput = "";
+  let messages = []; // array to store user and ai messages
+  let userInput = ""; // variable to store user message
 
-  let GeminiInput = "";
+  let GeminiInput = ""; // variable to store ai message
 
-  let shouldShowWelcomeMessage = true;
-  let shouldload = false;
+  let shouldShowWelcomeMessage = true; // shouldShowWelcomeMessage is true by default to show shouldShouldWelcomeMessage
+  let shouldload = false; // shouldload is false by default to not show loader
 
   function handleKeyDown(event) {
+    // function to handle key down
     if (event.key === "Enter") {
-      sendMessage();
+      // condition to check if key pressed is Enter
+      sendMessage(); // if condition is true sendMessage function runs
     }
   }
 
   function sendMessage() {
-    shouldShowWelcomeMessage = false;
+    // function to send messages to API
+    shouldShowWelcomeMessage = false; // sets shouldShowWelcomeMessage to false to not show welcome message
     const userInput = document.getElementById("userInput").value.trim(); // gets user input
     messages = [...messages, { content: userInput, sender: "User" }]; // add user input to messages
     document.getElementById("userInput").value = ""; // removes old message from the input
-    run(userInput); // sends user message to ai to get response
+    if (userInput == "") {
+      // checks if userInput is empty
+      messages = [
+        ...messages,
+        { content: "Sorry, you didn't enter a prompt!", sender: "Gemini" }, // returns error message
+      ]; // add userinput to messages
+    } else {
+      // if userInput is not empty
+      run(userInput); // userInput goes to run to get response from API
+    }
   }
 
-  const API_KEY = "AIzaSyD3pylacar54cPdqHQDPc1bWHBEU_-97uE";
+  const API_KEY = "AIzaSyD3pylacar54cPdqHQDPc1bWHBEU_-97uE"; // API key
 
   const genAI = new GoogleGenerativeAI(API_KEY); // generates a new ai to using the api key to get responses
 
   async function run(prompt) {
-    // TODO: add condition if prompt is emtpy then don't send it to model instead return error message
     const model = genAI.getGenerativeModel({ model: "gemini-pro" }); // generates a new model using genAI
-    shouldload = true;
+    shouldload = true; // sets shouldload to true to show loader
     const result = await model.generateContent(prompt); // takes in prompt and generates a result
     const response = await result.response; // takes result and generates a response
     const text = response.text(); //takes the text of the response and puts in "text"
-    shouldload = false;
+    shouldload = false; // sets shouldload to false to not show loader
 
-    const formattedText = text
-      .replace(/\*\*/g, "<br>")
-      .replace(/\./g, "<br>")
-      .replace(/\*/g, "");
+    const formattedText = text // variable to store formatted text
+      .replace(/\*\*/g, "<br>") // replaces "**" with line break
+      .replace(/\./g, ".<br>") // replaces "." with line break
+      .replace(/\*/g, ""); // replaces "*" with ""
 
     // Create a single message with line breaks
     const message = {
       content: formattedText,
       sender: "Gemini",
-    };
+    }; // stores formatted AI text in message
 
-    messages = [...messages, message];
+    messages = [...messages, message]; // appends formatted text to messages
   }
 </script>
 
@@ -64,6 +75,7 @@
   <div class="chatLog">
     <!-- Shows welcome message -->
     {#if shouldShowWelcomeMessage}
+      <!-- shows welcome message if shouldShowWelcomeMessage if true -->
       <h1 id="hello-message">Hello There!</h1>
       <p id="how-to">
         Start a conversation with Bard by typing in a prompt in the text input
@@ -77,10 +89,11 @@
         <h3>{userMessage.sender}:</h3>
         <p style="margin-left:35px;">{@html userMessage.content}</p>
       </div>
-      {#if shouldload}
-        <Loader />
-      {/if}
     {/each}
+    {#if shouldload}
+      <!-- shows loader id shouldload is true -->
+      <Loader />
+    {/if}
   </div>
   <div class="input-area">
     <input
