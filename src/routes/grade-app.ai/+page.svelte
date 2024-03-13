@@ -30,14 +30,17 @@
   const genAI = new GoogleGenerativeAI(API_KEY); // generates a new ai to using the api key to get responses
 
   async function run(prompt) {
-    const model = genAI.getGenerativeModel({ model: "gemini-pro" }); // generates a new model using genAI
+    // const model = genAI.getGenerativeModel({ model: "gemini-pro" }); // generates a new model using genAI
     shouldload = true;
-    const result = await model.generateContent(prompt); // takes in prompt and generates a result
-    const response = await result.response; // takes result and generates a response
-    const text = response.text(); //takes the text of the response and puts in "text"
-    shouldload = false;
+    // const result = await model.generateContent(prompt); // takes in prompt and generates a result
+    // const response = await result.response; // takes result and generates a response
+    // const text = response.text(); //takes the text of the response and puts in "text"
+    // shouldload = false;
 
-    const formattedText = text.replace(/\*\*/g, "<br>").replace(/\./g, "<br>");
+    const formattedText = text
+      .replace(/\*\*/g, "<br>")
+      .replace(/\./g, "<br>")
+      .replace(/\*/g, "");
 
     // Create a single message with line breaks
     const message = {

@@ -2,19 +2,77 @@
 
 <style>
   .loader {
-    border: 5px solid #f3f3f3;
-    border-top: 5px solid #e5972a;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    animation: spin 2s linear infinite;
+    animation: rotate 1s infinite;
+    height: 50px;
+    width: 50px;
+    position: relative;
+    left: 2vw;
   }
-  @keyframes spin {
+
+  .loader:before,
+  .loader:after {
+    border-radius: 50%;
+    content: "";
+    display: block;
+    height: 20px;
+    width: 20px;
+  }
+  .loader:before {
+    animation: ball1 1s infinite;
+    background-color: #4285f4;
+    box-shadow: 30px 0 0 #f8b334;
+    margin-bottom: 10px;
+  }
+  .loader:after {
+    animation: ball2 1s infinite;
+    background-color: #ea4335;
+    box-shadow: 30px 0 0 #97bf0d;
+  }
+
+  @keyframes rotate {
     0% {
-      transform: rotate(0deg);
+      -webkit-transform: rotate(0deg) scale(0.8);
+      -moz-transform: rotate(0deg) scale(0.8);
+    }
+    50% {
+      -webkit-transform: rotate(360deg) scale(1.2);
+      -moz-transform: rotate(360deg) scale(1.2);
     }
     100% {
-      transform: rotate(360deg);
+      -webkit-transform: rotate(720deg) scale(0.8);
+      -moz-transform: rotate(720deg) scale(0.8);
+    }
+  }
+
+  @keyframes ball1 {
+    0% {
+      box-shadow: 30px 0 0 #f8b334;
+    }
+    50% {
+      box-shadow: 0 0 0 #f8b334;
+      margin-bottom: 0;
+      -webkit-transform: translate(15px, 15px);
+      -moz-transform: translate(15px, 15px);
+    }
+    100% {
+      box-shadow: 30px 0 0 #f8b334;
+      margin-bottom: 10px;
+    }
+  }
+
+  @keyframes ball2 {
+    0% {
+      box-shadow: 30px 0 0 #97bf0d;
+    }
+    50% {
+      box-shadow: 0 0 0 #97bf0d;
+      margin-top: -20px;
+      -webkit-transform: translate(15px, 15px);
+      -moz-transform: translate(15px, 15px);
+    }
+    100% {
+      box-shadow: 30px 0 0 #97bf0d;
+      margin-top: 0;
     }
   }
 </style>
