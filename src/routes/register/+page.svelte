@@ -1,11 +1,47 @@
 <script>
-  function signUp() {
+  import { goto } from "$app/navigation";
+  import { initializeApp } from "firebase/app";
+  import {
+    AuthErrorCodes,
+    getAuth,
+    createUserWithEmailAndPassword,
+  } from "firebase/auth";
+
+  // config for firebase
+  const firebaseConfig = {
+    apiKey: "AIzaSyB_MSh9YlBu7GGN5wxZjY7kGN4bU697GO4",
+
+    authDomain: "grade-app-16e2d.firebaseapp.com",
+
+    projectId: "grade-app-16e2d",
+
+    storageBucket: "grade-app-16e2d.appspot.com",
+
+    messagingSenderId: "942886540823",
+
+    appId: "1:942886540823:web:29caeac2695fecc3d4ee52",
+
+    measurementId: "G-WD1M20G6LX",
+  };
+
+  const app = initializeApp(firebaseConfig); // initializes app using config info
+  const auth = getAuth(app);
+
+  async function signUp() {
+    event.preventDefault(); // prevents the site from reloading on button click
     const email = document.getElementById("email").value; // gets email from input field
     const password = document.getElementById("password").value; // gets password from input field
-    console.log(email, password); // logs email and password
-    alert(
-      "We are still working on this page! Please contant us at gradeappbyapp@gmail.com to register an account"
-    );
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        alert(
+          "Registration successful!! But currently your account is deactivated! To activate your account contact: gradeappbyapp@gmail.com."
+        );
+        goto("/login");
+      })
+      .catch((error) => {
+        alert(`Error: ${error.code}.`);
+      });
   }
 </script>
 
@@ -60,7 +96,7 @@
     color: white;
   }
   button,
-  input{
+  input {
     font-size: 20px;
   }
   input {

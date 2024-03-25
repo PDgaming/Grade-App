@@ -38,7 +38,6 @@
         email,
         password
       ); // creates user credentials with email and password to sign in
-      console.log(userCredential.user); // logs user credentials
       alert("Login Successfill!!"); // shows success message
       goto("/grade-app.ai"); // redirects user to chat window
     } catch (error) {
