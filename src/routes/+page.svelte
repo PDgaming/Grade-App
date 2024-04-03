@@ -23,14 +23,14 @@
   <h1 class="brandName">Grade App</h1>
   <Navbar />
   <div class="hero-section">
-    <img class="laptopImg" src={laptop} alt="laptop.img" />
+    <img class="laptopImg" src={laptop} alt="laptop.img" loading="lazy" />
     <div class="home" id="home">
       <h8>Grade App</h8><br />
       <p id="homep">
-        Grade App is an educational chatting application that leverages the
-        power of Google's AI Gemini to provide answers to academic questions
-        based on NCERT (National Council of Educational Research and Training)
-        books.
+        Grade App is an AI powered educational chatting application that
+        leverages the power of Google's Gemini to provide answers to academic
+        questions based on NCERT (National Council of Educational Research and
+        Training) books.
       </p>
       <p>
         It's designed to help students and educators easily access accurate and
@@ -111,7 +111,9 @@
       <u>gradeappbyapp@gmail.com</u>
     </p>
   </div>
-  <h2 id="happy-learning-with-grade-app">Happy learning with Grade App! 📚🤖🚀</h2>
+  <h2 id="happy-learning-with-grade-app">
+    Happy learning with Grade App! 📚🤖🚀
+  </h2>
 </div>
 
 <style>
@@ -195,7 +197,7 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
   }
-  #happy-learning-with-grade-app{
+  #happy-learning-with-grade-app {
     color: #ef926e;
   }
   .laptopImg {
