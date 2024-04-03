@@ -1,4 +1,3 @@
-import { registerRoute } from "workbox-strategies";
 import { CacheFirst } from "workbox-strategies";
 import { StaleWhileRevalidate } from "workbox-strategies";
 
