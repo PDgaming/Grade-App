@@ -101,6 +101,7 @@
       - The Grade App team(including PD) for their hard work and dedication in
       developing this educational tool.
     </p>
+    <p>- And AAB for designing the logo.</p>
   </div>
   <div class="contact" id="contact">
     <h7 id="contacth">Contact</h7>
