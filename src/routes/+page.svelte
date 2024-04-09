@@ -20,7 +20,6 @@
 </svelte:head>
 
 <div class="main">
-  <h1 class="brandName">Grade App</h1>
   <Navbar />
   <div class="hero-section">
     <img class="laptopImg" src={laptop} alt="laptop.img" loading="lazy" />
@@ -117,9 +116,6 @@
 </div>
 
 <style>
-  .brandName {
-    display: none;
-  }
   h7 {
     display: block;
   }
@@ -282,19 +278,6 @@
 
   /* Responsive for nav */
   @media screen and (max-width: 990px) {
-    .brandName {
-      display: block;
-      background: linear-gradient(
-        90deg,
-        rgba(72, 148, 229) 0%,
-        rgba(138, 121, 203) 30%
-      );
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      font-size: 50px;
-      margin-left: 37%;
-      margin-top: 20px;
-    }
     .laptopImg {
       margin-left: 620px;
     }
@@ -324,11 +307,6 @@
     .laptopImg {
       display: none;
     }
-
-    .brandName {
-      margin-left: 35%;
-    }
-
     .home {
       margin-top: 55px;
       width: auto;
@@ -358,10 +336,6 @@
     .home {
       margin-top: 50px;
       width: auto;
-    }
-    .brandName {
-      margin-left: 23%;
-      font-size: 45px;
     }
     h7 {
       font-size: 200%;

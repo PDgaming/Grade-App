@@ -2,6 +2,12 @@
   <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
       <ul class="navbar-nav">
+        <img src="/logo.webp" alt="Logo" id="logo" />
+        <li class="nav-item">
+          <a class="nav-link active homeNav" href="/" style="color: white;"
+            >Grade App</a
+          >
+        </li>
         <li class="nav-item">
           <a class="nav-link active homeNav" href="#home" style="color: white;"
             >Home</a
@@ -29,18 +35,48 @@
             >Contact</a
           >
         </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="/login" id="login">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="/register" id="register">Register</a>
+        </li>
       </ul>
     </div>
   </nav>
 </div>
 
 <style>
-  .homeNav {
-    margin-left: 16vh;
+  #logo {
+    width: 50px;
+    height: 50px;
+    position: relative;
+    top: 5px;
+    left: 30px;
+  }
+  #login,
+  #register {
+    color: white;
+    text-decoration: underline;
+    font-size: 19px;
+  }
+  #register {
+    margin-right: 15px;
+  }
+  .container-fluid {
+    padding: 0;
+  }
+  .navbar-nav {
+    background-color: #17171b;
+    display: flex;
+    justify-content: space-between;
+    height: 60px;
+    width: 100vw;
+    margin-top: -10px;
+    margin-left: -10px;
+    box-shadow: 0px 0px 50px 1px white;
   }
   .nav-item {
-    margin-top: 10px;
-    margin-right: 120px;
     font-size: 20px;
   }
   .navbar {
