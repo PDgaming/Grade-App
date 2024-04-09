@@ -13,6 +13,10 @@
   function registerPage() {
     goto("/register");
   }
+  // Takes to register page
+  function freeTrial() {
+    goto("/free-trial");
+  }
 </script>
 
 <svelte:head>
@@ -37,15 +41,23 @@
         format.
       </p>
     </div>
+    <div class="buttons">
+      <button
+        type="button"
+        class="btn btn-primary loginButton"
+        on:click={loginPage}>Login</button
+      >
+      <button
+        type="button"
+        class="btn btn-primary signUpButton"
+        on:click={registerPage}>Register</button
+      >
+    </div>
     <button
       type="button"
-      class="btn btn-primary loginButton"
-      on:click={loginPage}>Login</button
-    >
-    <button
-      type="button"
-      class="btn btn-primary signUpButton"
-      on:click={registerPage}>Register</button
+      class="btn btn-primary try-it"
+      on:click={freeTrial}
+      style="width: 160px;">Try It for free</button
     >
   </div>
   <div class="features" id="features">
@@ -105,7 +117,6 @@
   </div>
   <div class="contact" id="contact">
     <h7 id="contacth">Contact</h7>
-
     <p>
       If you have any questions or feedback, please feel free to reach out at
       <u>gradeappbyapp@gmail.com</u>
@@ -114,6 +125,7 @@
   <h2 id="happy-learning-with-grade-app">
     Happy learning with Grade App! 📚🤖🚀
   </h2>
+  <div class="footer" id="footer"></div>
 </div>
 
 <style>
@@ -124,15 +136,21 @@
   p {
     margin-left: 10px;
   }
+  .buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 35vw;
+    margin-top: 20px;
+  }
   .loginButton,
-  .signUpButton {
+  .signUpButton,
+  .try-it {
     font-size: 20px;
+    margin-left: 3vw;
   }
   .loginButton {
     margin-left: 3vw;
-  }
-  .signUpButton {
-    margin-left: 10vw;
   }
   .hero-section {
     border-bottom: 1px solid #333;
