@@ -123,6 +123,10 @@
   p {
     margin-left: 10px;
   }
+  .loginButton,
+  .signUpButton {
+    font-size: 20px;
+  }
   .loginButton {
     margin-left: 3vw;
   }
@@ -133,7 +137,7 @@
     border-bottom: 1px solid #333;
   }
   .home {
-    margin-top: -380px;
+    margin-top: -420px;
     width: 50%;
   }
   .features,
@@ -199,7 +203,7 @@
   .laptopImg {
     width: 35%;
     margin-left: 790px;
-    margin-top: 60px;
+    margin-top: 130px;
   }
   /* Responsive for nav */
   @media screen and (max-width: 1170px) {
