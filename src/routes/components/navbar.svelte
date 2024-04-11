@@ -48,11 +48,15 @@
 
 <style>
   #logo {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     position: relative;
-    top: 5px;
+    top: 7px;
     left: 30px;
+    border-radius: 100px;
+  }
+  li {
+    margin-top: 5px;
   }
   #login,
   #register {
@@ -74,7 +78,10 @@
     width: 100vw;
     margin-top: -10px;
     margin-left: -10px;
-    box-shadow: 0px 0px 50px 1px white;
+    box-shadow: 0px 0px 50px -20px white;
+  }
+  .navbar-nav:hover {
+    box-shadow: 0px 0px 50px -10px white;
   }
   .nav-item {
     font-size: 20px;
