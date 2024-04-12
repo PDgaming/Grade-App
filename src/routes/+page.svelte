@@ -140,8 +140,9 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 35vw;
+    width: 32vw;
     margin-top: 20px;
+    margin-bottom: 20px;
   }
   .loginButton,
   .signUpButton,
@@ -151,6 +152,9 @@
   }
   .loginButton {
     margin-left: 3vw;
+  }
+  .try-it {
+    margin-bottom: 20px;
   }
   .hero-section {
     border-bottom: 1px solid #333;
