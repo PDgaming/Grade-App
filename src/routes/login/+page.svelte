@@ -39,7 +39,7 @@
         password
       ); // creates user credentials with email and password to sign in
       alert("Login Successfill!!"); // shows success message
-      goto("/grade-app.ai"); // redirects user to chat window
+      goto("/dashboard"); // redirects user to chat window
     } catch (error) {
       console.log(error.code); // logs error code
       if (error.code == AuthErrorCodes.INVALID_LOGIN_CREDENTIALS) {
