@@ -1,10 +1,9 @@
-<script>
-  import { goto } from "$app/navigation";
-</script>
+<script></script>
 
-<h1>Hello</h1>
+<h1>Hello There, welcome To Your Dashboard!</h1>
+<p></p>
 
-<style> 
+<style>
   h1 {
     color: white;
     margin-top: 50px;
