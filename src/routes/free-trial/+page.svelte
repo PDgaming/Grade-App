@@ -3,6 +3,42 @@
   import "./chatWindow.css"; // imports css stylesheet
   import { GoogleGenerativeAI } from "@google/generative-ai"; // imports GoogleGenerativeAI
 
+  const firebaseConfig = {
+    apiKey: "AIzaSyB_MSh9YlBu7GGN5wxZjY7kGN4bU697GO4",
+
+    authDomain: "grade-app-16e2d.firebaseapp.com",
+
+    databaseURL: "https://grade-app-16e2d-default-rtdb.firebaseio.com",
+
+    projectId: "grade-app-16e2d",
+
+    storageBucket: "grade-app-16e2d.appspot.com",
+
+    messagingSenderId: "942886540823",
+
+    appId: "1:942886540823:web:29caeac2695fecc3d4ee52",
+
+    measurementId: "G-XCTQN883KL",
+  };
+
+  import { initializeApp } from "firebase/app";
+  import { getFirestore, doc, getDoc, updateDoc } from "firebase/firestore";
+  import { onMount } from "svelte";
+  
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+
+  const db = getFirestore(app);
+
+  const users = doc(db, "Messages/User-Messages/");
+
+  async function writeDataInDocument(question, answer) {
+    await updateDoc(users, {
+      [question]: answer
+    });
+  }
+
   let messages = []; // array to store user and ai messages
   let userInput = ""; // variable to store user message
 
@@ -69,6 +105,7 @@
     }; // stores formatted AI text in message
 
     messages = [...messages, message]; // appends formatted text to messages
+    writeDataInDocument(prompt, text);
   }
 </script>
 
@@ -83,29 +120,29 @@
   <div class="chatLog">
     <!-- Shows welcome message -->
     {#if shouldShowWelcomeMessage}
-      <!-- shows welcome message if shouldShowWelcomeMessage if true -->
-      <h1 id="hello-message">Hello There!</h1>
-      <p id="how-to">
-        Start a conversation with Bard by typing in a prompt in the text input
-        below.
-      </p>
-      <p id="free-trial">
-        This is a free trail version of Grade App. You will only be able to ask
-        5 questions. <br />To ask as many questions as you want and to use the
-        complete app contact <u>gradeappbyapp@gmail.com</u>
-      </p>
-      <!-- Adds messages to the DOM -->
+    <!-- shows welcome message if shouldShowWelcomeMessage if true -->
+    <h1 id="hello-message">Hello There!</h1>
+    <p id="how-to">
+      Start a conversation with Bard by typing in a prompt in the text input
+      below.
+    </p>
+    <p id="free-trial">
+      This is a free trail version of Grade App. You will only be able to ask 5
+      questions. <br />To ask as many questions as you want and to use the
+      complete app contact <u>gradeappbyapp@gmail.com</u>
+    </p>
+    <!-- Adds messages to the DOM -->
     {/if}
     {#each messages as userMessage}
-      <div class={userMessage.sender}>
-        <h3>{userMessage.sender}:</h3>
-        <p style="margin-left:35px;">{@html userMessage.content}</p>
-      </div>
+    <div class={userMessage.sender}>
+    <h3>{userMessage.sender}:</h3>
+    <p style="margin-left:35px;">{@html userMessage.content}</p>
+    </div>
     {/each}
     {#if shouldload}
-      <!-- shows loader id shouldload is true -->
-      <Loader />
-    {/if}
+    <!-- shows loader id shouldload is true -->
+    <Loader />
+    {/if} 
   </div>
   <div class="input-area">
     <input
