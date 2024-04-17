@@ -34,9 +34,7 @@
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        alert(
-          "Registration successful!! But currently your account is deactivated! To activate your account contact: gradeappbyapp@gmail.com."
-        );
+        alert("Registration successful!!");
         goto("/login");
       })
       .catch((error) => {
