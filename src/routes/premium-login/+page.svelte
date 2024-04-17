@@ -1,19 +1,15 @@
 <script>
   import { goto } from "$app/navigation";
   import { initializeApp } from "firebase/app";
-  import {
-    AuthErrorCodes,
-    getAuth,
-    signInWithEmailAndPassword,
-  } from "firebase/auth";
   import { getFirestore, doc, getDoc } from "firebase/firestore";
-  import { onMount } from "svelte";
 
   // config for firebase
   const firebaseConfig = {
     apiKey: "AIzaSyB_MSh9YlBu7GGN5wxZjY7kGN4bU697GO4",
 
     authDomain: "grade-app-16e2d.firebaseapp.com",
+
+    databaseURL: "https://grade-app-16e2d-default-rtdb.firebaseio.com",
 
     projectId: "grade-app-16e2d",
 
@@ -23,21 +19,42 @@
 
     appId: "1:942886540823:web:29caeac2695fecc3d4ee52",
 
-    measurementId: "G-WD1M20G6LX",
+    measurementId: "G-XCTQN883KL",
   };
+
   // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
+  const premiumLoginApp = initializeApp(firebaseConfig);
 
-  const db = getFirestore(app);
+  const db = getFirestore(premiumLoginApp);
 
-  const users = doc(db, "Messages/User-Messages/");
+  const users = doc(db, "Users/user-email-password");
 
-  const auth = getAuth(app);
-
-  const login = async (event) => {
-    event.preventDefault(); // prevents the site from reloading on button click
+  const login = async () => {
     const email = document.getElementById("email").value; // gets email from the input field
     const password = document.getElementById("password").value; // gets password from the input field
+
+    if (email === "" && password === "") {
+      alert("Both email and password are empty!");
+    } else {
+      const userDocument = await getDoc(users);
+      if (userDocument.exists()) {
+        let userData = userDocument.data();
+
+        const emails = Object.keys(userData);
+        if (emails.includes(email)) {
+          if (userData[email] === password) {
+            alert("Login Successful!");
+            goto("grade-app.ai");
+          } else {
+            alert("Incorrect password.");
+          }
+        } else {
+          alert("Email not found.");
+        }
+      } else {
+        console.log("Document does not exist!");
+      }
+    }
   };
 </script>
 

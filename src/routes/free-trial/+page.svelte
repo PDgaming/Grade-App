@@ -27,9 +27,9 @@
   
 
   // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
+  const freeTrialApp = initializeApp(firebaseConfig);
 
-  const db = getFirestore(app);
+  const db = getFirestore(freeTrialApp);
 
   const users = doc(db, "Messages/User-Messages/");
 
