@@ -76,7 +76,7 @@
       />
       <button id="loginButton" on:click={login}>Login</button>
       <h1 style="font-size: 20px;">
-        Don't have an account? <a href="/register">Register</a>
+        Don't have an account? <a href="/premium-register">Register</a>
       </h1>
       <a href="/">Go Back to Home Page</a>
     </div>
