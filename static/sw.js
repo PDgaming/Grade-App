@@ -1,15 +1,9 @@
-import { files } from "$service-worker";
+import { build, files } from "$service-worker";
 
 const CACHE_NAME = "static-cache-v1";
-const toCache = files.concat(["/offline.html"]);
 
 self.addEventListener("install", (event) => {
-  event.waitUntil(
-    caches
-      .open(CACHE_NAME)
-      .then((cache) => cache.addAll(toCache))
-      .then(() => self.skipWaiting())
-  );
+  console.log("Service Worker Installed");
 });
 
 self.addEventListener("activate", (event) => {
