@@ -13,7 +13,7 @@ const config = {
   },
 
   package: {
-    files: (file) => file === "static/sw.js",
+    files: (file) => file === "%sveltekit.assets%/sw.js",
   },
 };
 
