@@ -6,12 +6,6 @@ const config = {
     adapter: adapter(),
   },
 
-  vitePlugin: {
-    experimental: {
-      renderBuiltUrl: "https://grade-app.pages.dev/", // Replace with your website URL
-    },
-  },
-
   package: {
     files: (file) => file === "static/sw.js",
   },
