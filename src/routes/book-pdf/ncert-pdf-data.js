@@ -65,7 +65,7 @@ const ncertData = {
       },
       Hindi: {
         books: {
-          Vasant: {},
+          Vasant_II: {},
           Mahabharat: {},
         },
       },
@@ -91,10 +91,29 @@ const ncertData = {
           It_so_happened: {},
         },
       },
-      Mathematics: {},
-      Hindi: {},
-      Science: {},
-      Social_Science: {},
+      Mathematics: {
+        books: {
+          Mathematics: {},
+        },
+      },
+      Hindi: {
+        books: {
+          vasant_III: {},
+          Bharat_Ki_Khoj: {},
+        },
+      },
+      Science: {
+        books: {
+          Science: {},
+        },
+      },
+      Social_Science: {
+        books: {
+          Resource_And_Development: {},
+          Social_And_Political_Life: {},
+          Our_Past_III: {},
+        },
+      },
     },
   },
   class_IX: {
