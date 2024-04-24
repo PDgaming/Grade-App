@@ -2,9 +2,27 @@ const ncertData = {
   classes: {
     class_VI: {
       subject: {
-        Hindi: {},
-        English: {},
-        Mathematics: {},
+        Hindi: {
+          book: {
+            vasant: {
+              chapters: {},
+            },
+            Bal_Ram_Katha: {
+              chapters: {},
+            },
+          },
+        },
+        English: {
+          books: {
+            Honeysuckle: {},
+            A_pact_with_the_sun: {},
+          },
+        },
+        Mathematics: {
+          books: {
+            Mathematics: {},
+          },
+        },
         Social_Science: {},
         Science: {},
       },
@@ -12,11 +30,11 @@ const ncertData = {
   },
   class_VII: {
     subject: {
-      English: {},
       Mathematics: {},
-      Hindi: {},
       Science: {},
+      English: {},
       Social_Science: {},
+      Hindi: {},
     },
   },
   class_VIII: {
