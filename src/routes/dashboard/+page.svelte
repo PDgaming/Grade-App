@@ -1,12 +1,42 @@
-<script></script>
+<script>
+  import "../index.css";
+  import { goto } from "$app/navigation";
+
+  function freeTrial() {
+    goto("/free-trial");
+  }
+  function premiumLogin() {
+    goto("/premium-login");
+  }
+  function books() {
+    goto("/book-pdf");
+  }
+</script>
 
 <svelte:head>
   <title>Grade App - Dashboard</title>
 </svelte:head>
 <h1>Hello There, welcome To Your Dashboard!</h1>
-<h2>So what do you want to do today?</h2>
-<a href="/premium-login">Grade App</a>
-<a href="/book-pdf">Books</a>
+<button
+  type="button"
+  class="btn btn-primary grade-app"
+  on:click={premiumLogin}
+  href="/premium-login"
+  style="width: 140px;">Grade App</button
+>
+<button
+  type="button"
+  class="btn btn-primary try-it"
+  on:click={freeTrial}
+  style="width: 160px;">Try It for free</button
+>
+<button
+  type="button"
+  class="btn btn-primary books"
+  on:click={books}
+  style="width: 150px;"
+  href="/book-pdf">Books</button
+>
 
 <style>
   h1 {
@@ -14,11 +44,9 @@
     margin-top: 50px;
     font-weight: bold;
   }
-  h2 {
-    color: white;
-  }
-  a {
-    color: white;
-    font-size: 21px;
+  .try-it,
+  .grade-app,
+  .books {
+    font-size: 20px;
   }
 </style>

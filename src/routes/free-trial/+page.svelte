@@ -24,7 +24,6 @@
   import { initializeApp } from "firebase/app";
   import { getFirestore, doc, getDoc, updateDoc } from "firebase/firestore";
   import { onMount } from "svelte";
-  
 
   // Initialize Firebase
   const freeTrialApp = initializeApp(firebaseConfig);
@@ -35,7 +34,7 @@
 
   async function writeDataInDocument(question, answer) {
     await updateDoc(users, {
-      [question]: answer
+      [question]: answer,
     });
   }
 
@@ -120,29 +119,30 @@
   <div class="chatLog">
     <!-- Shows welcome message -->
     {#if shouldShowWelcomeMessage}
-    <!-- shows welcome message if shouldShowWelcomeMessage if true -->
-    <h1 id="hello-message">Hello There!</h1>
-    <p id="how-to">
-      Start a conversation with Bard by typing in a prompt in the text input
-      below.
-    </p>
-    <p id="free-trial">
-      This is a free trail version of Grade App. You will only be able to ask 5
-      questions. <br />To ask as many questions as you want and to use the
-      complete app contact <u>gradeappbyapp@gmail.com</u>
-    </p>
-    <!-- Adds messages to the DOM -->
+      <!-- shows welcome message if shouldShowWelcomeMessage if true -->
+      <h1 id="hello-message">Hello There!</h1>
+      <p id="how-to">
+        Start a conversation with Bard by typing in a prompt in the text input
+        below.
+      </p>
+      <p id="free-trial">
+        This is a free trail version of Grade App. You will only be able to ask
+        5 questions. Also all queries asked will be added to our database. <br
+        />To ask as many questions as you want and to use the complete app
+        contact <u>gradeappbyapp@gmail.com</u>
+      </p>
+      <!-- Adds messages to the DOM -->
     {/if}
     {#each messages as userMessage}
-    <div class={userMessage.sender}>
-    <h3>{userMessage.sender}:</h3>
-    <p style="margin-left:35px;">{@html userMessage.content}</p>
-    </div>
+      <div class={userMessage.sender}>
+        <h3>{userMessage.sender}:</h3>
+        <p style="margin-left:35px;">{@html userMessage.content}</p>
+      </div>
     {/each}
     {#if shouldload}
-    <!-- shows loader id shouldload is true -->
-    <Loader />
-    {/if} 
+      <!-- shows loader id shouldload is true -->
+      <Loader />
+    {/if}
   </div>
   <div class="input-area">
     <input

@@ -24,9 +24,6 @@
     measurementId: "G-WD1M20G6LX",
   };
 
-  const loginApp = initializeApp(firebaseConfig); // initializes app using config info
-  const auth = getAuth(loginApp);
-
   const login = async (event) => {
     event.preventDefault(); // prevents the site from reloading on button click
     const email = document.getElementById("email").value; // gets email from the input field
