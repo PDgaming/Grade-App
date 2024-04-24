@@ -36,45 +36,75 @@
   <title>Grade App - Book PDFs</title>
 </svelte:head>
 
-<select bind:value={selectedClass}>
-  <option value="">Select Class</option>
-  {#each Object.keys(ncertData.classes) as classKey}
-    <option value={classKey}>{classKey.replace(/_/g, " ")}</option>
-  {/each}
-</select>
-
-<select bind:value={selectedSubject}>
-  <option value="">Select Subject</option>
-  {#if selectedClass}
-    {#each Object.keys(ncertData.classes[selectedClass].subject) as subjectKey}
-      <option value={subjectKey}>{subjectKey}</option>
+<div class="select-form">
+  <select class="form-select" bind:value={selectedClass}>
+    <option value="">Select Class</option>
+    {#each Object.keys(ncertData.classes) as classKey}
+      <option value={classKey}>{classKey.replace(/_/g, " ")}</option>
     {/each}
-  {/if}
-</select>
+  </select>
 
-<select bind:value={selectedBook}>
-  <option value="">Select Book</option>
-  {#if selectedClass && selectedSubject}
-    {#each Object.keys(ncertData.classes[selectedClass].subject[selectedSubject].book) as chapterKey}
-      <option>{chapterKey.replace(/_/g, " ")}</option>
-    {/each}
-  {/if}
-</select>
+  <select class="form-select" bind:value={selectedSubject}>
+    <option value="">Select Subject</option>
+    {#if selectedClass}
+      {#each Object.keys(ncertData.classes[selectedClass].subject) as subjectKey}
+        <option value={subjectKey}>{subjectKey}</option>
+      {/each}
+    {/if}
+  </select>
 
-<select bind:value={selectedChapter}>
-  <option value="">Select Chapter</option>
-  {#if selectedClass && selectedSubject && selectedBook}
-    {#each Object.keys(ncertData.classes[selectedClass].subject[selectedSubject].book[selectedBook].chapters) as chapterKey}
-      <option value={chapterKey}>{chapterKey.replace(/_/g, " ")}</option>
-    {/each}
-  {/if}
-</select>
-<button type="button" class="btn btn-primary" on:click={searchBook}
-  >Search</button
->
-<button type="button" class="btn btn-primary" on:click={downloadBook}
-  >Download Complete book</button
->
+  <select class="form-select" bind:value={selectedBook}>
+    <option value="">Select Book</option>
+    {#if selectedClass && selectedSubject}
+      {#each Object.keys(ncertData.classes[selectedClass].subject[selectedSubject].book) as chapterKey}
+        <option>{chapterKey.replace(/_/g, " ")}</option>
+      {/each}
+    {/if}
+  </select>
+
+  <select class="form-select" bind:value={selectedChapter}>
+    <option value="">Select Chapter</option>
+    {#if selectedClass && selectedSubject && selectedBook}
+      {#each Object.keys(ncertData.classes[selectedClass].subject[selectedSubject].book[selectedBook].chapters) as chapterKey}
+        <option value={chapterKey}>{chapterKey.replace(/_/g, " ")}</option>
+      {/each}
+    {/if}
+  </select>
+</div>
+
+<div class="buttons">
+  <button type="button" class="btn btn-primary" on:click={searchBook}
+    >Search</button
+  >
+  <button
+    type="button"
+    class="btn btn-primary"
+    on:click={downloadBook}
+    style="width: 260px;">Download Complete book</button
+  >
+</div>
 
 <style>
+  .select-form {
+    display: flex;
+    justify-content: space-between;
+    width: 55vw;
+    margin-top: 20px;
+    margin-left: 1vw;
+  }
+  select {
+    height: 40px;
+    width: 150px;
+    margin-bottom: 10px;
+  }
+  button {
+    font-size: 20px;
+  }
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 31vw;
+    margin-top: 20px;
+    margin-left: 1vw;
+  }
 </style>
