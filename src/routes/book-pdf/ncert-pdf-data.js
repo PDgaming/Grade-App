@@ -23,18 +23,52 @@ const ncertData = {
             Mathematics: {},
           },
         },
-        Social_Science: {},
-        Science: {},
+        Social_Science: {
+          books: {
+            History_Our_Past: {},
+            The_Earth_Our_Habitat: {},
+            Social_And_Political_Life: {},
+          },
+        },
+        Science: {
+          books: {
+            Science: {},
+          },
+        },
       },
     },
   },
   class_VII: {
     subject: {
-      Mathematics: {},
-      Science: {},
-      English: {},
-      Social_Science: {},
-      Hindi: {},
+      Mathematics: {
+        books: {
+          Mathematics: {},
+        },
+      },
+      Science: {
+        books: {
+          Science: {},
+        },
+      },
+      English: {
+        books: {
+          Honeycomb: {},
+          An_Alien_Hand: {},
+        },
+      },
+      Social_Science: {
+        books: {
+          Social_And_Political_Life: {},
+          Our_Past_II: {},
+          Our_Environment: {},
+        },
+      },
+      Hindi: {
+        books: {
+          Vasant: {},
+          Mahabharat: {},
+        },
+      },
     },
   },
   class_VIII: {
