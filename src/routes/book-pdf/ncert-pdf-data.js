@@ -37,7 +37,7 @@ const ncertData = {
         },
       },
     },
-  },
+  
   class_VII: {
     subject: {
       Mathematics: {
@@ -138,6 +138,7 @@ const ncertData = {
       },
     },
   },
+},
 };
 
 export default ncertData;

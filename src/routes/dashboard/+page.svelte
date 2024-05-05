@@ -26,17 +26,17 @@
     style="width: 140px;">Grade App</button
   >
   <button
+  type="button"
+  class="btn btn-primary books"
+  on:click={books}
+  style="width: 150px;"
+  href="/book-pdf">Books</button
+  ><br>
+  <button
     type="button"
     class="btn btn-primary try-it"
     on:click={freeTrial}
     style="width: 160px;">Try It for free</button
-  >
-  <button
-    type="button"
-    class="btn btn-primary books"
-    on:click={books}
-    style="width: 150px;"
-    href="/book-pdf">Books</button
   >
 </div>
 
@@ -51,9 +51,7 @@
   .books {
     font-size: 20px;
   }
-  .buttons {
-    display: flex;
-    justify-content: space-between;
+  button {
     width: 40vw;
     margin-top: 20px;
     margin-left: 1vw;

@@ -87,7 +87,6 @@
 <style>
   .select-form {
     display: flex;
-    justify-content: space-between;
     width: 55vw;
     margin-top: 20px;
     margin-left: 1vw;
@@ -96,13 +95,10 @@
     height: 40px;
     width: 150px;
     margin-bottom: 10px;
+    margin-right: 10px;
   }
   button {
     font-size: 20px;
-  }
-  .buttons {
-    display: flex;
-    justify-content: space-between;
     width: 31vw;
     margin-top: 20px;
     margin-left: 1vw;

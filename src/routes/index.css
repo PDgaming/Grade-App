@@ -1,4 +1,4 @@
-body {
+:global(body) {
   background: #131314;
   background-attachment: fixed;
 }

@@ -24,6 +24,12 @@
     measurementId: "G-WD1M20G6LX",
   };
 
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+
+  // Initialize Firebase authentication
+  const auth = getAuth(app);
+
   const login = async (event) => {
     event.preventDefault(); // prevents the site from reloading on button click
     const email = document.getElementById("email").value; // gets email from the input field
@@ -38,7 +44,7 @@
       alert("Login Successfill!!"); // shows success message
       goto("/dashboard"); // redirects user to chat window
     } catch (error) {
-      console.log(error.code); // logs error code
+      console.log(error); // logs error code
       if (error.code == AuthErrorCodes.INVALID_LOGIN_CREDENTIALS) {
         alert("Error: " + error.code + ". Please recheck your credentials"); // shows error message if user credentials are wrong
       } else {

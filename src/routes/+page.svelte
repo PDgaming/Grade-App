@@ -3,6 +3,7 @@
   import "./index.css";
   import { goto } from "$app/navigation";
   import laptop from "./images/laptop.webp";
+  import logo from "./images/logo.webp";
 
   // Takes to login page
   function loginPage() {
@@ -13,10 +14,6 @@
   function registerPage() {
     goto("/register");
   }
-  // Takes to register page
-  function freeTrial() {
-    goto("/free-trial");
-  }
 </script>
 
 <svelte:head>
@@ -26,7 +23,7 @@
 <div class="main">
   <Navbar />
   <div class="hero-section">
-    <img class="laptopImg" src={laptop} alt="laptop.img" loading="lazy" />
+    <img class="laptopImg" src={laptop} alt="laptop.img"/>
     <div class="home" id="home">
       <h8>Grade App</h8><br />
       <p id="homep">
@@ -53,12 +50,6 @@
         on:click={registerPage}>Register</button
       >
     </div>
-    <button
-      type="button"
-      class="btn btn-primary try-it"
-      on:click={freeTrial}
-      style="width: 160px;">Try It for free</button
-    >
   </div>
   <div class="features" id="features">
     <h7 id="featuresh">Features</h7>
@@ -110,8 +101,8 @@
 
     <p>- Thanks to Google for providing the API for Gemini.</p>
     <p>
-      - The Grade App team(including PD) for their hard work and dedication in
-      developing this educational tool.
+      - The Grade App team for their hard work and dedication in developing this
+      educational tool.
     </p>
     <p>- And AAB for designing the logo and helping in the design process.</p>
   </div>
@@ -125,7 +116,35 @@
   <h2 id="happy-learning-with-grade-app">
     Happy learning with Grade App! 📚🤖🚀
   </h2>
-  <div class="footer" id="footer"></div>
+  <div class="footer" id="footer">
+    <div id="footer-top">
+      <div class="logo-and-title">
+        <img src={logo} alt="logo" id="footer-logo" />
+        <h1 id="title">Grade App</h1>
+      </div>
+      <div id="footer-content">
+        <div id="footer-acknowledgement">
+          <a href="#acknowledgments">Acknowledgments</a><br />
+          <a href="https://www.google.com">- Google</a><br />
+          <a href="https://github.com/PDgaming/Grade-App/graphs/contributors">
+            - The Grade App team
+          </a><br />
+          <a
+            href="https://www.instagram.com/itz__atif__564?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+          >
+            - AAB
+          </a><br />
+        </div>
+        <div id="footer-contact">
+          <a href="#contact">Contact</a><br />
+          <p9>
+            <u>gradeappbyapp@gmail.com</u>
+          </p9>
+        </div>
+      </div>
+      <div id="footer-bottom">Copyright © 2024 Grade App</div>
+    </div>
+  </div>
 </div>
 
 <style>
@@ -146,18 +165,11 @@
   }
   .loginButton,
   .signUpButton,
-  .try-it {
-    font-size: 20px;
-    margin-left: 3vw;
+  .hero-section {
+    border-bottom: 1px solid #333;
   }
   .loginButton {
     margin-left: 3vw;
-  }
-  .try-it {
-    margin-bottom: 20px;
-  }
-  .hero-section {
-    border-bottom: 1px solid #333;
   }
   .home {
     margin-top: -420px;
@@ -222,11 +234,45 @@
   }
   #happy-learning-with-grade-app {
     color: #ef926e;
+    margin-bottom: 30px;
   }
   .laptopImg {
     width: 35%;
     margin-left: 790px;
     margin-top: 130px;
+  }
+  #footer {
+    background-color: #19191d;
+    height: 200px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+  }
+  #footer-bottom {
+    background-color: #15161b;
+    text-align: center;
+    margin-top: auto;
+  }
+  #footer-logo {
+    width: 80px;
+    margin-top: 10px;
+    margin-left: 63px;
+  }
+  #footer-top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  #footer-acknowledgement a,
+  #footer-contact a {
+    text-decoration: none;
+    color: white;
+  }
+  #footer-acknowledgement {
+    margin-left: 100px;
+  }
+  #title {
+    margin-left: 10px;
   }
   /* Responsive for nav */
   @media screen and (max-width: 1170px) {
