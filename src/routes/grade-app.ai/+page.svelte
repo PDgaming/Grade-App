@@ -78,7 +78,7 @@
       <!-- shows welcome message if shouldShowWelcomeMessage if true -->
       <h1 id="hello-message">Hello There!</h1>
       <p id="how-to">
-        Start a conversation with Bard by typing in a prompt in the text input
+        Start a conversation with Gemini by typing in a prompt in the text input
         below.
       </p>
 
@@ -144,15 +144,17 @@
     position: relative;
     top: 15px;
     left: 9vw;
-    height: 9vh;
+    height: 55px;
     width: 65vw;
     border: 1px solid white;
     border-radius: 25px;
     background-color: #1e1f20;
     color: white;
-    padding-left: 20px;
+    padding-left: 15px;
   }
-
+  input:focus {
+    border: none;
+  }
   button {
     position: relative;
     top: 15px;
@@ -164,29 +166,27 @@
     border: 1px solid white;
     border-radius: 10px;
   }
-
   .input-area {
     position: fixed;
-    top: 78vh;
+    top: 81vh;
     left: 8vw;
-    height: 100px;
+    height: 90px;
     width: 85vw;
     background-color: transparent;
   }
-
   .chatLog {
     overflow-y: scroll;
     overflow-x: hidden;
-    margin-left: 8%;
-    height: 85vh;
-    width: 85vw;
+    margin-left: 5%;
+    height: 90vh;
+    width: 91vw;
     background-color: transparent;
     padding-bottom: 100px;
     align-items: center;
   }
   #gemini-safety {
     position: relative;
-    top: -10px;
+    top: -30px;
     left: 26vw;
     color: white;
   }
