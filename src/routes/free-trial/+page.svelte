@@ -122,7 +122,7 @@
       <!-- shows welcome message if shouldShowWelcomeMessage if true -->
       <h1 id="hello-message">Hello There!</h1>
       <p id="how-to">
-        Start a conversation with Bard by typing in a prompt in the text input
+        Start a conversation with Gemini by typing in a prompt in the text input
         below.
       </p>
       <p id="free-trial">
