@@ -69,6 +69,7 @@
       const user = result.user;
       // IdP data available using getAdditionalUserInfo(result)
       // ...
+      sessionStorage.setItem("Display Name", user.displayName);
       sessionStorage.setItem("Email", user.email);
       alert("Login Successfill!!"); // shows success message
       goto("/dashboard");
