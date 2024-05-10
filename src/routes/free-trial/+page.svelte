@@ -25,9 +25,6 @@
   import { getFirestore, doc, getDoc, updateDoc } from "firebase/firestore";
   import { onMount } from "svelte";
 
-  // Initialize Firebase
-  const freeTrialApp = initializeApp(firebaseConfig);
-
   const db = getFirestore(freeTrialApp);
 
   const users = doc(db, "Messages/User-Messages/");

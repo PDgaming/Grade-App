@@ -5,6 +5,8 @@
     AuthErrorCodes,
     getAuth,
     signInWithEmailAndPassword,
+    GoogleAuthProvider,
+    signInWithPopup
   } from "firebase/auth";
 
   // config for firebase
@@ -29,6 +31,8 @@
 
   // Initialize Firebase authentication
   const auth = getAuth(app);
+  auth.useDeviceLanguage();
+  const provider = new GoogleAuthProvider();
 
   const login = async (event) => {
     event.preventDefault(); // prevents the site from reloading on button click
@@ -54,6 +58,30 @@
       }
     }
   };
+
+  async function loginWithGoogle() {
+    signInWithPopup(auth, provider)
+    .then((result) => {
+      // This gives you a Google Access Token. You can use it to access the Google API.
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      const token = credential.accessToken;
+      // The signed-in user info.
+      const user = result.user;
+      // IdP data available using getAdditionalUserInfo(result)
+      // ...
+      alert("Login Successfill!!"); // shows success message
+      goto("/dashboard");
+  }).catch((error) => {
+    // Handle Errors here.
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // The email of the user's account used.
+    const email = error.customData.email;
+    // The AuthCredential type that was used.
+    const credential = GoogleAuthProvider.credentialFromError(error);
+    alert(errorMessage);
+  });
+  }
 </script>
 
 <svelte:head>
@@ -77,7 +105,8 @@
         id="password"
         placeholder="Password"
       />
-      <button id="loginButton" on:click={login}>Login</button>
+      <button id="loginButton" on:click={login}>Login</button><br>
+      <button id="loginWithGoogleButton" on:click={loginWithGoogle}>Login With Google</button>
       <h1 style="font-size: 20px;">
         Don't have an account? <a href="/premium-register">Register</a>
       </h1>
@@ -113,7 +142,9 @@
     border: 1px solid #ccc;
     border-radius: 5px;
   }
-
+  #loginWithGoogleButton{
+    width: 250px;
+  }
   .emailInput {
     margin-top: 50px;
     margin-right: 40px;
