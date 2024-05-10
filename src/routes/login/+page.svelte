@@ -69,14 +69,13 @@
       const user = result.user;
       // IdP data available using getAdditionalUserInfo(result)
       // ...
+      sessionStorage.setItem("Email", user.email);
       alert("Login Successfill!!"); // shows success message
       goto("/dashboard");
   }).catch((error) => {
     // Handle Errors here.
     const errorCode = error.code;
     const errorMessage = error.message;
-    // The email of the user's account used.
-    const email = error.customData.email;
     // The AuthCredential type that was used.
     const credential = GoogleAuthProvider.credentialFromError(error);
     alert(errorMessage);
