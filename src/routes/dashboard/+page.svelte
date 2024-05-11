@@ -2,23 +2,85 @@
   import "../index.css";
   import { goto } from "$app/navigation";
   import { onMount } from "svelte";
+  import { getFirestore, getDoc, doc} from "firebase/firestore"
+  import { initializeApp } from "firebase/app";
   
   let name = "Your Name";
 
+  const firebaseConfig = {
+    apiKey: "AIzaSyB_MSh9YlBu7GGN5wxZjY7kGN4bU697GO4",
+
+    authDomain: "grade-app-16e2d.firebaseapp.com",
+
+    projectId: "grade-app-16e2d",
+
+    storageBucket: "grade-app-16e2d.appspot.com",
+
+    messagingSenderId: "942886540823",
+
+    appId: "1:942886540823:web:29caeac2695fecc3d4ee52",
+
+    measurementId: "G-WD1M20G6LX",
+  };
+  
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore();
+  
+  const userDocRef = doc(db, "Users/user-email-password");
+  let email = "";
+  let password = "";
+  onMount(() => {
+    if (sessionStorage.getItem("Display Name")) {
+      name = sessionStorage.getItem("Display Name");
+    } else {
+      name = sessionStorage.getItem("Email")
+    }
+    email = sessionStorage.getItem("Email")
+    password = sessionStorage.getItem("Password")
+  })
   function freeTrial() {
     goto("/free-trial");
   }
-  function premiumLogin() {
-    goto("/premium-login");
+  async function gradeAi(email, password) {
+    try {
+      const docSnap = await getDoc(userDocRef);
+
+      if (docSnap.exists()) {
+        const docData = docSnap.data();
+        // Access specific fields using docData object (e.g., docData.name, docData.age)
+        if (password == null) {
+          if (Object.keys(docData).includes(email)) {
+            goto("/grade-app.ai")
+          } else{
+            alert("You do not have a premium account. Register a premium account by contacting gradeappbyapp@gmail.com")
+          }
+        } else {
+          if (Object.keys(docData).includes(email) && Object.values(docData).includes(password)) {
+            console.log("User is Subscribed")
+            goto("/grade-app.ai")
+          }else{
+            alert("You do not have a premium account. Register a premium account by contacting gradeappbyapp@gmail.com")
+          }
+        }
+      } else {
+        alert("No document found with the provided reference.");
+        // Handle the case where the document doesn't exist
+      }
+    } catch (error) {
+      alert("Error fetching document:", error);
+      // Handle errors
+    }
   }
   function books() {
     goto("/book-pdf");
   }
-  onMount(() => {
-    name = sessionStorage.getItem("Display Name");
-    const email = sessionStorage.getItem("Email");
-    console.log(name, email)
-  })
+  function notes() {
+    goto("/notes")
+  }
+  function register() {
+    goto("/premium-register")
+  }
 </script>
 
 <svelte:head>
@@ -28,13 +90,13 @@
 <h2>So what would you like to do today?</h2>
 <div class="buttons">
   <span class="buttonsContainer" style="margin-top: 15px;">
-    <h4>Try our Grade App AI:</h4>
+    <h4>Use our Grade App AI:</h4>
     <button
     type="button"
     class="btn btn-primary grade-app"
-    on:click={premiumLogin}
+    on:click={gradeAi(email, password)}
     href="/premium-login"
-    style="width: 140px;">Grade App</button
+    style="width: 140px;">Grade AI</button
     >
   </span><br>
   <span class="buttonsContainer">
@@ -54,6 +116,24 @@
     class="btn btn-primary try-it"
     on:click={freeTrial}
     style="width: 160px;">Try It for free</button
+    >
+  </span><br>
+  <span class="buttonsContainer">
+    <h4>Get access to notes from classes:</h4>
+    <button
+    type="button"
+    class="btn btn-primary try-it"
+    on:click={notes}
+    style="width: 160px;">Notes</button
+    >
+  </span><br>
+  <span class="buttonsContainer">
+    <h4>Register for a premium account to acess Grade AI:</h4>
+    <button
+    type="button"
+    class="btn btn-primary try-it"
+    on:click={register}
+    style="width: 160px;">Register</button
     >
   </span>
 </div>

@@ -45,6 +45,8 @@
         email,
         password
       ); // creates user credentials with email and password to sign in
+      sessionStorage.setItem("Email", email);
+      sessionStorage.setItem("Password", password);
       alert("Login Successfill!!"); // shows success message
       goto("/dashboard"); // redirects user to chat window
     } catch (error) {
@@ -98,7 +100,6 @@
         id="email"
         placeholder="Email"
       /><br />
-
       <input
         type="password"
         class="passwordInput"
@@ -149,11 +150,12 @@
     margin-top: 50px;
     margin-right: 40px;
     margin-left: 30px;
-    margin-bottom: 55px;
+    margin-bottom: 30px;
     width: 76%;
   }
-
   .passwordInput {
+    margin-right: 40px;
+    margin-left: 30px;
     margin-bottom: 100px;
     width: 76%;
   }

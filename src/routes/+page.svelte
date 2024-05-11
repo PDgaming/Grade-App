@@ -87,7 +87,7 @@
       1. Click on the "Register" Button above.<br />
       2. Enter your email and password and click "Register".<br />
       Or<br />
-      Contact our team at <u>gradeappbyapp@gmail.com</u> for more information on
+      Contact our team at <a href="mailto:gradeappbyapp@gmail.com">gradeappbyapp@gmail.com</a> for more information on
       how you can create an account.
     </p>
 
@@ -110,7 +110,7 @@
     <h7 id="contacth">Contact</h7>
     <p>
       If you have any questions or feedback, please feel free to reach out at
-      <u>gradeappbyapp@gmail.com</u>
+      <a href="mailto:gradeappbyapp@gmail.com">gradeappbyapp@gmail.com</a>
     </p>
   </div>
   <h2 id="happy-learning-with-grade-app">
@@ -138,7 +138,7 @@
         <div id="footer-contact">
           <a href="#contact">Contact</a><br />
           <p9>
-            <u>gradeappbyapp@gmail.com</u>
+            <a href="mailto:gradeappbyapp@gmail.com">gradeappbyapp@gmail.com</a>
           </p9>
         </div>
       </div>

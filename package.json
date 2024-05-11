@@ -1,6 +1,6 @@
 {
   "name": "grade-app",
-  "version": "3.1.0",
+  "version": "3.5.0",
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
@@ -24,6 +24,7 @@
     "dotenv": "^16.4.1",
     "firebase": "^10.11.0",
     "openai": "^4.41.0",
+    "stripe": "^15.6.0",
     "workbox-strategies": "^7.0.0"
   }
 }
