@@ -72,9 +72,6 @@
       // Handle errors
     }
   }
-  function books() {
-    goto("/book-pdf");
-  }
   function notes() {
     goto("/notes")
   }
@@ -97,16 +94,6 @@
     on:click={gradeAi(email, password)}
     href="/premium-login"
     style="width: 140px;">Grade AI</button
-    >
-  </span><br>
-  <span class="buttonsContainer">
-    <h4>Access any NCERT books for free:</h4>
-    <button
-    type="button"
-    class="btn btn-primary books"
-    on:click={books}
-    style="width: 140px;"
-    href="/book-pdf">Books</button
     >
   </span><br>
   <span class="buttonsContainer">
@@ -147,8 +134,7 @@
     color: white;
   }
   .try-it,
-  .grade-app,
-  .books {
+  .grade-app {
     font-size: 20px;
   }
   button {

@@ -7,14 +7,3 @@ self.addEventListener("install", (event) => {
 self.addEventListener("activate", (event) => {
   console.log("Service Worker Activated");
 });
-
-self.addEventListener("fetch", (event) => {
-  if (event.request.method !== "GET") return;
-
-  event.respondWith(
-    caches
-      .match(event.request)
-      .then((cached) => cached || fetch(event.request))
-      .catch(() => caches.match("/offline.html"))
-  );
-});
