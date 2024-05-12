@@ -2,9 +2,9 @@
   import "../index.css";
   import { goto } from "$app/navigation";
   import { onMount } from "svelte";
-  import { getFirestore, getDoc, doc} from "firebase/firestore"
+  import { getFirestore, getDoc, doc } from "firebase/firestore";
   import { initializeApp } from "firebase/app";
-  
+
   let name = "Your Name";
 
   const firebaseConfig = {
@@ -22,11 +22,11 @@
 
     measurementId: "G-WD1M20G6LX",
   };
-  
+
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
   const db = getFirestore();
-  
+
   const userDocRef = doc(db, "Users/user-email-password");
   let email = "";
   let password = "";
@@ -34,11 +34,11 @@
     if (sessionStorage.getItem("Display Name")) {
       name = sessionStorage.getItem("Display Name");
     } else {
-      name = sessionStorage.getItem("Email")
+      name = sessionStorage.getItem("Email");
     }
-    email = sessionStorage.getItem("Email")
-    password = sessionStorage.getItem("Password")
-  })
+    email = sessionStorage.getItem("Email");
+    password = sessionStorage.getItem("Password");
+  });
   function freeTrial() {
     goto("/free-trial");
   }
@@ -51,16 +51,22 @@
         // Access specific fields using docData object (e.g., docData.name, docData.age)
         if (password == null) {
           if (Object.keys(docData).includes(email)) {
-            goto("/grade-app.ai")
-          } else{
-            alert("You do not have a premium account. Register a premium account by contacting gradeappbyapp@gmail.com")
+            goto("/grade-app.ai");
+          } else {
+            alert(
+              "You do not have a premium account. Register a premium account by contacting gradeappbyapp@gmail.com"
+            );
           }
         } else {
-          if (Object.keys(docData).includes(email) && Object.values(docData).includes(password)) {
-            console.log("User is Subscribed")
-            goto("/grade-app.ai")
-          }else{
-            alert("You do not have a premium account. Register a premium account by contacting gradeappbyapp@gmail.com")
+          if (
+            Object.keys(docData).includes(email) &&
+            Object.values(docData).includes(password)
+          ) {
+            goto("/grade-app.ai");
+          } else {
+            alert(
+              "You do not have a premium account. Register a premium account by contacting gradeappbyapp@gmail.com"
+            );
           }
         }
       } else {
@@ -73,10 +79,10 @@
     }
   }
   function notes() {
-    goto("/notes")
+    goto("/notes");
   }
   function register() {
-    goto("/premium-register")
+    goto("/premium-register");
   }
 </script>
 
@@ -89,38 +95,38 @@
   <span class="buttonsContainer" style="margin-top: 15px;">
     <h4>Use our Grade App AI:</h4>
     <button
-    type="button"
-    class="btn btn-primary grade-app"
-    on:click={gradeAi(email, password)}
-    href="/premium-login"
-    style="width: 140px;">Grade AI</button
+      type="button"
+      class="btn btn-primary grade-app"
+      on:click={gradeAi(email, password)}
+      href="/premium-login"
+      style="width: 140px;">Grade AI</button
     >
-  </span><br>
+  </span><br />
   <span class="buttonsContainer">
     <h4>Try our Grade App AI for free:</h4>
     <button
-    type="button"
-    class="btn btn-primary try-it"
-    on:click={freeTrial}
-    style="width: 160px;">Try It for free</button
+      type="button"
+      class="btn btn-primary try-it"
+      on:click={freeTrial}
+      style="width: 160px;">Try It for free</button
     >
-  </span><br>
+  </span><br />
   <span class="buttonsContainer">
     <h4>Get access to notes from classes:</h4>
     <button
-    type="button"
-    class="btn btn-primary try-it"
-    on:click={notes}
-    style="width: 160px;">Notes</button
+      type="button"
+      class="btn btn-primary try-it"
+      on:click={notes}
+      style="width: 160px;">Notes</button
     >
-  </span><br>
+  </span><br />
   <span class="buttonsContainer">
     <h4>Register for a premium account to acess Grade AI:</h4>
     <button
-    type="button"
-    class="btn btn-primary try-it"
-    on:click={register}
-    style="width: 160px;">Register</button
+      type="button"
+      class="btn btn-primary try-it"
+      on:click={register}
+      style="width: 160px;">Register</button
     >
   </span>
 </div>
@@ -130,7 +136,9 @@
     margin-top: 50px;
     font-weight: bold;
   }
-  h1, h2, h4 {
+  h1,
+  h2,
+  h4 {
     color: white;
   }
   .try-it,
