@@ -2,7 +2,9 @@
   import Loader from "../components/loader.svelte"; // imports Loader from components
   import "./chatWindow.css"; // imports css stylesheet
   import { GoogleGenerativeAI } from "@google/generative-ai"; // imports GoogleGenerativeAI
-
+  import { onMount } from "svelte";
+  import { initializeApp } from "firebase/app";
+  // import { getFirestore, doc, getDoc, updateDoc } from "firebase/firestore";
   const firebaseConfig = {
     apiKey: "AIzaSyB_MSh9YlBu7GGN5wxZjY7kGN4bU697GO4",
 
@@ -20,20 +22,16 @@
 
     measurementId: "G-XCTQN883KL",
   };
+  // const freeTrialApp = initializeApp(firebaseConfig);
+  // const db = getFirestore(freeTrialApp);
 
-  import { initializeApp } from "firebase/app";
-  import { getFirestore, doc, getDoc, updateDoc } from "firebase/firestore";
-  import { onMount } from "svelte";
+  // const users = doc(db, "Messages/User-Messages/");
 
-  const db = getFirestore(freeTrialApp);
-
-  const users = doc(db, "Messages/User-Messages/");
-
-  async function writeDataInDocument(question, answer) {
-    await updateDoc(users, {
-      [question]: answer,
-    });
-  }
+  // async function writeDataInDocument(question, answer) {
+  //   await updateDoc(users, {
+  //     [question]: answer,
+  //   });
+  // }
 
   let messages = []; // array to store user and ai messages
   let userInput = ""; // variable to store user message
@@ -50,9 +48,10 @@
       sendMessage(); // if condition is true sendMessage function runs
     }
   }
-
+  onMount(() => {
+    sessionStorage.setItem("Queries Left", queriesLeft);
+  });
   function sendMessage() {
-    console.log("Queries Left:", queriesLeft);
     // function to send messages to API
     shouldShowWelcomeMessage = false; // sets shouldShowWelcomeMessage to false to not show welcome message
     const userInput = document.getElementById("userInput").value.trim(); // gets user input
@@ -101,7 +100,7 @@
     }; // stores formatted AI text in message
 
     messages = [...messages, message]; // appends formatted text to messages
-    writeDataInDocument(prompt, text);
+    // writeDataInDocument(prompt, text);
   }
 </script>
 
