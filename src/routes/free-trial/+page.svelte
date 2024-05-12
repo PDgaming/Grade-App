@@ -65,13 +65,14 @@
       ]; // add userinput to messages
     } else {
       // if userInput is not empty
-      if (queriesLeft == 0) {
+      if (queriesLeft == 0 || sessionStorage.getItem("Queries Left") == 0) {
         alert(
           "0 Queries Left! Please contact gradeappbyapp@gmail.com to create an account to enjoy the full app and ask as many questions as you want."
         );
       } else if (queriesLeft != 0) {
         run(userInput); // userInput goes to run to get response from API
         queriesLeft = queriesLeft - 1;
+        sessionStorage.setItem("Queries Left", queriesLeft);
       }
     }
   }
