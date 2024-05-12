@@ -3,7 +3,8 @@ const ImageURLData = {
     class_VII: {
       subjects: {
         Mathematics: {
-          link: "https://firebasestorage.googleapis.com/v0/b/grade-app-16e2d.appspot.com/o/images%2Fmultiplication-table.jpg?alt=media&token=8f85193f-4149-4074-968f-cdec3e325fcb",
+          links:
+            "https://firebasestorage.googleapis.com/v0/b/grade-app-16e2d.appspot.com/o/images%2Fmultiplication-table.jpg?alt=media&token=8f85193f-4149-4074-968f-cdec3e325fcb",
         },
         Science: {},
         English: {},
