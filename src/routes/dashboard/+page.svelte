@@ -119,6 +119,7 @@
       on:click={notes}
       style="width: 160px;">Notes</button
     >
+    <h4>(Coming Soon)</h4>
   </span><br />
   <span class="buttonsContainer">
     <h4>Register for a premium account to acess Grade AI:</h4>
