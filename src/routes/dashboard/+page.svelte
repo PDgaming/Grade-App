@@ -27,17 +27,25 @@
   const app = initializeApp(firebaseConfig);
   const db = getFirestore();
 
+  let notLoggedIn;
+
   const userDocRef = doc(db, "Users/user-email-password");
   let email = "";
   let password = "";
   onMount(() => {
-    if (sessionStorage.getItem("Display Name")) {
-      name = sessionStorage.getItem("Display Name");
-    } else {
-      name = sessionStorage.getItem("Email");
-    }
+    // if (sessionStorage.getItem("Display Name")) {
+    //   name = sessionStorage.getItem("Display Name");
+    // } else {
+    //   name = sessionStorage.getItem("Email");
+    // }
     email = sessionStorage.getItem("Email");
     password = sessionStorage.getItem("Password");
+
+    if (sessionStorage.getItem("name") || sessionStorage.getItem("Email")) {
+      notLoggedIn = false;
+    } else {
+      notLoggedIn = true;
+    }
   });
   function freeTrial() {
     goto("/free-trial");
@@ -112,16 +120,6 @@
     >
   </span><br />
   <span class="buttonsContainer">
-    <h4>Get access to notes from classes:</h4>
-    <button
-      type="button"
-      class="btn btn-primary try-it"
-      on:click={notes}
-      style="width: 160px;">Notes</button
-    >
-    <h4>(Coming Soon)</h4>
-  </span><br />
-  <span class="buttonsContainer">
     <h4>Register for a premium account to acess Grade AI:</h4>
     <button
       type="button"
@@ -130,6 +128,13 @@
       style="width: 160px;">Register</button
     >
   </span>
+  {#if notLoggedIn}
+    <div class="not-logged-in">
+      <h2>
+        You have not logged in!! Please go to <a href="/login">Login</a> to login
+      </h2>
+    </div>
+  {/if}
 </div>
 
 <style>
