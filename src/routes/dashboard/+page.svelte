@@ -2,8 +2,8 @@
   import "../index.css";
   import { goto } from "$app/navigation";
   import { onMount } from "svelte";
-  // import { initializeApp } from "firebase/app";
-  // import { getFirestore, getDoc, doc } from "firebase/firestore";
+  import { initializeApp } from "firebase/app";
+  import { getFirestore, getDoc, doc } from "firebase/firestore";
 
   const firebaseConfig = {
     apiKey: "AIzaSyB_MSh9YlBu7GGN5wxZjY7kGN4bU697GO4",
@@ -21,8 +21,8 @@
     measurementId: "G-WD1M20G6LX",
   };
 
-  // // Initialize Firebase
-  // const app = initializeApp(firebaseConfig);
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
   // const db = getFirestore(app);
 
   let name = "User";

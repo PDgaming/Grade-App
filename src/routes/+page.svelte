@@ -7,12 +7,18 @@
 
   // Takes to login page
   function loginPage() {
-    goto("/login");
+    // goto("/login");
+    alert(
+      "We are currently deloping some new features!! So please hang tight till we are back"
+    );
   }
 
   // Takes to register page
   function registerPage() {
-    goto("/register");
+    // goto("/register");
+    alert(
+      "We are currently deloping some new features!! So please hang tight till we are back"
+    );
   }
 </script>
 
@@ -23,7 +29,7 @@
 <div class="main">
   <Navbar />
   <div class="hero-section">
-    <img class="laptopImg" src={laptop} alt="laptop.img"/>
+    <img class="laptopImg" src={laptop} alt="laptop.img" />
     <div class="home" id="home">
       <h8>Grade App</h8><br />
       <p id="homep">
@@ -87,8 +93,9 @@
       1. Click on the "Register" Button above.<br />
       2. Enter your email and password and click "Register".<br />
       Or<br />
-      Contact our team at <a href="mailto:gradeappbyapp@gmail.com">gradeappbyapp@gmail.com</a> for more information on
-      how you can create an account.
+      Contact our team at
+      <a href="mailto:gradeappbyapp@gmail.com">gradeappbyapp@gmail.com</a> for more
+      information on how you can create an account.
     </p>
 
     <p>
