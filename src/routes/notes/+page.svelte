@@ -1,7 +1,6 @@
 <script>
   import { initializeApp } from "firebase/app";
-  import { getStorage } from "firebase/storage";
-  import ImageURLData from "./imageURLdata";
+  import { getStorage, ref } from "firebase/storage";
 
   // config for firebase
   const firebaseConfig = {
@@ -22,17 +21,22 @@
 
   const app = initializeApp(firebaseConfig);
   const storage = getStorage();
+  const notesRef = ref(storage, "Notes/Class-VIII/multiplication-table.jpg");
 
   let imageUrl = "";
   let selectedClass = "";
   let selectedSubject = "";
+  let ImageURLData = {
+    Classes: {},
+  };
+  console.log(notesRef);
 
   async function searchNotes() {
     if (selectedClass && selectedSubject) {
-      let link =
-        ImageURLData.Classes[selectedClass].subjects[selectedSubject].links;
-      console.log(link);
-      imageUrl = link;
+      // let link =
+      // ImageURLData.Classes[selectedClass].subjects[selectedSubject].links;
+      // console.log(link);
+      // imageUrl = link;
     } else {
       console.log("Please select a class and subject first");
     }

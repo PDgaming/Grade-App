@@ -1,7 +1,11 @@
 <script>
   import Loader from "../components/loader.svelte"; // imports Loader from components
   import "./chatWindow.css"; // imports css stylesheet
-  import { GoogleGenerativeAI } from "@google/generative-ai"; // imports GoogleGenerativeAI
+  import {
+    GoogleGenerativeAI,
+    HarmCategory,
+    HarmBlockThreshold,
+  } from "@google/generative-ai"; // imports GoogleGenerativeAI
 
   let messages = []; // array to store user and ai messages
   let userInput = ""; // variable to store user message
@@ -41,12 +45,47 @@
 
   const genAI = new GoogleGenerativeAI(API_KEY); // generates a new ai to using the api key to get responses
 
+  const model = genAI.getGenerativeModel({
+    model: "gemini-1.0-pro",
+  });
+
+  const generationConfig = {
+    temperature: 1,
+    topP: 0.95,
+    topK: 64,
+    maxOutputTokens: 8192,
+  };
+
+  const safetySettings = [
+    {
+      category: HarmCategory.HARM_CATEGORY_HARASSMENT,
+      threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+    },
+    {
+      category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
+      threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+    },
+    {
+      category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
+      threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+    },
+    {
+      category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
+      threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+    },
+  ];
+  const chatSession = model.startChat({
+    generationConfig,
+    safetySettings,
+    history: [],
+  });
+
   async function run(prompt) {
-    const model = genAI.getGenerativeModel({ model: "gemini-pro" }); // generates a new model using genAI
     shouldload = true; // sets shouldload to true to show loader
-    const result = await model.generateContent(prompt); // takes in prompt and generates a result
-    const response = await result.response; // takes result and generates a response
-    const text = response.text(); //takes the text of the response and puts in "text"
+
+    const result = await chatSession.sendMessage(prompt);
+    const text = result.response.text();
+
     shouldload = false; // sets shouldload to false to not show loader
 
     const formattedText = text // variable to store formatted text
