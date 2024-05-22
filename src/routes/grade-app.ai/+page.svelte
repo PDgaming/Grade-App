@@ -90,7 +90,6 @@
 
     const formattedText = text // variable to store formatted text
       .replace(/\*\*/g, "<br>") // replaces "**" with line break
-      .replace(/\./g, ".<br>") // replaces "." with line break
       .replace(/\*/g, ""); // replaces "*" with ""
 
     // Create a single message with line breaks
