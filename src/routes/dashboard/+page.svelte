@@ -25,20 +25,23 @@
   // const app = initializeApp(firebaseConfig);
   // const db = getFirestore(app);
 
-  let name = "Your Name";
+  let name = "User";
   let notLoggedIn = false;
 
   // const userDocRef = doc(db, "Users/user-email-password");
   let email = "";
   let password = "";
   onMount(() => {
-    // if (sessionStorage.getItem("Display Name")) {
-    //   name = sessionStorage.getItem("Display Name");
-    // } else {
-    //   name = sessionStorage.getItem("Email");
-    // }
-    // email = sessionStorage.getItem("Email");
-    // password = sessionStorage.getItem("Password");
+    if (sessionStorage.getItem("Display Name")) {
+      name = sessionStorage.getItem("Display Name");
+    } else {
+      name = sessionStorage.getItem("Email");
+    }
+    if (name == null) {
+      notLoggedIn = true;
+    }
+    email = sessionStorage.getItem("Email");
+    password = sessionStorage.getItem("Password");
   });
   function freeTrial() {
     goto("/free-trial");
