@@ -1,6 +1,7 @@
 <script>
   import { goto } from "$app/navigation";
   import { initializeApp } from "firebase/app";
+  import "./index.css";
   import {
     AuthErrorCodes,
     getAuth,
@@ -186,23 +187,28 @@
   /* Responsive for tablets */
   @media screen and (max-width: 1280px) {
     .container {
-      width: 90%;
+      width: 70%;
+      margin-top: 10vh;
     }
 
     .emailInput {
       margin-top: 30px;
       margin-right: 40px;
       margin-left: 30px;
-      width: 76%;
+      width: 60%;
     }
 
     .passwordInput {
       margin-bottom: 60px;
-      width: 76%;
+      width: 60%;
     }
 
     button {
-      width: 360px;
+      width: 270px;
+      font-size: 19px;
+    }
+    #loginWithGoogleButton {
+      width: 220px;
     }
   }
 
@@ -210,33 +216,37 @@
   @media screen and (max-width: 800px) {
     .container {
       width: 80%;
-      height: 70%;
+      height: 80%;
     }
 
     .emailInput {
       margin-top: 30px;
       margin-right: 40px;
       margin-left: 30px;
-      width: 76%;
+      width: 60%;
     }
 
     .passwordInput {
       margin-bottom: 60px;
-      width: 76%;
+      width: 60%;
     }
 
     button {
-      width: 360px;
+      width: 200px;
+      font-size: 18px;
+    }
+    #loginWithGoogleButton {
+      width: 190px;
     }
   }
 
   /* Responsive for tablets */
   @media screen and (max-width: 770px) {
     .container {
-      width: 90%;
-      height: 80%;
+      width: 800px;
+      height: 530px;
+      margin-top: 5vh;
     }
-
     h1 {
       font-size: 30px;
     }
@@ -261,8 +271,11 @@
   /* Responsive for mobiles */
   @media screen and (max-width: 400px) {
     .container {
-      width: 100%;
-      height: 100vh;
+      width: 399px;
+      height: 580px;
+      margin-top: 0;
+      margin-left: 0;
+      margin-bottom: 0;
       border-radius: 0px;
     }
 

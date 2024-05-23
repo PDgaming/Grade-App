@@ -82,7 +82,7 @@
       >
     </span><br />
     <span class="buttonsContainer">
-      <h4>Try our Grade App AI for free:</h4>
+      <h4 id="trial-text">Try our Grade App AI for free:</h4>
       <button
         type="button"
         class="btn btn-primary try-it"
@@ -91,10 +91,12 @@
       >
     </span><br />
     <span class="buttonsContainer">
-      <h4>Register for a premium account to acess Grade AI:</h4>
+      <h4 id="register-text">
+        Register for a premium account to acess Grade AI:
+      </h4>
       <button
         type="button"
-        class="btn btn-primary try-it"
+        class="btn btn-primary register"
         on:click={register}
         style="width: 160px;">Register</button
       >
@@ -134,5 +136,26 @@
   .buttonsContainer {
     display: inline-flex;
     margin-bottom: 20px;
+  }
+
+  /* Responsive for mobiles */
+  @media screen and (max-width: 400px) {
+    .try-it {
+      height: 50px;
+      margin-left: 15px;
+    }
+    .btn {
+      font-size: 18px;
+    }
+    .register {
+      height: 50px;
+      margin-left: 15px;
+    }
+    #trial-text {
+      width: 200px;
+    }
+    #register-text {
+      width: 200px;
+    }
   }
 </style>
