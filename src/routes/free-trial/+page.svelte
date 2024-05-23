@@ -256,8 +256,11 @@
   }
 
   @media screen and (max-width: 1170px) {
+    #hello-message {
+      font-size: 40px;
+    }
     p {
-      font-size: 22px;
+      font-size: 20px;
     }
     input {
       left: 8vw;
@@ -274,7 +277,10 @@
   }
   @media screen and (max-width: 1090px) {
     p {
-      font-size: 23px;
+      font-size: 20px;
+    }
+    #hello-message {
+      font-size: 35px;
     }
     button {
       top: 16px;
@@ -291,7 +297,10 @@
 
   @media screen and (max-width: 1060px) {
     p {
-      font-size: 24px;
+      font-size: 20px;
+    }
+    #hello-message {
+      font-size: 33px;
     }
     button {
       top: 16px;
@@ -309,7 +318,10 @@
   /* Responsive for tablets */
   @media screen and (max-width: 800px) {
     p {
-      font-size: 25px;
+      font-size: 20px;
+    }
+    #hello-message {
+      font-size: 30px;
     }
     button {
       top: 16px;
@@ -328,7 +340,10 @@
   /* Responsive for mobiles */
   @media screen and (max-width: 400px) {
     p {
-      font-size: 22px;
+      font-size: 19px;
+    }
+    #hello-message {
+      font-size: 30px;
     }
     button {
       top: 16px;
