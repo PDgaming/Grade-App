@@ -39,12 +39,6 @@
             style="color: white;">Contact</a
           >
         </li>
-        <li class="nav-item login-link">
-          <a class="nav-link active" href="/login" id="login">Login</a>
-        </li>
-        <li class="nav-item register-link">
-          <a class="nav-link active" href="/register" id="register">Register</a>
-        </li>
       </ul>
     </div>
   </nav>
@@ -61,15 +55,6 @@
   }
   li {
     margin-top: 5px;
-  }
-  #login,
-  #register {
-    color: white;
-    text-decoration: underline;
-    font-size: 19px;
-  }
-  #register {
-    margin-right: 15px;
   }
   .container-fluid {
     padding: 0;
@@ -111,10 +96,49 @@
       height: 70px;
     }
     .homeNav {
-      margin-left: -30px;
+      margin-left: -40px;
     }
     .usage {
-      margin-left: -20px;
+      margin-left: -30px;
+    }
+    .features {
+      margin-left: -40px;
+    }
+    #acknowledgments {
+      margin-left: -50px;
+    }
+    .grade-app {
+      margin-left: 0vw;
+      margin-top: 0px;
+    }
+    .navbar-nav {
+      width: 1180px;
+    }
+    .nav-item {
+      margin-right: 100px;
+    }
+    .nav-item {
+      font-size: 18px;
+    }
+  }
+  /* Responsive for nav */
+  @media screen and (max-width: 1090px) {
+    #logo {
+      margin-top: 10px;
+    }
+    .nav-item {
+      justify-content: space-between;
+      width: 45px;
+      margin-top: 12px;
+    }
+    .navbar-nav {
+      height: 70px;
+    }
+    .homeNav {
+      margin-left: -35px;
+    }
+    .usage {
+      margin-left: -25px;
     }
     .features {
       margin-left: -25px;
@@ -124,7 +148,7 @@
     }
     .grade-app {
       margin-left: 3vw;
-      margin-top: 0px;
+      margin-top: 1px;
     }
     .navbar-nav {
       width: 1180px;
@@ -132,16 +156,8 @@
     .nav-item {
       margin-right: 100px;
     }
-    .login-link,
-    .register-link,
     .nav-item {
-      font-size: 18px;
-    }
-  }
-  /* Responsive for nav */
-  @media screen and (max-width: 1090px) {
-    .homeNav {
-      margin-left: 7vw;
+      font-size: 16px;
     }
   }
 
