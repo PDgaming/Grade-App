@@ -15,10 +15,13 @@
 
 <div class="container">
   <h1>Register</h1>
-  <h2>Contact <a href="mailto:gradeapbyapp@gmail.com">gradeappbyapp@gmail.com</a> to create a premium account.</h2>
-    <h1 style="font-size: 20px;">
-      Already have an account? <a href="/login">Login</a>
-    </h1>
+  <h2>
+    Contact <a href="mailto:gradeapbyapp@gmail.com">gradeappbyapp@gmail.com</a> to
+    create a premium account.
+  </h2>
+  <h1 style="font-size: 20px;">
+    Already have an account? <a href="/login">Login</a>
+  </h1>
 </div>
 
 <style>
@@ -35,7 +38,8 @@
   h1 {
     font-size: 50px;
   }
-  h1, h2 {
+  h1,
+  h2 {
     color: white;
   }
   a {
@@ -47,6 +51,8 @@
   @media screen and (max-width: 1280px) {
     .container {
       width: 90%;
+      height: 80vh;
+      margin-top: 10vh;
     }
   }
 
@@ -54,7 +60,7 @@
   @media screen and (max-width: 800px) {
     .container {
       width: 80%;
-      height: 70%;
+      height: 80vh;
     }
   }
 
@@ -62,7 +68,7 @@
   @media screen and (max-width: 770px) {
     .container {
       width: 90%;
-      height: 80%;
+      height: 80vh;
     }
 
     h1 {
@@ -76,10 +82,12 @@
       width: 100%;
       height: 100vh;
       border-radius: 0px;
+      margin-top: 0;
     }
 
     h1 {
-      font-size: 60px;
+      font-size: 50px;
+      margin-bottom: 30px;
     }
   }
 </style>
