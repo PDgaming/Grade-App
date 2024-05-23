@@ -135,19 +135,16 @@
       height: 70px;
     }
     .homeNav {
-      margin-left: -35px;
+      margin-left: -40px;
     }
     .usage {
-      margin-left: -25px;
+      margin-left: -35px;
     }
     .features {
-      margin-left: -25px;
-    }
-    #acknowledgments {
-      margin-left: -50px;
+      margin-left: -40px;
     }
     .grade-app {
-      margin-left: 3vw;
+      margin-left: 0vw;
       margin-top: 1px;
     }
     .navbar-nav {
@@ -163,8 +160,41 @@
 
   /* Responsive for nav */
   @media screen and (max-width: 1060px) {
+    #logo {
+      margin-top: 10px;
+    }
+    .nav-item {
+      justify-content: space-between;
+      width: 45px;
+      margin-top: 12px;
+    }
+    .navbar-nav {
+      height: 70px;
+    }
     .homeNav {
-      margin-left: 5vw;
+      margin-left: -45px;
+    }
+    .usage {
+      margin-left: -45px;
+    }
+    .features {
+      margin-left: -50px;
+    }
+    #acknowledgments {
+      margin-left: -60px;
+    }
+    .grade-app {
+      margin-left: 0vw;
+      margin-top: 1px;
+    }
+    .navbar-nav {
+      width: 1180px;
+    }
+    .nav-item {
+      margin-right: 100px;
+    }
+    .nav-item {
+      font-size: 16px;
     }
   }
 

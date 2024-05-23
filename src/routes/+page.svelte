@@ -25,7 +25,7 @@
   <div class="hero-section">
     <img class="laptopImg" src={laptop} alt="laptop.img" />
     <div class="home" id="home">
-      <h8>Grade App</h8><br />
+      <h8 id="grade-app">Grade App</h8><br />
       <p id="homep">
         Grade App is an AI powered educational chatting application that
         leverages the power of Google's Gemini to provide answers to academic
@@ -117,7 +117,7 @@
   <h2 id="happy-learning-with-grade-app">
     Happy learning with Grade App! 📚🤖🚀
   </h2>
-  <div class="footer" id="footer">
+  <!-- <div class="footer" id="footer">
     <div id="footer-top">
       <div class="logo-and-title">
         <img src={logo} alt="logo" id="footer-logo" />
@@ -145,7 +145,7 @@
       </div>
       <div id="footer-bottom">Copyright © 2024 Grade App</div>
     </div>
-  </div>
+  </div> -->
 </div>
 
 <style>
@@ -242,7 +242,7 @@
     margin-left: 790px;
     margin-top: 130px;
   }
-  #footer {
+  /* #footer {
     background-color: #19191d;
     height: 200px;
     color: white;
@@ -274,7 +274,7 @@
   }
   #title {
     margin-left: 10px;
-  }
+  } */
   /* Responsive for nav */
   @media screen and (max-width: 1170px) {
     .laptopImg {
@@ -381,8 +381,11 @@
     .laptopImg {
       display: none;
     }
+    #grade-app {
+      margin-left: 30%;
+    }
     .home {
-      margin-top: 55px;
+      margin-top: 0px;
       width: auto;
     }
     p {
@@ -390,6 +393,7 @@
     }
     #homep {
       font-size: 17px;
+      margin-top: 35px;
     }
     #featuresh {
       margin-left: 41%;
@@ -408,7 +412,7 @@
   /* Responsive for mobiles */
   @media screen and (max-width: 400px) {
     .home {
-      margin-top: 50px;
+      margin-top: 0px;
       width: auto;
     }
     h7 {
@@ -419,6 +423,7 @@
     }
     #homep {
       font-size: 17px;
+      margin-top: 50px;
     }
     #featuresh {
       margin-left: 35%;
@@ -439,7 +444,7 @@
       margin-bottom: 60%;
     }
     .loginButton {
-      margin-left: 30px;
+      margin-left: 70%;
     }
     .signUpButton {
       margin-left: 60px;
