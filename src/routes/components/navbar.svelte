@@ -3,9 +3,8 @@
     <div class="container-fluid">
       <ul class="navbar-nav">
         <img src="/logo.webp" alt="Logo" id="logo" />
-        <li class="nav-item">
-          <a class="nav-link active homeNav" href="/" style="color: white;"
-            >Grade App</a
+        <li class="nav-item grade-app">
+          <a class="nav-link active" href="/" style="color: white;">Grade App</a
           >
         </li>
         <li class="nav-item">
@@ -14,12 +13,14 @@
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="#features" style="color: white;"
-            >Features</a
+          <a
+            class="nav-link active features"
+            href="#features"
+            style="color: white;">Features</a
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="#usage" style="color: white;"
+          <a class="nav-link active usage" href="#usage" style="color: white;"
             >Usage</a
           >
         </li>
@@ -27,18 +28,21 @@
           <a
             class="nav-link active"
             href="#acknowledgments"
+            id="acknowledgments"
             style="color: white;">Acknowledgments</a
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="#contact" style="color: white;"
-            >Contact</a
+          <a
+            class="nav-link active contact"
+            href="#contact"
+            style="color: white;">Contact</a
           >
         </li>
-        <li class="nav-item">
+        <li class="nav-item login-link">
           <a class="nav-link active" href="/login" id="login">Login</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item register-link">
           <a class="nav-link active" href="/register" id="register">Register</a>
         </li>
       </ul>
@@ -95,11 +99,43 @@
   }
   /* Responsive for nav */
   @media screen and (max-width: 1170px) {
+    #logo {
+      margin-top: 10px;
+    }
+    .nav-item {
+      justify-content: space-between;
+      width: 45px;
+      margin-top: 10px;
+    }
+    .navbar-nav {
+      height: 70px;
+    }
+    .homeNav {
+      margin-left: -30px;
+    }
+    .usage {
+      margin-left: -20px;
+    }
+    .features {
+      margin-left: -25px;
+    }
+    #acknowledgments {
+      margin-left: -50px;
+    }
+    .grade-app {
+      margin-left: 3vw;
+      margin-top: 0px;
+    }
+    .navbar-nav {
+      width: 1180px;
+    }
     .nav-item {
       margin-right: 100px;
     }
-    .homeNav {
-      margin-left: 10vw;
+    .login-link,
+    .register-link,
+    .nav-item {
+      font-size: 18px;
     }
   }
   /* Responsive for nav */
