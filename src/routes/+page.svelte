@@ -7,18 +7,12 @@
 
   // Takes to login page
   function loginPage() {
-    // goto("/login");
-    alert(
-      "We are currently deloping some new features!! And Grade-App will no be availble while we bring these feature, So please hang tight till we are back"
-    );
+    goto("/login");
   }
 
   // Takes to register page
   function registerPage() {
-    // goto("/register");
-    alert(
-      "We are currently deloping some new features!! And Grade-App will no be availble while we bring these feature, So please hang tight till we are back"
-    );
+    goto("/register");
   }
 </script>
 

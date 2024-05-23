@@ -2,35 +2,12 @@
   import "../index.css";
   import { goto } from "$app/navigation";
   import { onMount } from "svelte";
-  import { initializeApp } from "firebase/app";
-  import { getFirestore, getDoc, doc } from "firebase/firestore";
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyB_MSh9YlBu7GGN5wxZjY7kGN4bU697GO4",
-
-    authDomain: "grade-app-16e2d.firebaseapp.com",
-
-    projectId: "grade-app-16e2d",
-
-    storageBucket: "grade-app-16e2d.appspot.com",
-
-    messagingSenderId: "942886540823",
-
-    appId: "1:942886540823:web:29caeac2695fecc3d4ee52",
-
-    measurementId: "G-WD1M20G6LX",
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  // const db = getFirestore(app);
+  import { supabase } from "../supabaseClient";
 
   let name = "User";
   let notLoggedIn = false;
 
-  // const userDocRef = doc(db, "Users/user-email-password");
-  let email = "";
-  let password = "";
+  let userEmail = "";
   onMount(() => {
     if (sessionStorage.getItem("Display Name")) {
       name = sessionStorage.getItem("Display Name");
@@ -40,50 +17,51 @@
     if (name == null) {
       notLoggedIn = true;
     }
-    email = sessionStorage.getItem("Email");
-    password = sessionStorage.getItem("Password");
+    userEmail = sessionStorage.getItem("Email");
   });
   function freeTrial() {
     goto("/free-trial");
   }
-  async function gradeAi(email, password) {
-    // try {
-    //   const docSnap = await getDoc(userDocRef);
-    //   if (docSnap.exists()) {
-    //     const docData = docSnap.data();
-    //     // Access specific fields using docData object (e.g., docData.name, docData.age)
-    //     if (password == null) {
-    //       if (Object.keys(docData).includes(email)) {
-    //         goto("/grade-app.ai");
-    //       } else {
-    //         alert(
-    //           "You do not have a premium account. Register a premium account by contacting gradeappbyapp@gmail.com"
-    //         );
-    //       }
-    //     } else {
-    //       if (
-    //         Object.keys(docData).includes(email) &&
-    //         Object.values(docData).includes(password)
-    //       ) {
-    //         goto("/grade-app.ai");
-    //       } else {
-    //         alert(
-    //           "You do not have a premium account. Register a premium account by contacting gradeappbyapp@gmail.com"
-    //         );
-    //       }
-    //     }
-    //   } else {
-    //     alert("No document found with the provided reference.");
-    //     // Handle the case where the document doesn't exist
-    //   }
-    // } catch (error) {
-    //   alert("Error fetching document:", error);
-    //   // Handle errors
-    // }
+  async function gradeAi(email) {
+    try {
+      const { data, error } = await supabase
+        .from("Users")
+        .select("Email") // Select both email and member columns
+        .eq("Email", email)
+        .single()
+        .select("Member");
+      if (error) {
+        console.error("Error:", error);
+        console.error("Error message:", error.message);
+        console.error("Error details:", error.details);
+        if (error.details == "The result contains 0 rows") {
+          alert(
+            "Your email is not found in the database! If you do not have a premium account, please go to /premium-register to use Grade-AI"
+          );
+          goto("/premium-register");
+        } else {
+          alert("There was an error!!");
+        }
+        // Handle the error appropriately
+        return; // Or throw an exception if needed
+      } else {
+        if (data) {
+          const memberOrNot = data.Member;
+          if (memberOrNot) {
+            goto("/grade-app.ai");
+          } else {
+            alert(
+              "You have an account but your account is inactive. Contact gradeappbyapp@gmail.com to reactivate your account"
+            );
+          }
+        }
+      }
+    } catch (error) {
+      console.error("Unexpected error:", error);
+      // Handle unexpected errors gracefully
+    }
   }
-  function notes() {
-    goto("/notes");
-  }
+
   function register() {
     goto("/premium-register");
   }
@@ -101,7 +79,7 @@
       <button
         type="button"
         class="btn btn-primary grade-app"
-        on:click={gradeAi(email, password)}
+        on:click={gradeAi(userEmail)}
         href="/premium-login"
         style="width: 140px;">Grade AI</button
       >

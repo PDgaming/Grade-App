@@ -6,7 +6,7 @@
     getAuth,
     signInWithEmailAndPassword,
     GoogleAuthProvider,
-    signInWithPopup
+    signInWithPopup,
   } from "firebase/auth";
 
   // config for firebase
@@ -63,26 +63,27 @@
 
   async function loginWithGoogle() {
     signInWithPopup(auth, provider)
-    .then((result) => {
-      // This gives you a Google Access Token. You can use it to access the Google API.
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-      const token = credential.accessToken;
-      // The signed-in user info.
-      const user = result.user;
-      // IdP data available using getAdditionalUserInfo(result)
-      // ...
-      sessionStorage.setItem("Display Name", user.displayName);
-      sessionStorage.setItem("Email", user.email);
-      alert("Login Successfill!!"); // shows success message
-      goto("/dashboard");
-  }).catch((error) => {
-    // Handle Errors here.
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // The AuthCredential type that was used.
-    const credential = GoogleAuthProvider.credentialFromError(error);
-    alert(errorMessage);
-  });
+      .then((result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        // The signed-in user info.
+        const user = result.user;
+        // IdP data available using getAdditionalUserInfo(result)
+        // ...
+        sessionStorage.setItem("Display Name", user.displayName);
+        sessionStorage.setItem("Email", user.email);
+        alert("Login Successfill!!"); // shows success message
+        goto("/dashboard");
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        alert(errorMessage);
+      });
   }
 </script>
 
@@ -106,10 +107,12 @@
         id="password"
         placeholder="Password"
       />
-      <button id="loginButton" on:click={login}>Login</button><br>
-      <button id="loginWithGoogleButton" on:click={loginWithGoogle}>Login With Google</button>
+      <button id="loginButton" on:click={login}>Login</button><br />
+      <button id="loginWithGoogleButton" on:click={loginWithGoogle}
+        >Login With Google</button
+      >
       <h1 style="font-size: 20px;">
-        Don't have an account? <a href="/premium-register">Register</a>
+        Don't have an account? <a href="/register">Register</a>
       </h1>
       <a href="/">Go Back to Home Page</a>
     </div>
@@ -143,7 +146,7 @@
     border: 1px solid #ccc;
     border-radius: 5px;
   }
-  #loginWithGoogleButton{
+  #loginWithGoogleButton {
     width: 250px;
   }
   .emailInput {

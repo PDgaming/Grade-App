@@ -34,7 +34,9 @@
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        alert("Registration successful!!");
+        alert(
+          "Registration successful!! But to use Grade-AI, you will need a premium account, to create a premium account contact gradeappbyapp@gmail.com"
+        );
         goto("/login");
       })
       .catch((error) => {
