@@ -31,9 +31,6 @@
         .single()
         .select("Member");
       if (error) {
-        console.error("Error:", error);
-        console.error("Error message:", error.message);
-        console.error("Error details:", error.details);
         if (error.details == "The result contains 0 rows") {
           alert(
             "Your email is not found in the database! If you do not have a premium account, please go to /premium-register to use Grade-AI"
