@@ -3,7 +3,7 @@
   import "./chatWindow.css"; // imports css stylesheet
   import { GoogleGenerativeAI } from "@google/generative-ai"; // imports GoogleGenerativeAI
   import { onMount } from "svelte";
-  import { initializeApp } from "firebase/app";
+  import { supabase } from "../supabaseClient";
   // import { getFirestore, doc, getDoc, updateDoc } from "firebase/firestore";
   const firebaseConfig = {
     apiKey: "AIzaSyB_MSh9YlBu7GGN5wxZjY7kGN4bU697GO4",
@@ -22,16 +22,6 @@
 
     measurementId: "G-XCTQN883KL",
   };
-  // const freeTrialApp = initializeApp(firebaseConfig);
-  // const db = getFirestore(freeTrialApp);
-
-  // const users = doc(db, "Messages/User-Messages/");
-
-  // async function writeDataInDocument(question, answer) {
-  //   await updateDoc(users, {
-  //     [question]: answer,
-  //   });
-  // }
 
   let messages = []; // array to store user and ai messages
   let userInput = ""; // variable to store user message
@@ -50,6 +40,8 @@
   }
   onMount(() => {
     sessionStorage.setItem("Queries Left", queriesLeft);
+    const email = sessionStorage.getItem("Email");
+    console.log(email);
   });
   function sendMessage() {
     // function to send messages to API
@@ -91,7 +83,6 @@
 
     const formattedText = text // variable to store formatted text
       .replace(/\*\*/g, "<br>") // replaces "**" with line break
-      .replace(/\./g, ".<br>") // replaces "." with line break
       .replace(/\*/g, ""); // replaces "*" with ""
 
     // Create a single message with line breaks
@@ -101,7 +92,27 @@
     }; // stores formatted AI text in message
 
     messages = [...messages, message]; // appends formatted text to messages
-    // writeDataInDocument(prompt, text);
+    writeDataInDb(prompt, text);
+  }
+
+  async function writeDataInDb(prompt, response, email) {
+    try {
+      const { data, error } = await supabase
+        .from("Free-trial-messages")
+        .insert({
+          user: email,
+          prompt: prompt,
+          response: response,
+        });
+      if (error) {
+        console.log(error);
+        // Handle the error appropriately
+        return; // Or throw an exception if needed
+      }
+    } catch (error) {
+      console.error("Unexpected error:", error);
+      // Handle unexpected errors gracefully
+    }
   }
 </script>
 
