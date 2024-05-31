@@ -22,7 +22,25 @@
       sendMessage(); // if condition is true sendMessage function runs
     }
   }
-
+  async function writeDataInDb(prompt, response, email) {
+    try {
+      const { data, error } = await supabase
+        .from("Free-trial-messages")
+        .insert({
+          user: email,
+          prompt: prompt,
+          response: response,
+        });
+      if (error) {
+        console.log(error);
+        // Handle the error appropriately
+        return; // Or throw an exception if needed
+      }
+    } catch (error) {
+      console.error("Unexpected error:", error);
+      // Handle unexpected errors gracefully
+    }
+  }
   function sendMessage() {
     // function to send messages to API
     shouldShowWelcomeMessage = false; // sets shouldShowWelcomeMessage to false to not show welcome message
@@ -99,6 +117,7 @@
     }; // stores formatted AI text in message
 
     messages = [...messages, message]; // appends formatted text to messages
+    writeDataInDb(prompt, text);
   }
 </script>
 
