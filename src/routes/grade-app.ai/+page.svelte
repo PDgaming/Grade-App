@@ -6,7 +6,6 @@
     HarmCategory,
     HarmBlockThreshold,
   } from "@google/generative-ai"; // imports GoogleGenerativeAI
-  import { onMount } from "svelte";
   import { supabase } from "../supabaseClient";
 
   let messages = []; // array to store user and ai messages
@@ -16,9 +15,6 @@
 
   let shouldShowWelcomeMessage = true; // shouldShowWelcomeMessage is true by default to show shouldShouldWelcomeMessage
   let shouldload = false; // shouldload is false by default to not show loader
-  onMount(() => {
-    const email = sessionStorage.getItem("Email");
-  });
   function handleKeyDown(event) {
     // function to handle key down
     if (event.key === "Enter") {
@@ -26,7 +22,8 @@
       sendMessage(); // if condition is true sendMessage function runs
     }
   }
-  async function writeDataInDb(prompt, response, email) {
+  async function writeDataInDb(prompt, response) {
+    const email = sessionStorage.getItem("Email");
     try {
       const { data, error } = await supabase.from("User-messages").insert({
         user: email,

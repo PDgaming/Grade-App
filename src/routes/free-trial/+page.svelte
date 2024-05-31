@@ -40,8 +40,6 @@
   }
   onMount(() => {
     sessionStorage.setItem("Queries Left", queriesLeft);
-    const email = sessionStorage.getItem("Email");
-    console.log(email);
   });
   function sendMessage() {
     // function to send messages to API
@@ -59,7 +57,7 @@
       // if userInput is not empty
       if (queriesLeft == 0 || sessionStorage.getItem("Queries Left") == 0) {
         alert(
-          "0 Queries Left! Please contact gradeappbyapp@gmail.com to create an account to enjoy the full app and ask as many questions as you want."
+          "0 Queries Left! Please contact gradeappbyapp@gmail.com to create an account to enjoy the full app and ask as many questions as you want.",
         );
       } else if (queriesLeft != 0) {
         run(userInput); // userInput goes to run to get response from API
@@ -95,7 +93,8 @@
     writeDataInDb(prompt, text);
   }
 
-  async function writeDataInDb(prompt, response, email) {
+  async function writeDataInDb(prompt, response) {
+    const email = sessionStorage.getItem("Email");
     try {
       const { data, error } = await supabase
         .from("Free-trial-messages")
