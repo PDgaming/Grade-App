@@ -67,7 +67,7 @@
     }
   }
 
-  const API_KEY = "AIzaSyBXn4fdb8a7ej5Ln53cJwtsadgGWjHF5v0"; // API key
+  const API_KEY = "AIzaSyACEDCjFAFHbChfAcnf98RccGA5R-Vzxok"; // API key
 
   const genAI = new GoogleGenerativeAI(API_KEY); // generates a new ai to using the api key to get responses
 
