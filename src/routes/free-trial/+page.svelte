@@ -4,6 +4,7 @@
   import { GoogleGenerativeAI } from "@google/generative-ai"; // imports GoogleGenerativeAI
   import { onMount } from "svelte";
   import { supabase } from "../supabaseClient";
+
   // import { getFirestore, doc, getDoc, updateDoc } from "firebase/firestore";
   const firebaseConfig = {
     apiKey: "AIzaSyB_MSh9YlBu7GGN5wxZjY7kGN4bU697GO4",
@@ -57,7 +58,7 @@
       // if userInput is not empty
       if (queriesLeft == 0 || sessionStorage.getItem("Queries Left") == 0) {
         alert(
-          "0 Queries Left! Please contact gradeappbyapp@gmail.com to create an account to enjoy the full app and ask as many questions as you want.",
+          "0 Queries Left! Please contact gradeappbyapp@gmail.com to create an account to enjoy the full app and ask as many questions as you want."
         );
       } else if (queriesLeft != 0) {
         run(userInput); // userInput goes to run to get response from API
@@ -67,7 +68,7 @@
     }
   }
 
-  const API_KEY = "AIzaSyACEDCjFAFHbChfAcnf98RccGA5R-Vzxok"; // API key
+  const API_KEY = import.meta.env.VITE_FREE_TRIAL_API_KEY; // API key
 
   const genAI = new GoogleGenerativeAI(API_KEY); // generates a new ai to using the api key to get responses
 

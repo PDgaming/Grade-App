@@ -58,7 +58,7 @@
     }
   }
 
-  const API_KEY = "AIzaSyACEDCjFAFHbChfAcnf98RccGA5R-Vzxok"; // API key
+  const API_KEY = import.meta.env.VITE_MAIN_API_KEY; // API key
 
   const genAI = new GoogleGenerativeAI(API_KEY); // generates a new ai to using the api key to get responses
 
