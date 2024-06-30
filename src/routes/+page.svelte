@@ -2,8 +2,6 @@
   import Navbar from "./components/navbar.svelte";
   import "./index.css";
   import { goto } from "$app/navigation";
-  import laptop from "./images/laptop.webp";
-  import logo from "./images/logo.webp";
 
   // Takes to login page
   function loginPage() {
@@ -23,7 +21,6 @@
 <div class="main">
   <Navbar />
   <div class="hero-section">
-    <img class="laptopImg" src={laptop} alt="laptop.img" />
     <div class="home" id="home">
       <h8 id="grade-app">Grade App</h8><br />
       <p id="homep">
@@ -37,18 +34,18 @@
         reliable information related to their studies in a conversational
         format.
       </p>
-    </div>
-    <div class="buttons">
-      <button
-        type="button"
-        class="btn btn-primary loginButton"
-        on:click={loginPage}>Login</button
-      >
-      <button
-        type="button"
-        class="btn btn-primary signUpButton"
-        on:click={registerPage}>Register</button
-      >
+      <div class="buttons">
+        <button
+          type="button"
+          class="btn btn-primary loginButton"
+          on:click={loginPage}>Login</button
+        >
+        <button
+          type="button"
+          class="btn btn-primary registerButton"
+          on:click={registerPage}>Register</button
+        >
+      </div>
     </div>
   </div>
   <div class="features" id="features">
@@ -149,32 +146,39 @@
 </div>
 
 <style>
+  :root {
+    --laptop-image-size: 550px;
+  }
+  .hero-section {
+    display: inline-flex;
+    border-bottom: 1px solid #333;
+    margin-top: 30px;
+    width: 99vw;
+  }
+  .hero-section .home {
+    width: 50vw;
+    margin-top: 80px;
+    margin-left: 30px;
+    margin-bottom: 140px;
+  }
+  .buttons {
+    height: 60px;
+    width: 900px;
+    margin-top: 40px;
+  }
+  .buttons button {
+    width: 120px;
+    height: 40px;
+  }
+  .buttons .loginButton {
+    margin-right: 100px;
+  }
   h7 {
     display: block;
   }
   h7,
   p {
     margin-left: 10px;
-  }
-  .buttons {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 32vw;
-    margin-top: 20px;
-    margin-bottom: 60px;
-  }
-  .loginButton,
-  .signUpButton,
-  .hero-section {
-    border-bottom: 1px solid #333;
-  }
-  .loginButton {
-    margin-left: 3vw;
-  }
-  .home {
-    margin-top: -420px;
-    width: 50%;
   }
   .features,
   .usage,
@@ -237,10 +241,16 @@
     color: #ef926e;
     margin-bottom: 30px;
   }
-  .laptopImg {
-    width: 35%;
-    margin-left: 1200px;
-    margin-top: 120px;
+  @media (max-width: 1000px) {
+    .hero-section .home {
+      width: 95vw;
+    }
+  }
+  @media (max-width: 990px) {
+    h7,
+    p {
+      margin-left: 9px;
+    }
   }
   /* #footer {
     background-color: #19191d;
@@ -275,185 +285,4 @@
   #title {
     margin-left: 10px;
   } */
-  /* Responsive for nav */
-  @media screen and (max-width: 1919px) {
-    .laptopImg {
-      margin-left: 790px;
-      margin-top: 130px;
-    }
-  }
-  @media screen and (max-width: 1170px) {
-    .laptopImg {
-      margin-left: 740px;
-    }
-    .home {
-      margin-top: -360px;
-    }
-    h8 {
-      font-size: 65px;
-    }
-    p {
-      font-size: 22px;
-    }
-    #homep {
-      font-size: 21px;
-    }
-    #featuresh {
-      margin-left: 42%;
-    }
-    #usageh {
-      margin-left: 43%;
-    }
-    #acknowledgementh {
-      margin-left: 35%;
-    }
-  }
-  /* Responsive for nav */
-  @media screen and (max-width: 1090px) {
-    .laptopImg {
-      margin-left: 690px;
-    }
-    .home {
-      margin-top: -320px;
-    }
-    h8 {
-      font-size: 60px;
-    }
-    p {
-      font-size: 21px;
-    }
-    #homep {
-      font-size: 20px;
-    }
-    #usageh {
-      margin-left: 44%;
-    }
-    #acknowledgementh {
-      margin-left: 34%;
-    }
-  }
-
-  /* Responsive for nav */
-  @media screen and (max-width: 1060px) {
-    .laptopImg {
-      margin-left: 660px;
-    }
-    .home {
-      margin-top: -300px;
-      width: 55%;
-    }
-    p {
-      font-size: 20px;
-    }
-    #homep {
-      font-size: 19px;
-    }
-    #acknowledgementh {
-      margin-left: 35%;
-    }
-    #contacth {
-      margin-left: 43%;
-    }
-  }
-
-  /* Responsive for nav */
-  @media screen and (max-width: 990px) {
-    .laptopImg {
-      margin-left: 620px;
-    }
-    .home {
-      margin-top: -310px;
-      width: 60%;
-    }
-    p {
-      font-size: 19px;
-    }
-    #homep {
-      font-size: 18px;
-    }
-    #usageh {
-      margin-left: 44%;
-    }
-    .loginButton {
-      margin-left: 20px;
-    }
-    .signUpButton {
-      margin-left: 20px;
-    }
-  }
-
-  /* Responsive for tablets */
-  @media screen and (max-width: 800px) {
-    .laptopImg {
-      display: none;
-    }
-    #grade-app {
-      margin-left: 30%;
-    }
-    .home {
-      margin-top: 0px;
-      width: auto;
-    }
-    p {
-      font-size: 18px;
-    }
-    #homep {
-      font-size: 17px;
-      margin-top: 35px;
-    }
-    #featuresh {
-      margin-left: 41%;
-    }
-    #usageh {
-      margin-left: 43%;
-    }
-    #acknowledgementh {
-      margin-left: 30%;
-    }
-    #contacth {
-      margin-left: 42%;
-    }
-  }
-
-  /* Responsive for mobiles */
-  @media screen and (max-width: 400px) {
-    .home {
-      margin-top: 0px;
-      width: auto;
-    }
-    h7 {
-      font-size: 200%;
-    }
-    p {
-      font-size: 18px;
-    }
-    #homep {
-      font-size: 17px;
-      margin-top: 50px;
-    }
-    #featuresh {
-      margin-left: 35%;
-    }
-    #usageh {
-      margin-left: 38%;
-    }
-    #acknowledgementh {
-      margin-left: 17%;
-    }
-    #contacth {
-      margin-left: 35%;
-    }
-    h8 {
-      font-size: 40px;
-    }
-    .btn {
-      margin-bottom: 60%;
-    }
-    .loginButton {
-      margin-left: 70%;
-    }
-    .signUpButton {
-      margin-left: 60px;
-    }
-  }
 </style>
