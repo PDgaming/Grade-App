@@ -1,206 +1,87 @@
-<div class="main">
-  <nav class="navbar navbar-expand-lg">
-    <div class="container-fluid">
-      <ul class="navbar-nav">
-        <img src="/logo.webp" alt="Logo" id="logo" />
-        <li class="nav-item grade-app">
-          <a class="nav-link active" href="/" style="color: white;">Grade App</a
-          >
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active homeNav" href="#home" style="color: white;"
-            >Home</a
-          >
-        </li>
-        <li class="nav-item">
-          <a
-            class="nav-link active features"
-            href="#features"
-            style="color: white;">Features</a
-          >
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active usage" href="#usage" style="color: white;"
-            >Usage</a
-          >
-        </li>
-        <li class="nav-item">
-          <a
-            class="nav-link active"
-            href="#acknowledgments"
-            id="acknowledgments"
-            style="color: white;">Acknowledgments</a
-          >
-        </li>
-        <li class="nav-item">
-          <a
-            class="nav-link active contact"
-            href="#contact"
-            style="color: white;">Contact</a
-          >
-        </li>
-      </ul>
-    </div>
-  </nav>
-</div>
+<nav class="navbar navbar-expand-lg">
+  <div class="container-fluid">
+    <ul class="navbar-nav">
+      <img src="/logo.webp" alt="Logo" id="logo" />
+      <li class="nav-item grade-app">
+        <a class="nav-link active" href="/" style="color: white;">Grade App</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active homeNav" href="#home" style="color: white;"
+          >Home</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link active features"
+          href="#features"
+          style="color: white;">Features</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active usage" href="#usage" style="color: white;"
+          >Usage</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link active"
+          href="#acknowledgments"
+          id="acknowledgments"
+          style="color: white;">Acknowledgments</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active contact" href="#contact" style="color: white;"
+          >Contact</a
+        >
+      </li>
+    </ul>
+  </div>
+</nav>
 
 <style>
-  #logo {
-    width: 40px;
-    height: 40px;
-    position: relative;
-    top: 7px;
-    left: 30px;
-    border-radius: 100px;
-  }
-  li {
-    margin-top: 5px;
-  }
-  .container-fluid {
-    padding: 0;
-  }
-  .navbar-nav {
-    background-color: #17171b;
-    display: flex;
-    justify-content: space-between;
-    height: 60px;
-    width: 100vw;
-    margin-top: -10px;
-    margin-left: -10px;
-    box-shadow: 0px 0px 50px -20px white;
-  }
-  .navbar-nav:hover {
-    box-shadow: 0px 0px 50px -10px white;
-  }
-  .nav-item {
-    font-size: 20px;
+  :root {
+    --image-size: 70px;
   }
   .navbar {
     background-attachment: fixed;
   }
-  .nav-link {
-    text-decoration: none;
-    color: #333;
+  .navbar .container-fluid {
+    padding: 0;
   }
-  /* Responsive for nav */
-  @media screen and (max-width: 1170px) {
-    #logo {
-      margin-top: 10px;
-    }
-    .nav-item {
-      justify-content: space-between;
-      width: 45px;
-      margin-top: 10px;
-    }
-    .navbar-nav {
-      height: 70px;
-    }
-    .homeNav {
-      margin-left: -40px;
-    }
-    .usage {
-      margin-left: -30px;
-    }
-    .features {
-      margin-left: -40px;
-    }
-    #acknowledgments {
-      margin-left: -50px;
-    }
-    .grade-app {
-      margin-left: 0vw;
-      margin-top: 0px;
-    }
-    .navbar-nav {
-      width: 1180px;
-    }
-    .nav-item {
-      margin-right: 100px;
-    }
-    .nav-item {
-      font-size: 18px;
-    }
+  .navbar-nav {
+    background-color: #17171b;
+    justify-content: space-evenly;
+    padding: 10px;
+    height: 90px;
+    width: 100vw;
+    margin-top: -10px;
+    box-shadow: 0px 0px 40px -20px white;
   }
-  /* Responsive for nav */
-  @media screen and (max-width: 1090px) {
-    #logo {
-      margin-top: 10px;
-    }
-    .nav-item {
-      justify-content: space-between;
-      width: 45px;
-      margin-top: 12px;
-    }
-    .navbar-nav {
-      height: 70px;
-    }
-    .homeNav {
-      margin-left: -40px;
-    }
-    .usage {
-      margin-left: -35px;
-    }
-    .features {
-      margin-left: -40px;
-    }
-    .grade-app {
-      margin-left: 0vw;
-      margin-top: 1px;
-    }
-    .navbar-nav {
-      width: 1180px;
-    }
-    .nav-item {
-      margin-right: 100px;
-    }
-    .nav-item {
-      font-size: 16px;
-    }
+  .navbar-nav:hover {
+    box-shadow: 0px 0px 40px -10px white;
   }
-
-  /* Responsive for nav */
-  @media screen and (max-width: 1060px) {
-    #logo {
-      margin-top: 10px;
-    }
-    .nav-item {
-      justify-content: space-between;
-      width: 45px;
-      margin-top: 12px;
-    }
-    .navbar-nav {
-      height: 70px;
-    }
-    .homeNav {
-      margin-left: -45px;
-    }
-    .usage {
-      margin-left: -45px;
-    }
-    .features {
-      margin-left: -50px;
-    }
-    #acknowledgments {
-      margin-left: -60px;
-    }
-    .grade-app {
-      margin-left: 0vw;
-      margin-top: 1px;
-    }
-    .navbar-nav {
-      width: 1180px;
-    }
-    .nav-item {
-      margin-right: 100px;
-    }
-    .nav-item {
-      font-size: 16px;
-    }
+  #logo {
+    width: var(--image-size);
+    height: var(--image-size);
+    position: relative;
+    border-radius: 100px;
+    cursor: pointer;
   }
-
-  /* Responsive for nav */
-  @media screen and (max-width: 990px) {
-    .navbar {
+  .nav-item {
+    font-size: 30px;
+  }
+  a {
+    transition: ease 500ms all;
+  }
+  a:hover {
+    color: red;
+    text-decoration: underline;
+    transform: scale(1.2);
+    transition: ease 500ms all;
+  }
+  @media (max-width: 990px) {
+    .nav-item {
       display: none;
     }
   }
