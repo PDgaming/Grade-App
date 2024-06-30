@@ -7,7 +7,10 @@
     HarmBlockThreshold,
   } from "@google/generative-ai"; // imports GoogleGenerativeAI
   import { supabase } from "../supabaseClient";
+  import { onMount } from "svelte";
+  import NotLoggedIn from "../components/notLoggedIn.svelte";
 
+  let notLoggedIn = false;
   let messages = []; // array to store user and ai messages
   let userInput = ""; // variable to store user message
 
@@ -15,6 +18,11 @@
 
   let shouldShowWelcomeMessage = true; // shouldShowWelcomeMessage is true by default to show shouldShouldWelcomeMessage
   let shouldload = false; // shouldload is false by default to not show loader
+  onMount(() => {
+    if (!sessionStorage.getItem("Display Name")) {
+      notLoggedIn = true;
+    }
+  });
   function handleKeyDown(event) {
     // function to handle key down
     if (event.key === "Enter") {
@@ -123,48 +131,50 @@
 <svelte:head>
   <title>Grade-App AI (powered by Google's Gemini)</title>
 </svelte:head>
+{#if !notLoggedIn}
+  <div class="main">
+    <div class="header">
+      <h3>Gemini</h3>
+    </div>
+    <div class="chatLog">
+      <!-- Shows welcome message -->
+      {#if shouldShowWelcomeMessage}
+        <!-- shows welcome message if shouldShowWelcomeMessage if true -->
+        <h1 id="hello-message">Hello There!</h1>
+        <p id="how-to">
+          Start a conversation with Gemini by typing in a prompt in the text
+          input below.
+        </p>
 
-<div class="main">
-  <div class="header">
-    <h3>Gemini</h3>
+        <!-- Adds messages to the DOM -->
+      {/if}
+      {#each messages as userMessage}
+        <div class={userMessage.sender}>
+          <h3>{userMessage.sender}:</h3>
+          <p style="margin-left:35px;">{@html userMessage.content}</p>
+        </div>
+      {/each}
+      {#if shouldload}
+        <!-- shows loader id shouldload is true -->
+        <Loader />
+      {/if}
+    </div>
+    <div class="input-area">
+      <input
+        type="text"
+        id="userInput"
+        placeholder="Enter a prompt here"
+        on:keydown={handleKeyDown}
+      />
+      <button type="button" on:click={sendMessage}>Send</button>
+    </div>
+    <h6 id="gemini-safety">
+      Gemini may display inaccurate info about people, so double-check its
+      responses.
+    </h6>
   </div>
-  <div class="chatLog">
-    <!-- Shows welcome message -->
-    {#if shouldShowWelcomeMessage}
-      <!-- shows welcome message if shouldShowWelcomeMessage if true -->
-      <h1 id="hello-message">Hello There!</h1>
-      <p id="how-to">
-        Start a conversation with Gemini by typing in a prompt in the text input
-        below.
-      </p>
-
-      <!-- Adds messages to the DOM -->
-    {/if}
-    {#each messages as userMessage}
-      <div class={userMessage.sender}>
-        <h3>{userMessage.sender}:</h3>
-        <p style="margin-left:35px;">{@html userMessage.content}</p>
-      </div>
-    {/each}
-    {#if shouldload}
-      <!-- shows loader id shouldload is true -->
-      <Loader />
-    {/if}
-  </div>
-  <div class="input-area">
-    <input
-      type="text"
-      id="userInput"
-      placeholder="Enter a prompt here"
-      on:keydown={handleKeyDown}
-    />
-    <button type="button" on:click={sendMessage}>Send</button>
-  </div>
-  <h6 id="gemini-safety">
-    Gemini may display inaccurate info about people, so double-check its
-    responses.
-  </h6>
-</div>
+{/if}
+{#if notLoggedIn}<NotLoggedIn />{/if}
 
 <style>
   .header {
@@ -179,19 +189,20 @@
     color: white;
     font-size: 25px;
   }
-  h1 {
+  h1,
+  h3,
+  p {
     color: white;
+  }
+  h1 {
     margin-top: 50px;
     font-weight: bold;
   }
-
   p {
-    color: white;
     font-size: 21px;
   }
 
   h3 {
-    color: white;
     margin-top: 5px;
     margin-left: 10px;
   }

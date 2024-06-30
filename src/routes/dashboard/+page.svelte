@@ -3,6 +3,7 @@
   import { goto } from "$app/navigation";
   import { onMount } from "svelte";
   import { supabase } from "../supabaseClient";
+  import NotLoggedIn from "../components/notLoggedIn.svelte";
 
   let name = "User";
   let notLoggedIn = false;
@@ -103,13 +104,7 @@
     </span>
   </div>
 {/if}
-{#if notLoggedIn}
-  <div class="not-logged-in">
-    <h2>
-      You have not logged in!! Please go to <a href="/login">Login</a> to login
-    </h2>
-  </div>
-{/if}
+{#if notLoggedIn}<NotLoggedIn />{/if}
 
 <style>
   h1 {
