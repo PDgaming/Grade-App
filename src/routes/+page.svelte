@@ -162,7 +162,7 @@
     justify-content: space-between;
     width: 32vw;
     margin-top: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 60px;
   }
   .loginButton,
   .signUpButton,
@@ -239,8 +239,8 @@
   }
   .laptopImg {
     width: 35%;
-    margin-left: 790px;
-    margin-top: 130px;
+    margin-left: 1200px;
+    margin-top: 120px;
   }
   /* #footer {
     background-color: #19191d;

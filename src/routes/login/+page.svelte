@@ -163,8 +163,8 @@
     margin-bottom: 100px;
     width: 76%;
   }
-
-  button {
+  #loginButton,
+  #loginWithGoogleButton {
     background-color: #007bff;
     color: #fff;
     padding: 10px 20px;
@@ -175,7 +175,8 @@
     margin-bottom: 10px;
   }
 
-  button:hover {
+  #loginButton:hover,
+  #loginWithGoogleButton:hover {
     background-color: #0056b3;
   }
 
