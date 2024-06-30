@@ -6,6 +6,7 @@
     getAuth,
     createUserWithEmailAndPassword,
   } from "firebase/auth";
+  import Form from "../components/form.svelte";
 
   // config for firebase
   const firebaseConfig = {
@@ -27,7 +28,7 @@
   const registerApp = initializeApp(firebaseConfig); // initializes app using config info
   const auth = getAuth(registerApp);
 
-  async function signUp() {
+  async function register() {
     event.preventDefault(); // prevents the site from reloading on button click
     const email = document.getElementById("email").value; // gets email from input field
     const password = document.getElementById("password").value; // gets password from input field
@@ -49,201 +50,64 @@
   <title>Grade App - Register</title>
 </svelte:head>
 
-<div class="container">
+<center id="register-text">
   <h1>Register</h1>
-  <form>
-    <div id="SignUpForm">
-      <input
-        type="email"
-        class="emailInput"
-        id="email"
-        placeholder="Email"
-      /><br />
+</center>
 
-      <input
-        type="password"
-        class="passwordInput"
-        id="password"
-        placeholder="Password"
-      />
+<center id="normal">
+  <div class="container">
+    <Form />
 
-      <button on:click={signUp}>Register</button>
-      <h1 style="font-size: 20px;">
-        Already have an account? <a href="/login">Login</a>
-      </h1>
-      <a href="/">Go Back to Home Page</a>
-    </div>
-  </form>
-</div>
+    <button on:click={register} class="btn btn-primary registerButton"
+      >Register</button
+    ><br />
+    <span id="login"><a href="/login">Login</a> </span>
+  </div>
+</center>
+
+<center id="responsive">
+  <Form />
+
+  <button on:click={register} class="btn btn-primary registerButton"
+    >Register</button
+  ><br />
+  <span id="login"><a href="/login">Login</a> </span>
+</center>
 
 <style>
-  .container,
-  div {
-    text-align: center;
-  }
-  button {
-    cursor: pointer;
+  #register-text {
+    margin-top: 30px;
   }
   .container {
-    margin-top: 120px;
-    background-color: #1e1f20;
-    padding: 20px;
-    border-radius: 30px;
+    background-color: #2c2f34;
+    margin-top: 40px;
+    border-radius: 10px;
+    width: 35vw;
+    height: 310px;
+    text-align: center;
   }
   h1 {
-    font-size: 50px;
+    font-size: 55px;
     color: white;
   }
-  button,
-  input {
-    font-size: 20px;
-  }
-
-  input {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  .emailInput {
-    margin-top: 50px;
-    margin-right: 40px;
-    margin-left: 30px;
-    margin-bottom: 30px;
-    width: 76%;
-  }
-  .passwordInput {
-    margin-right: 40px;
-    margin-left: 30px;
-    margin-bottom: 100px;
-    width: 76%;
-  }
-
-  button {
-    background-color: #007bff;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    transition: background-color 0.2s;
-    width: 400px;
+  .registerButton {
     margin-bottom: 10px;
+    font-size: 25px;
+    width: 120px;
   }
-
-  button:hover {
-    background-color: #0056b3;
-  }
-
-  a {
+  #login a {
     text-decoration: none;
     color: #007bff;
   }
-
-  /* Responsive for tablets */
-  @media screen and (max-width: 1280px) {
-    .container {
-      width: 70%;
-      margin-top: 10vh;
-    }
-
-    .emailInput {
-      margin-top: 30px;
-      margin-right: 40px;
-      margin-left: 30px;
-      width: 60%;
-    }
-
-    .passwordInput {
-      margin-bottom: 60px;
-      width: 60%;
-    }
-
-    button {
-      width: 270px;
-      font-size: 19px;
-    }
+  #responsive {
+    display: none;
   }
-
-  /* Responsive for tablets */
-  @media screen and (max-width: 800px) {
-    .container {
-      width: 80%;
-      height: 80%;
+  @media (max-width: 1000px) {
+    #normal {
+      display: none;
     }
-
-    .emailInput {
-      margin-top: 30px;
-      margin-right: 40px;
-      margin-left: 30px;
-      width: 60%;
-    }
-
-    .passwordInput {
-      margin-bottom: 60px;
-      width: 60%;
-    }
-
-    button {
-      width: 200px;
-      font-size: 18px;
-    }
-  }
-
-  /* Responsive for tablets */
-  @media screen and (max-width: 770px) {
-    .container {
-      width: 800px;
-      height: 530px;
-      margin-top: 5vh;
-    }
-    h1 {
-      font-size: 30px;
-    }
-
-    .emailInput {
-      margin-top: 45px;
-      margin-left: 27px;
-      margin-bottom: 70px;
-      width: 77%;
-    }
-
-    .passwordInput {
-      margin-bottom: 50px;
-      width: 75%;
-    }
-
-    button {
-      width: 280px;
-    }
-  }
-
-  /* Responsive for mobiles */
-  @media screen and (max-width: 400px) {
-    .container {
-      width: 399px;
-      height: 580px;
-      margin-top: 0;
-      margin-left: 0;
-      margin-bottom: 0;
-      border-radius: 0px;
-    }
-
-    h1 {
-      font-size: 60px;
-    }
-
-    .emailInput {
-      margin-top: 45px;
-      margin-left: 15px;
-      margin-bottom: 70px;
-      width: 90%;
-    }
-
-    .passwordInput {
-      margin-bottom: 50px;
-      width: 90%;
-    }
-
-    button {
-      width: 200px;
+    #responsive {
+      display: block;
     }
   }
 </style>
