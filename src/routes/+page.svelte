@@ -276,6 +276,12 @@
     margin-left: 10px;
   } */
   /* Responsive for nav */
+  @media screen and (max-width: 1919px) {
+    .laptopImg {
+      margin-left: 790px;
+      margin-top: 130px;
+    }
+  }
   @media screen and (max-width: 1170px) {
     .laptopImg {
       margin-left: 740px;
