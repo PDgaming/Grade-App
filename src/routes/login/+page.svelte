@@ -9,6 +9,7 @@
     GoogleAuthProvider,
     signInWithPopup,
   } from "firebase/auth";
+  import Form from "../components/form.svelte";
 
   // config for firebase
   const firebaseConfig = {
@@ -92,212 +93,82 @@
   <title>Grade App - Login</title>
 </svelte:head>
 
-<div class="container">
+<center id="login-text">
   <h1>Login</h1>
-  <form>
-    <div id="loginForm">
-      <input
-        type="email"
-        class="emailInput"
-        id="email"
-        placeholder="Email"
-      /><br />
-      <input
-        type="password"
-        class="passwordInput"
-        id="password"
-        placeholder="Password"
-      />
-      <button id="loginButton" on:click={login}>Login</button><br />
-      <button id="loginWithGoogleButton" on:click={loginWithGoogle}
-        >Login With Google</button
-      >
-      <h1 style="font-size: 20px;">
-        Don't have an account? <a href="/register">Register</a>
-      </h1>
-      <a href="/">Go Back to Home Page</a>
-    </div>
-  </form>
-</div>
+</center>
+
+<center id="normal">
+  <div class="container">
+    <Form />
+    <button
+      id="loginWithGoogleButton"
+      class="btn btn-primary"
+      on:click={loginWithGoogle}>Google</button
+    ><br />
+    <button id="loginButton" class="btn btn-primary" on:click={login}
+      >Login</button
+    ><br />
+    <span id="register">
+      <a href="/register">Register</a>
+    </span>
+  </div>
+</center>
+
+<center id="responsive">
+  <Form />
+  <button
+    id="loginWithGoogleButton"
+    class="btn btn-primary"
+    on:click={loginWithGoogle}>Google</button
+  ><br />
+  <button id="loginButton" class="btn btn-primary" on:click={login}
+    >Login</button
+  ><br />
+  <span id="register">
+    <a href="/register">Register</a>
+  </span>
+</center>
 
 <style>
-  .container,
-  div {
-    text-align: center;
-  }
-  button {
-    cursor: pointer;
+  #login-text {
+    margin-top: 30px;
   }
   .container {
-    margin-top: 120px;
-    background-color: #1e1f20;
-    padding: 20px;
-    border-radius: 30px;
+    background-color: #2c2f34;
+    margin-top: 40px;
+    border-radius: 10px;
+    width: 35vw;
+    height: 310px;
+    text-align: center;
   }
   h1 {
-    font-size: 50px;
+    font-size: 55px;
     color: white;
-  }
-  button,
-  input {
-    font-size: 20px;
-  }
-
-  input {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  #loginWithGoogleButton {
-    width: 250px;
-  }
-  .emailInput {
-    margin-top: 50px;
-    margin-right: 40px;
-    margin-left: 30px;
-    margin-bottom: 30px;
-    width: 76%;
-  }
-  .passwordInput {
-    margin-right: 40px;
-    margin-left: 30px;
-    margin-bottom: 100px;
-    width: 76%;
   }
   #loginButton,
   #loginWithGoogleButton {
-    background-color: #007bff;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    transition: background-color 0.2s;
-    width: 400px;
     margin-bottom: 10px;
   }
-
-  #loginButton:hover,
-  #loginWithGoogleButton:hover {
-    background-color: #0056b3;
+  #loginWithGoogleButton {
+    font-size: 20px;
   }
-
-  a {
+  #loginButton {
+    font-size: 25px;
+    width: 120px;
+  }
+  #register a {
     text-decoration: none;
     color: #007bff;
   }
-
-  /* Responsive for tablets */
-  @media screen and (max-width: 1280px) {
-    .container {
-      width: 70%;
-      margin-top: 10vh;
-    }
-
-    .emailInput {
-      margin-top: 30px;
-      margin-right: 40px;
-      margin-left: 30px;
-      width: 60%;
-    }
-
-    .passwordInput {
-      margin-bottom: 60px;
-      width: 60%;
-    }
-
-    button {
-      width: 270px;
-      font-size: 19px;
-    }
-    #loginWithGoogleButton {
-      width: 220px;
-    }
+  #responsive {
+    display: none;
   }
-
-  /* Responsive for tablets */
-  @media screen and (max-width: 800px) {
-    .container {
-      width: 80%;
-      height: 80%;
+  @media (max-width: 1000px) {
+    #normal {
+      display: none;
     }
-
-    .emailInput {
-      margin-top: 30px;
-      margin-right: 40px;
-      margin-left: 30px;
-      width: 60%;
-    }
-
-    .passwordInput {
-      margin-bottom: 60px;
-      width: 60%;
-    }
-
-    button {
-      width: 200px;
-      font-size: 18px;
-    }
-    #loginWithGoogleButton {
-      width: 190px;
-    }
-  }
-
-  /* Responsive for tablets */
-  @media screen and (max-width: 770px) {
-    .container {
-      width: 800px;
-      height: 530px;
-      margin-top: 5vh;
-    }
-    h1 {
-      font-size: 30px;
-    }
-
-    .emailInput {
-      margin-top: 45px;
-      margin-left: 27px;
-      margin-bottom: 70px;
-      width: 77%;
-    }
-
-    .passwordInput {
-      margin-bottom: 50px;
-      width: 75%;
-    }
-
-    button {
-      width: 280px;
-    }
-  }
-
-  /* Responsive for mobiles */
-  @media screen and (max-width: 400px) {
-    .container {
-      width: 399px;
-      height: 580px;
-      margin-top: 0;
-      margin-left: 0;
-      margin-bottom: 0;
-      border-radius: 0px;
-    }
-
-    h1 {
-      font-size: 60px;
-    }
-
-    .emailInput {
-      margin-top: 45px;
-      margin-left: 15px;
-      margin-bottom: 70px;
-      width: 90%;
-    }
-
-    .passwordInput {
-      margin-bottom: 50px;
-      width: 90%;
-    }
-
-    button {
-      width: 200px;
+    #responsive {
+      display: block;
     }
   }
 </style>
