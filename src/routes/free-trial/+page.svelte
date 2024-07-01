@@ -40,13 +40,6 @@
       sendMessage(); // if condition is true sendMessage function runs
     }
   }
-  onMount(() => {
-    sessionStorage.setItem("Queries Left", queriesLeft);
-
-    if (!sessionStorage.getItem("Display Name")) {
-      notLoggedIn = true;
-    }
-  });
   function sendMessage() {
     // function to send messages to API
     shouldShowWelcomeMessage = false; // sets shouldShowWelcomeMessage to false to not show welcome message
@@ -72,9 +65,17 @@
       }
     }
   }
-
-  const API_KEY = import.meta.env.VITE_FREE_TRIAL_API_KEY; // API key
-
+  async function getApiKey() {
+    const { data, error } = await supabase.from("API-Key").select();
+    if (data) {
+      const API_KEY = data[0].API_KEY;
+      window.sessionStorage.setItem("API_KEY", API_KEY);
+    } else {
+      console.log(error);
+    }
+  }
+  const API_KEY_from_session_storage = window.sessionStorage.getItem("API_KEY");
+  let API_KEY = API_KEY_from_session_storage;
   const genAI = new GoogleGenerativeAI(API_KEY); // generates a new ai to using the api key to get responses
 
   async function run(prompt) {
@@ -119,6 +120,13 @@
       // Handle unexpected errors gracefully
     }
   }
+  onMount(() => {
+    sessionStorage.setItem("Queries Left", queriesLeft);
+
+    if (!sessionStorage.getItem("Display Name")) {
+      notLoggedIn = true;
+    }
+  });
 </script>
 
 <svelte:head>
