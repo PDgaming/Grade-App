@@ -22,6 +22,11 @@
     if (!sessionStorage.getItem("Display Name")) {
       notLoggedIn = true;
     }
+    try {
+      initializeEverything();
+    } catch (error) {
+      console.log(error);
+    }
   });
   function handleKeyDown(event) {
     // function to handle key down
@@ -65,31 +70,12 @@
       run(userInput); // userInput goes to run to get response from API
     }
   }
-  async function getApiKey() {
-    const { data, error } = await supabase.from("API-Key").select();
-    if (data) {
-      const API_KEY = data[0].API_KEY;
-      window.sessionStorage.setItem("API_KEY", API_KEY);
-    } else {
-      console.log(error);
-    }
-  }
-  const API_KEY_from_session_storage = window.sessionStorage.getItem("API_KEY");
-  let API_KEY = API_KEY_from_session_storage;
-
-  const genAI = new GoogleGenerativeAI(API_KEY); // generates a new ai to using the api key to get responses
-
-  const model = genAI.getGenerativeModel({
-    model: "gemini-1.0-pro",
-  });
-
   const generationConfig = {
     temperature: 1,
     topP: 0.95,
     topK: 64,
     maxOutputTokens: 8192,
   };
-
   const safetySettings = [
     {
       category: HarmCategory.HARM_CATEGORY_HARASSMENT,
@@ -108,32 +94,65 @@
       threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
     },
   ];
-  const chatSession = model.startChat({
-    generationConfig,
-    safetySettings,
-    history: [],
-  });
+  let chatSession;
+  async function getApiKey() {
+    const { data, error } = await supabase.from("API-Key").select();
+    if (data) {
+      return data[0].API_KEY;
+    } else {
+      console.log(error);
+    }
+  }
+  async function initializeEverything() {
+    const API_KEY = await getApiKey();
+    try {
+      const genAI = new GoogleGenerativeAI(API_KEY); // generates a new ai to using the api key to get responses
+      try {
+        const model = genAI.getGenerativeModel({ model: "gemini-pro" }); // generates a new model using genAI
+        try {
+          chatSession = model.startChat({
+            generationConfig,
+            safetySettings,
+            history: [],
+          });
+        } catch (error) {
+          console.log(`Error setting up chatSession: ${error}`);
+        }
+      } catch (error) {
+        console.log(`Error setting up model: ${error}`);
+      }
+    } catch (error) {
+      console.log(`Error initializing AI: ${error}`);
+    }
+  }
 
   async function run(prompt) {
-    shouldload = true; // sets shouldload to true to show loader
+    if (chatSession) {
+      try {
+        shouldload = true; // sets shouldload to true to show loader
+        const result = await chatSession.sendMessage(prompt);
+        const text = result.response.text();
 
-    const result = await chatSession.sendMessage(prompt);
-    const text = result.response.text();
+        shouldload = false; // sets shouldload to false to not show loader
 
-    shouldload = false; // sets shouldload to false to not show loader
+        const formattedText = text // variable to store formatted text
+          .replace(/\*\*/g, "<br>") // replaces "**" with line break
+          .replace(/\*/g, ""); // replaces "*" with ""
 
-    const formattedText = text // variable to store formatted text
-      .replace(/\*\*/g, "<br>") // replaces "**" with line break
-      .replace(/\*/g, ""); // replaces "*" with ""
+        // Create a single message with line breaks
+        const message = {
+          content: formattedText,
+          sender: "Gemini",
+        }; // stores formatted AI text in message
 
-    // Create a single message with line breaks
-    const message = {
-      content: formattedText,
-      sender: "Gemini",
-    }; // stores formatted AI text in message
-
-    messages = [...messages, message]; // appends formatted text to messages
-    writeDataInDb(prompt, text);
+        messages = [...messages, message]; // appends formatted text to messages
+        writeDataInDb(prompt, text);
+      } catch (error) {
+        console.log(`Error sending message: ${error}`);
+      }
+    } else {
+      initializeEverything();
+    }
   }
 </script>
 

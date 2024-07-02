@@ -93,10 +93,7 @@
     }
   }
   async function run(prompt) {
-    if (!model) {
-      console.log("Model not initialized");
-      return;
-    } else {
+    if (model) {
       try {
         shouldload = true; // sets shouldload to true to show loader
         const result = await model.generateContent(prompt); // takes in prompt and generates a result
@@ -119,6 +116,9 @@
       } catch (error) {
         console.log(errro);
       }
+    } else {
+      console.log("Model not initialized");
+      return;
     }
   }
   setupModel()
