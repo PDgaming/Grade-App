@@ -4,6 +4,7 @@
   import { onMount } from "svelte";
   import { supabase } from "../supabaseClient";
   import NotLoggedIn from "../components/notLoggedIn.svelte";
+  import "./index.css";
 
   let name = "User";
   let notLoggedIn = false;
@@ -59,7 +60,6 @@
       // Handle unexpected errors gracefully
     }
   }
-
   function register() {
     goto("/premium-register");
   }
@@ -69,38 +69,24 @@
   <title>Grade App - Dashboard</title>
 </svelte:head>
 {#if !notLoggedIn}
-  <h1>Hello There {name}, welcome To Your Dashboard!</h1>
+  <h1>Hello There {name}, <br />welcome To Your Dashboard!!</h1>
   <h2>So what would you like to do today?</h2>
   <div class="buttons">
-    <span class="buttonsContainer" style="margin-top: 15px;">
+    <span class="buttonsContainer">
       <h4>Use our Grade App AI:</h4>
-      <button
-        type="button"
-        class="btn btn-primary grade-app"
+      <a
+        class="btn grade-app"
         on:click={gradeAi(userEmail)}
-        href="/premium-login"
-        style="width: 140px;">Grade AI</button
+        href="/premium-login"><h6>Grade_AI</h6></a
       >
     </span><br />
     <span class="buttonsContainer">
       <h4 id="trial-text">Try our Grade App AI for free:</h4>
-      <button
-        type="button"
-        class="btn btn-primary try-it"
-        on:click={freeTrial}
-        style="width: 160px;">Try It for free</button
-      >
+      <a class="btn try-it" href="/free-trial"><h6>Trial</h6></a>
     </span><br />
     <span class="buttonsContainer">
-      <h4 id="register-text">
-        Register for a premium account to acess Grade AI:
-      </h4>
-      <button
-        type="button"
-        class="btn btn-primary register"
-        on:click={register}
-        style="width: 160px;">Register</button
-      >
+      <h4 id="register-text">Register for a premium account:</h4>
+      <a class="btn register" href="/premium-register"><h6>Register</h6></a>
     </span>
   </div>
 {/if}
@@ -108,49 +94,87 @@
 
 <style>
   h1 {
-    margin-top: 50px;
+    margin-top: 10px;
     font-weight: bold;
+  }
+  h2 {
+    margin-top: 15px;
   }
   h1,
   h2,
   h4 {
     color: white;
   }
-  .try-it,
-  .grade-app {
-    font-size: 20px;
+  a {
+    color: rgb(255, 255, 255);
+    text-decoration: underline;
   }
-  button {
-    width: 40vw;
-    margin-top: -10px;
-    margin-left: 1vw;
+  a:hover {
+    color: rgb(204, 204, 204);
   }
   .buttons {
-    margin-top: 20px;
+    margin-top: 10px;
+  }
+  .try-it,
+  .grade-app,
+  .register {
+    font-size: 15px;
   }
   .buttonsContainer {
     display: inline-flex;
-    margin-bottom: 20px;
   }
-
-  /* Responsive for mobiles */
-  @media screen and (max-width: 400px) {
-    .try-it {
-      height: 50px;
-      margin-left: 15px;
+  @media (max-width: 1000px) {
+    h1 {
+      font-size: 30px;
     }
-    .btn {
-      font-size: 18px;
+    h2 {
+      font-size: 25px;
     }
-    .register {
-      height: 50px;
-      margin-left: 15px;
+    h4 {
+      font-size: 20px;
     }
-    #trial-text {
-      width: 200px;
+    h6 {
+      margin-top: -2px;
+      font-size: 15px;
     }
-    #register-text {
-      width: 200px;
+  }
+  @media (max-width: 850px) {
+    h1 {
+      font-size: 28px;
+    }
+    h6 {
+      margin-top: -3px;
+    }
+  }
+  @media (max-width: 700px) {
+    h1 {
+      font-size: 25px;
+    }
+    h2 {
+      font-size: 24px;
+    }
+    h6 {
+      margin-top: -3px;
+    }
+  }
+  @media (max-width: 600px) {
+    h1 {
+      font-size: 23px;
+    }
+    h2 {
+      font-size: 22px;
+    }
+  }
+  @media (max-width: 375px) {
+    h1,
+    h2 {
+      font-size: 20px;
+    }
+    h4 {
+      font-size: 19px;
+    }
+    h6 {
+      font-size: 14px;
     }
   }
 </style>
