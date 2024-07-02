@@ -13,32 +13,35 @@
   <title>Grade App - Register</title>
 </svelte:head>
 
-<div class="container">
-  <h1>Register</h1>
+<span id="normal">
+  <div class="container">
+    <h2>
+      We are so sorry for the inconvinience caused.<br />
+      But we currently do not support on-site payment.<br />
+      Please Contact
+      <a href="mailto:gradeapbyapp@gmail.com">gradeappbyapp@gmail.com</a> to create
+      a premium account.
+    </h2>
+  </div>
+</span>
+<span id="responsive">
   <h2>
-    Contact <a href="mailto:gradeapbyapp@gmail.com">gradeappbyapp@gmail.com</a> to
-    create a premium account.
+    We are so sorry for the inconvinience caused.<br />
+    But we currently do not support on-site payment.<br />
+    Please Contact
+    <a href="mailto:gradeapbyapp@gmail.com">gradeappbyapp@gmail.com</a> to create
+    a premium account.
   </h2>
-  <h1 style="font-size: 20px;">
-    Already have an account? <a href="/login">Login</a>
-  </h1>
-</div>
+</span>
 
 <style>
-  .container,
-  div {
-    text-align: center;
-  }
   .container {
-    margin-top: 120px;
     background-color: #1e1f20;
+    text-align: center;
+    margin-top: 100px;
     padding: 20px;
-    border-radius: 30px;
+    border-radius: 20px;
   }
-  h1 {
-    font-size: 50px;
-  }
-  h1,
   h2 {
     color: white;
   }
@@ -46,48 +49,17 @@
     text-decoration: none;
     color: #007bff;
   }
-
-  /* Responsive for tablets */
-  @media screen and (max-width: 1280px) {
-    .container {
-      width: 90%;
-      height: 80vh;
-      margin-top: 10vh;
-    }
+  #responsive {
+    margin-top: 100px;
+    text-align: center;
+    display: none;
   }
-
-  /* Responsive for tablets */
-  @media screen and (max-width: 800px) {
-    .container {
-      width: 80%;
-      height: 80vh;
+  @media (max-width: 574px) {
+    #normal {
+      display: none;
     }
-  }
-
-  /* Responsive for tablets */
-  @media screen and (max-width: 770px) {
-    .container {
-      width: 90%;
-      height: 80vh;
-    }
-
-    h1 {
-      font-size: 30px;
-    }
-  }
-
-  /* Responsive for mobiles */
-  @media screen and (max-width: 400px) {
-    .container {
-      width: 100%;
-      height: 100vh;
-      border-radius: 0px;
-      margin-top: 0;
-    }
-
-    h1 {
-      font-size: 50px;
-      margin-bottom: 30px;
+    #responsive {
+      display: block;
     }
   }
 </style>
