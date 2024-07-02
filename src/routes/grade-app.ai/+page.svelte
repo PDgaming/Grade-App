@@ -186,25 +186,34 @@
         <!-- shows loader id shouldload is true -->
         <Loader />
       {/if}
+      <center>
+        <div class="input-area">
+          <input
+            type="text"
+            id="userInput"
+            placeholder="Enter a prompt here"
+            on:keydown={handleKeyDown}
+          />
+          <button type="button" on:click={sendMessage}>Send</button>
+        </div>
+      </center>
     </div>
-    <div class="input-area">
-      <input
-        type="text"
-        id="userInput"
-        placeholder="Enter a prompt here"
-        on:keydown={handleKeyDown}
-      />
-      <button type="button" on:click={sendMessage}>Send</button>
-    </div>
-    <h6 id="gemini-safety">
-      Gemini may display inaccurate info about people, so double-check its
-      responses.
-    </h6>
+    <center>
+      <h6 id="gemini-safety">
+        Gemini may display inaccurate info about people, so double-check its
+        responses.
+      </h6>
+    </center>
   </div>
 {/if}
 {#if notLoggedIn}<NotLoggedIn />{/if}
 
 <style>
+  :root {
+    @media (prefers-reduced-motion: no-preference) {
+      overflow: hidden;
+    }
+  }
   .header {
     height: 50px;
   }
@@ -238,7 +247,6 @@
   input {
     position: relative;
     top: 15px;
-    left: 9vw;
     height: 55px;
     width: 65vw;
     border: 1px solid white;
@@ -253,7 +261,6 @@
   button {
     position: relative;
     top: 15px;
-    left: 10vw;
     background-color: #131314;
     color: white;
     height: 40px;
@@ -263,144 +270,23 @@
   }
   .input-area {
     position: fixed;
-    top: 81vh;
-    left: 8vw;
-    height: 90px;
-    width: 85vw;
+    top: 80vh;
+    height: 87px;
+    width: 96vw;
     background-color: transparent;
   }
   .chatLog {
     overflow-y: scroll;
     overflow-x: hidden;
-    margin-left: 5%;
-    height: 90vh;
-    width: 91vw;
+    margin-left: 10px;
+    height: 84vh;
+    width: 98vw;
     background-color: transparent;
     padding-bottom: 100px;
     align-items: center;
+    padding-left: 10px;
   }
   #gemini-safety {
-    position: relative;
-    top: -30px;
-    left: 26vw;
     color: white;
-  }
-  :root {
-    @media (prefers-reduced-motion: no-preference) {
-      overflow: hidden;
-    }
-  }
-
-  @media screen and (max-width: 1170px) {
-    p {
-      font-size: 22px;
-    }
-    #hello-message {
-      font-size: 40px;
-    }
-    input {
-      left: 8vw;
-      height: 10vh;
-      width: 65vw;
-    }
-    button {
-      top: 17px;
-      left: 9vw;
-    }
-    #gemini-safety {
-      left: 23vw;
-    }
-  }
-  @media screen and (max-width: 1090px) {
-    p {
-      font-size: 22px;
-    }
-    #hello-message {
-      font-size: 35px;
-    }
-    button {
-      top: 16px;
-      left: 7vw;
-    }
-    input {
-      left: 6vw;
-      width: 66vw;
-    }
-    #gemini-safety {
-      left: 20vw;
-    }
-  }
-
-  @media screen and (max-width: 1060px) {
-    p {
-      font-size: 22px;
-    }
-    #hello-message {
-      font-size: 32px;
-    }
-    button {
-      top: 16px;
-      left: 6vw;
-    }
-    input {
-      left: 5vw;
-      width: 72vw;
-    }
-    #gemini-safety {
-      left: 21vw;
-    }
-  }
-
-  /* Responsive for tablets */
-  @media screen and (max-width: 800px) {
-    p {
-      font-size: 23px;
-    }
-    #hello-message {
-      font-size: 31px;
-    }
-    button {
-      top: 16px;
-      left: 1vw;
-    }
-    input {
-      left: 0vw;
-      width: 75vw;
-    }
-    #gemini-safety {
-      font-size: 13px;
-      left: 15vw;
-    }
-  }
-
-  /* Responsive for mobiles */
-  @media screen and (max-width: 400px) {
-    p {
-      font-size: 20px;
-    }
-    #hello-message {
-      font-size: 30px;
-    }
-    button {
-      top: 16px;
-      left: -3vw;
-    }
-    input {
-      left: -4vw;
-      height: 8vh;
-      width: 66vw;
-      border-radius: 20px;
-    }
-    #gemini-safety {
-      text-align: center;
-      font-size: 12px;
-      left: 0vw;
-    }
-  }
-  /* Responsive for vivo 1724 */
-  @media screen and (max-width: 390px) {
-    input {
-      width: 64vw;
-    }
   }
 </style>

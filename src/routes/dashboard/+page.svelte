@@ -74,10 +74,8 @@
   <div class="buttons">
     <span class="buttonsContainer">
       <h4>Use our Grade App AI:</h4>
-      <a
-        class="btn grade-app"
-        on:click={gradeAi(userEmail)}
-        href="/premium-login"><h6>Grade_AI</h6></a
+      <a class="btn grade-app" on:click={gradeAi(userEmail)}
+        ><h6>Grade_AI</h6></a
       >
     </span><br />
     <span class="buttonsContainer">
