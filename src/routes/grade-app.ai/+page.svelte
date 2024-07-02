@@ -13,11 +13,10 @@
   let notLoggedIn = false;
   let messages = []; // array to store user and ai messages
   let userInput = ""; // variable to store user message
-
   let GeminiInput = ""; // variable to store ai message
-
   let shouldShowWelcomeMessage = true; // shouldShowWelcomeMessage is true by default to show shouldShouldWelcomeMessage
   let shouldload = false; // shouldload is false by default to not show loader
+
   onMount(() => {
     if (!sessionStorage.getItem("Display Name")) {
       notLoggedIn = true;
