@@ -9,15 +9,23 @@
   import { supabase } from "../supabaseClient";
   import { onMount } from "svelte";
   import NotLoggedIn from "../components/notLoggedIn.svelte";
-  import { ElevenLabsClient } from "elevenlabs";
 
   let notLoggedIn = false;
   let messages = []; // array to store user and ai messages
+  let messagesForTTS = [];
   let userInput = ""; // variable to store user message
   let GeminiInput = ""; // variable to store ai message
   let shouldShowWelcomeMessage = true; // shouldShowWelcomeMessage is true by default to show shouldShouldWelcomeMessage
   let shouldload = false; // shouldload is false by default to not show loader
 
+  function speak(text) {
+    const utterance = new SpeechSynthesisUtterance(text);
+    const voices = speechSynthesis.getVoices();
+    utterance.voice = voices[18];
+    if (text) {
+      speechSynthesis.speak(utterance);
+    }
+  }
   onMount(() => {
     if (!sessionStorage.getItem("Display Name")) {
       notLoggedIn = true;
@@ -28,6 +36,11 @@
       console.log(error);
     }
   });
+  function speakText() {
+    if (messages[messages.length - 1].sender == "Gemini") {
+      speak(messages[messages.length - 1].content);
+    }
+  }
   function handleKeyDown(event) {
     // function to handle key down
     if (event.key === "Enter") {
@@ -58,7 +71,6 @@
     shouldShowWelcomeMessage = false; // sets shouldShowWelcomeMessage to false to not show welcome message
     const userInput = document.getElementById("userInput").value.trim(); // gets user input
     messages = [...messages, { content: userInput, sender: "User" }]; // add user input to messages
-    document.getElementById("userInput").value = ""; // removes old message from the input
     if (userInput == "") {
       // checks if userInput is empty
       messages = [
@@ -69,6 +81,7 @@
       // if userInput is not empty
       run(userInput); // userInput goes to run to get response from API
     }
+    document.getElementById("userInput").value = ""; // removes old message from the input
   }
   const generationConfig = {
     temperature: 1,
@@ -125,18 +138,16 @@
       console.log(`Error initializing AI: ${error}`);
     }
   }
-
   async function run(prompt) {
     if (chatSession) {
       try {
         shouldload = true; // sets shouldload to true to show loader
         const result = await chatSession.sendMessage(prompt);
         const text = result.response.text();
-
         shouldload = false; // sets shouldload to false to not show loader
 
         const formattedText = text // variable to store formatted text
-          .replace(/\*\*/g, "<br>") // replaces "**" with line break
+          .replace(/\*\*/g, "") // replaces "**" with line break
           .replace(/\*/g, ""); // replaces "*" with ""
 
         // Create a single message with line breaks
@@ -195,6 +206,7 @@
             on:keydown={handleKeyDown}
           />
           <button type="button" on:click={sendMessage}>Send</button>
+          <button type="button" on:click={speakText}>Speak</button>
         </div>
       </center>
     </div>
