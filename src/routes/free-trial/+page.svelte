@@ -68,38 +68,64 @@
   async function getApiKey() {
     const { data, error } = await supabase.from("API-Key").select();
     if (data) {
-      const API_KEY = data[0].API_KEY;
-      window.sessionStorage.setItem("API_KEY", API_KEY);
+      return data[0].API_KEY;
     } else {
       console.log(error);
     }
   }
-  const API_KEY_from_session_storage = window.sessionStorage.getItem("API_KEY");
-  let API_KEY = API_KEY_from_session_storage;
-  const genAI = new GoogleGenerativeAI(API_KEY); // generates a new ai to using the api key to get responses
-
-  async function run(prompt) {
-    const model = genAI.getGenerativeModel({ model: "gemini-pro" }); // generates a new model using genAI
-    shouldload = true; // sets shouldload to true to show loader
-    const result = await model.generateContent(prompt); // takes in prompt and generates a result
-    const response = await result.response; // takes result and generates a response
-    const text = response.text(); //takes the text of the response and puts in "text"
-    shouldload = false; // sets shouldload to false to not show loader
-
-    const formattedText = text // variable to store formatted text
-      .replace(/\*\*/g, "<br>") // replaces "**" with line break
-      .replace(/\*/g, ""); // replaces "*" with ""
-
-    // Create a single message with line breaks
-    const message = {
-      content: formattedText,
-      sender: "Gemini",
-    }; // stores formatted AI text in message
-
-    messages = [...messages, message]; // appends formatted text to messages
-    writeDataInDb(prompt, text);
+  let model;
+  async function initializeAI() {
+    try {
+      const API_KEY = await getApiKey();
+      const genAI = new GoogleGenerativeAI(API_KEY); // generates a new ai to using the api key to get responses
+      return genAI;
+    } catch (error) {
+      console.log(`Error initializing AI: ${error}`);
+    }
   }
 
+  async function setupModel() {
+    try {
+      const genAI = await initializeAI();
+      model = genAI.getGenerativeModel({ model: "gemini-pro" }); // generates a new model using genAI
+    } catch (error) {
+      console.error("Error setting up model:", error);
+    }
+  }
+  async function run(prompt) {
+    if (!model) {
+      console.log("Model not initialized");
+      return;
+    } else {
+      try {
+        shouldload = true; // sets shouldload to true to show loader
+        const result = await model.generateContent(prompt); // takes in prompt and generates a result
+        const response = await result.response; // takes result and generates a response
+        const text = response.text(); //takes the text of the response and puts in "text"
+        shouldload = false; // sets shouldload to false to not show loader
+
+        const formattedText = text // variable to store formatted text
+          .replace(/\*\*/g, "<br>") // replaces "**" with line break
+          .replace(/\*/g, ""); // replaces "*" with ""
+
+        // Create a single message with line breaks
+        const message = {
+          content: formattedText,
+          sender: "Gemini",
+        }; // stores formatted AI text in message
+
+        messages = [...messages, message]; // appends formatted text to messages
+        writeDataInDb(prompt, text);
+      } catch (error) {
+        console.log(errro);
+      }
+    }
+  }
+  setupModel()
+    .then(() => {})
+    .catch((error) => {
+      console.log(error);
+    });
   async function writeDataInDb(prompt, response) {
     const email = sessionStorage.getItem("Email");
     try {
