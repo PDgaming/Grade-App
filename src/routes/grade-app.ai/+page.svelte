@@ -9,6 +9,7 @@
   import { supabase } from "../supabaseClient";
   import { onMount } from "svelte";
   import NotLoggedIn from "../components/notLoggedIn.svelte";
+  import { ElevenLabsClient } from "elevenlabs";
 
   let notLoggedIn = false;
   let messages = []; // array to store user and ai messages
