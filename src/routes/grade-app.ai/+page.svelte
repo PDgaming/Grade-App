@@ -24,6 +24,7 @@
     utterance.voice = voices[18];
     if (text) {
       speechSynthesis.speak(utterance);
+      speechSynthesis.pause();
     }
   }
   onMount(() => {
