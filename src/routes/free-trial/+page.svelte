@@ -149,7 +149,7 @@
   onMount(() => {
     sessionStorage.setItem("Queries Left", queriesLeft);
 
-    if (!sessionStorage.getItem("Display Name")) {
+    if (!sessionStorage.getItem("Email")) {
       notLoggedIn = true;
     }
   });

@@ -53,7 +53,7 @@
       goto("/dashboard"); // redirects user to chat window
     } catch (error) {
       console.log(error); // logs error code
-      if (error.code == AuthErrorCodes.INVALID_LOGIN_CREDENTIALS) {
+      if (error.code == AuthErrorCodes.INVALID_EMAIL) {
         alert("Error: " + error.code + ". Please recheck your credentials"); // shows error message if user credentials are wrong
       } else {
         alert(
