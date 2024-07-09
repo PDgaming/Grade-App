@@ -17,18 +17,29 @@
   let GeminiInput = ""; // variable to store ai message
   let shouldShowWelcomeMessage = true; // shouldShowWelcomeMessage is true by default to show shouldShouldWelcomeMessage
   let shouldload = false; // shouldload is false by default to not show loader
+  let speakButton = true;
+  let pauseButton = false;
+  let resumeButton = false;
 
   function speak(text) {
     const utterance = new SpeechSynthesisUtterance(text);
     const voices = speechSynthesis.getVoices();
     utterance.voice = voices[18];
     if (text) {
-      speechSynthesis.speak(utterance);
-      speechSynthesis.pause();
+      try {
+        speechSynthesis.speak(utterance);
+        utterance.onend = () => {
+          pauseButton = false;
+          resumeButton = false;
+        };
+      } catch {
+        alert("Speech synthesis could not be generated");
+      }
     }
   }
+
   onMount(() => {
-    if (!sessionStorage.getItem("Display Name")) {
+    if (!sessionStorage.getItem("Email")) {
       notLoggedIn = true;
     }
     try {
@@ -38,9 +49,20 @@
     }
   });
   function speakText() {
+    pauseButton = true;
     if (messages[messages.length - 1].sender == "Gemini") {
       speak(messages[messages.length - 1].content);
     }
+  }
+  function pauseSpeech() {
+    pauseButton = false;
+    resumeButton = true;
+    speechSynthesis.pause();
+  }
+  function resumeSpeech() {
+    resumeButton = false;
+    pauseButton = true;
+    speechSynthesis.resume();
   }
   function handleKeyDown(event) {
     // function to handle key down
@@ -207,7 +229,15 @@
             on:keydown={handleKeyDown}
           />
           <button type="button" on:click={sendMessage}>Send</button>
-          <button type="button" on:click={speakText}>Speak</button>
+          {#if speakButton}
+            <button type="button" on:click={speakText}>Speak</button>
+          {/if}
+          {#if pauseButton}
+            <button type="button" on:click={pauseSpeech}>Pause</button>
+          {/if}
+          {#if resumeButton}
+            <button type="button" on:click={resumeSpeech}>Resume</button>
+          {/if}
         </div>
       </center>
     </div>
