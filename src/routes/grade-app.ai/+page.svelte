@@ -26,20 +26,39 @@
     const voices = speechSynthesis.getVoices();
     utterance.voice = voices[18];
     if (text) {
+      pauseButton = true;
       try {
         speechSynthesis.speak(utterance);
         utterance.onend = () => {
           pauseButton = false;
           resumeButton = false;
+          stopButton = false;
         };
       } catch {
         alert("Speech synthesis could not be generated");
       }
     }
   }
-
+  async function getUserMessagesFromDb(userEmail) {
+    const { data, error } = await supabase
+      .from("User-messages")
+      .select()
+      .eq("user", userEmail);
+    if (data) {
+      console.log(data);
+      for (const row of data) {
+        messages = [...messages, { content: row.prompt, sender: "User" }];
+        messages = [...messages, { content: row.response, sender: "Gemini" }];
+      }
+    } else {
+      console.log(
+        `There was an error getting your Messages from Database, ${error}`
+      );
+    }
+  }
   onMount(() => {
-    if (!sessionStorage.getItem("Email")) {
+    const userEmail = sessionStorage.getItem("Email");
+    if (!userEmail) {
       notLoggedIn = true;
     }
     try {
@@ -47,9 +66,9 @@
     } catch (error) {
       console.log(error);
     }
+    getUserMessagesFromDb(userEmail);
   });
   function speakText() {
-    pauseButton = true;
     if (messages[messages.length - 1].sender == "Gemini") {
       speak(messages[messages.length - 1].content);
     }
