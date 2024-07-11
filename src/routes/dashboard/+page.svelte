@@ -103,11 +103,6 @@
   h2 {
     margin-top: 15px;
   }
-  h1,
-  h2,
-  h4 {
-    color: white;
-  }
   a {
     color: rgb(255, 255, 255);
     text-decoration: underline;
