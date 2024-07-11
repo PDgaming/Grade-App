@@ -215,7 +215,6 @@
   }
   p {
     font-size: 22px;
-    color: white;
   }
   h7 {
     font-size: 40px;

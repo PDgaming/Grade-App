@@ -109,9 +109,6 @@
   #login-text {
     margin-top: 30px;
   }
-  h2 {
-    color: white;
-  }
   .container {
     background-color: #2c2f34;
     margin-top: 40px;
@@ -122,7 +119,6 @@
   }
   h1 {
     font-size: 55px;
-    color: white;
   }
   #loginWithGoogleButton {
     margin-bottom: 10px;

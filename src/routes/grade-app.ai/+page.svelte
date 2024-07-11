@@ -289,8 +289,7 @@
     font-size: 25px;
   }
   h1,
-  h3,
-  p {
+  h3 {
     color: white;
   }
   h1 {

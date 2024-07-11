@@ -31,9 +31,6 @@
     padding: 20px;
     border-radius: 20px;
   }
-  h2 {
-    color: white;
-  }
   a {
     text-decoration: none;
     color: #007bff;

@@ -84,6 +84,10 @@
       <a class="btn try-it" href="/free-trial"><h6>Trial</h6></a>
     </span><br />
     <span class="buttonsContainer">
+      <h4 id="register-text">Try our AI powered quizes:</h4>
+      <a class="btn register" href="/quizes"><h6>Quiz</h6></a>
+    </span><br />
+    <span class="buttonsContainer">
       <h4 id="register-text">Register for a premium account:</h4>
       <a class="btn register" href="/premium-register"><h6>Register</h6></a>
     </span>
