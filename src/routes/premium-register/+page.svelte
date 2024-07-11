@@ -1,14 +1,3 @@
-<script>
-  async function signUp() {
-    alert(
-      "Please contact gradeappbyapp@gmail.com to register and account. Thank you!"
-    );
-    event.preventDefault(); // prevents the site from reloading on button click
-    const email = document.getElementById("email").value; // gets email from input field
-    const password = document.getElementById("password").value; // gets password from input field
-  }
-</script>
-
 <svelte:head>
   <title>Grade App - Register</title>
 </svelte:head>

@@ -153,7 +153,7 @@
     display: inline-flex;
     border-bottom: 1px solid #333;
     margin-top: 30px;
-    width: 99vw;
+    width: 98vw;
   }
   .hero-section .home {
     width: 50vw;

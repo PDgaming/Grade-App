@@ -2,14 +2,7 @@
   import { goto } from "$app/navigation";
   import { initializeApp } from "firebase/app";
   import "./index.css";
-  import {
-    AuthErrorCodes,
-    getAuth,
-    signInWithEmailAndPassword,
-    GoogleAuthProvider,
-    signInWithPopup,
-  } from "firebase/auth";
-  import Form from "../components/form.svelte";
+  import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
   // config for firebase
   const firebaseConfig = {
@@ -35,33 +28,6 @@
   const auth = getAuth(app);
   auth.useDeviceLanguage();
   const provider = new GoogleAuthProvider();
-
-  const login = async (event) => {
-    event.preventDefault(); // prevents the site from reloading on button click
-    const email = document.getElementById("email").value; // gets email from the input field
-    const password = document.getElementById("password").value; // gets password from the input field
-
-    try {
-      const userCredential = await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      ); // creates user credentials with email and password to sign in
-      sessionStorage.setItem("Email", email);
-      sessionStorage.setItem("Password", password);
-      alert("Login Successfill!!"); // shows success message
-      goto("/dashboard"); // redirects user to chat window
-    } catch (error) {
-      console.log(error); // logs error code
-      if (error.code == AuthErrorCodes.INVALID_EMAIL) {
-        alert("Error: " + error.code + ". Please recheck your credentials"); // shows error message if user credentials are wrong
-      } else {
-        alert(
-          "Error: " + error.code + ". Something went wrong please try again."
-        ); // shows error message if somthing else went wrong
-      }
-    }
-  };
 
   async function loginWithGoogle() {
     signInWithPopup(auth, provider)
@@ -99,14 +65,19 @@
 
 <center id="normal">
   <div class="container">
-    <Form />
+    <h2>We have migrated to Google only login</h2>
     <button
       id="loginWithGoogleButton"
       class="btn btn-primary"
-      on:click={loginWithGoogle}>Google</button
-    ><br />
-    <button id="loginButton" class="btn btn-primary" on:click={login}
-      >Login</button
+      on:click={loginWithGoogle}
+      ><svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 488 512"
+        id="google-icon"
+        ><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path
+          d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"
+        /></svg
+      ></button
     ><br />
     <span id="register">
       <a href="/register">Register</a>
@@ -115,14 +86,19 @@
 </center>
 
 <center id="responsive">
-  <Form />
+  <h2>We have migrated to Google only login</h2>
   <button
     id="loginWithGoogleButton"
     class="btn btn-primary"
-    on:click={loginWithGoogle}>Google</button
-  ><br />
-  <button id="loginButton" class="btn btn-primary" on:click={login}
-    >Login</button
+    on:click={loginWithGoogle}
+    ><svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 488 512"
+      id="google-icon"
+      ><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path
+        d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"
+      /></svg
+    ></button
   ><br />
   <span id="register">
     <a href="/register">Register</a>
@@ -132,6 +108,9 @@
 <style>
   #login-text {
     margin-top: 30px;
+  }
+  h2 {
+    color: white;
   }
   .container {
     background-color: #2c2f34;
@@ -145,16 +124,10 @@
     font-size: 55px;
     color: white;
   }
-  #loginButton,
   #loginWithGoogleButton {
     margin-bottom: 10px;
-  }
-  #loginWithGoogleButton {
     font-size: 20px;
-  }
-  #loginButton {
-    font-size: 25px;
-    width: 120px;
+    margin-top: 50px;
   }
   #register a {
     text-decoration: none;
@@ -162,6 +135,9 @@
   }
   #responsive {
     display: none;
+  }
+  #google-icon {
+    width: 30px;
   }
   @media (max-width: 1000px) {
     #normal {
