@@ -45,7 +45,6 @@
       .select()
       .eq("user", userEmail);
     if (data) {
-      console.log(data);
       for (const row of data) {
         messages = [...messages, { content: row.prompt, sender: "User" }];
         messages = [...messages, { content: row.response, sender: "Gemini" }];
@@ -189,7 +188,7 @@
         shouldload = false; // sets shouldload to false to not show loader
 
         const formattedText = text // variable to store formatted text
-          .replace(/\*\*/g, "") // replaces "**" with line break
+          .replace(/\*\*/g, "") // replaces "**" with ""
           .replace(/\*/g, ""); // replaces "*" with ""
 
         // Create a single message with line breaks

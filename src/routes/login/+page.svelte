@@ -3,6 +3,7 @@
   import { initializeApp } from "firebase/app";
   import "./index.css";
   import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+  import { supabase } from "../supabaseClient";
 
   // config for firebase
   const firebaseConfig = {
@@ -29,6 +30,30 @@
   auth.useDeviceLanguage();
   const provider = new GoogleAuthProvider();
 
+  async function checkIfUserExistsInDatabase(email) {
+    try {
+      const { data, error } = await supabase
+        .from("Users")
+        .insert({ Email: email, Member: false });
+      if (error) {
+        console.log(error);
+        if (
+          error.details == `Failing row contains (null, ${email}, f).` ||
+          `Key ("Email")=(${email}) already exists.`
+        ) {
+          console.log("User already exists in Database");
+          alert("Login Successfull!!"); // shows success message
+          goto("/dashboard");
+        } else {
+          console.error("There was an error", error);
+        }
+      }
+    } catch (error) {
+      console.error("Unexpected error:", error);
+      // Handle unexpected errors gracefully
+    }
+  }
+
   async function loginWithGoogle() {
     signInWithPopup(auth, provider)
       .then((result) => {
@@ -41,8 +66,7 @@
         // ...
         sessionStorage.setItem("Display Name", user.displayName);
         sessionStorage.setItem("Email", user.email);
-        alert("Login Successfill!!"); // shows success message
-        goto("/dashboard");
+        checkIfUserExistsInDatabase(user.email);
       })
       .catch((error) => {
         // Handle Errors here.
@@ -50,7 +74,7 @@
         const errorMessage = error.message;
         // The AuthCredential type that was used.
         const credential = GoogleAuthProvider.credentialFromError(error);
-        alert(errorMessage);
+        console.error(errorMessage);
       });
   }
 </script>

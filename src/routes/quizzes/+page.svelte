@@ -1,8 +1,6 @@
 <script>
   import "../index.css";
-  import { goto } from "$app/navigation";
   import { onMount } from "svelte";
-  import { supabase } from "../supabaseClient";
   import NotLoggedIn from "../components/notLoggedIn.svelte";
 
   let name = "User";
@@ -23,7 +21,7 @@
 </script>
 
 <svelte:head>
-  <title>Grade App - Dashboard</title>
+  <title>Grade App - Quizes</title>
 </svelte:head>
 {#if !notLoggedIn}
   <h1>Hello There {name}, <br />welcome To Your Quizes Dashboard!!</h1>
@@ -31,11 +29,11 @@
   <div class="buttons">
     <span class="buttonsContainer">
       <h4>Take a quiz:</h4>
-      <a class="btn grade-app" href="/quizes/quize"><h6>Grade_AI</h6></a>
+      <a class="btn grade-app" href="/quizzes/quiz/"><h6>Grade_AI</h6></a>
     </span><br />
     <span class="buttonsContainer">
       <h4>View Leaderboard:</h4>
-      <a class="btn grade-app" href="/quizes/leaderboard"
+      <a class="btn grade-app" href="/quizzes/leaderboard/"
         ><h6>Leaderboard</h6></a
       >
     </span><br />
@@ -61,9 +59,7 @@
   .buttons {
     margin-top: 10px;
   }
-  .try-it,
-  .grade-app,
-  .register {
+  .grade-app {
     font-size: 15px;
   }
   .buttonsContainer {
