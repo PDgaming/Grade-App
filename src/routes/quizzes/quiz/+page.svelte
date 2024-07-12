@@ -87,26 +87,38 @@
       error = "Failed to parse response";
     }
   }
+
+  function checkAnswer() {
+    console.isLoading(parsedJSONResponse);
+  }
 </script>
 
 {#if notLoggedIn}
   <NotLoggedIn />
 {:else if isLoading}
-  <p>Loading Questions...</p>
+  <center>
+    <p>Loading Questions...</p>
+  </center>
 {:else if error}
   <p>Error: {error}</p>
 {:else if parsedJSONResponse.length > 0}
-  {#each parsedJSONResponse as question}
+  {#each parsedJSONResponse as question, index}
     <div>
-      <h3>{question.question}</h3>
-      <ul>
-        {#each question.options as option}
-          <li>{option}</li>
-        {/each}
-      </ul>
-      <p>Correct Answer: {question.answer}</p>
+      <h3>Question {index++}: {question.question}</h3>
+      {#each question.options as option}
+        <button class="btn btn-primary" value={option} on:click={checkAnswer}
+          >{option}</button
+        >
+      {/each}
     </div>
   {/each}
 {:else}
   <p>No questions generated.</p>
 {/if}
+
+<style>
+  button {
+    margin-right: 10px;
+    width: 90px;
+  }
+</style>
