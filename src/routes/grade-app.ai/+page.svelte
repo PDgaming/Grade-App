@@ -361,10 +361,11 @@
     height: 55px;
     width: 65vw;
     border: 1px solid white;
-    border-radius: 25px;
+    border-radius: 15px;
     background-color: #1e1f20;
     color: white;
     padding-left: 15px;
+    padding-right: 15px;
   }
   input:focus {
     border: none;
