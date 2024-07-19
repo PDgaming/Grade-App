@@ -10,7 +10,7 @@
   import { onMount } from "svelte";
   import NotLoggedIn from "../components/notLoggedIn.svelte";
   import { toasts, ToastContainer, FlatToast } from "svelte-toasts";
-  import Highlight, { HighlightAuto } from "svelte-highlight";
+  import HighlightedContent from "../components/highlightedContent.svelte";
 
   let notLoggedIn = false;
   let messages = []; // array to store user and ai messages
@@ -57,14 +57,16 @@
       .select()
       .eq("user", userEmail);
     if (data) {
+      let newMessages = []; // Declare newMessages here
       for (const row of data) {
-        messages = [...messages, { content: row.prompt, sender: "User" }];
-        messages = [
-          ...messages,
-          { content: row.response.replace(/\*\*/g, "<br>"), sender: "Gemini" },
-        ];
-        console.log(row.response.replace(/\*\*/g, ""));
+        newMessages.push({ content: row.prompt, sender: "User" });
+        newMessages.push({
+          content: row.response.replace(/\*\*/g, "<br>"),
+          sender: "Gemini",
+        });
+        console.log(row);
       }
+      messages = [...messages, ...newMessages]; // This triggers reactivity
     } else {
       console.log(
         `There was an error getting your Messages from Database, ${error}`
@@ -84,7 +86,9 @@
     getUserMessagesFromDb(userEmail);
     const chatLog = document.getElementById("chatlog");
     setTimeout(() => {
-      chatLog.scrollTo(0, chatLog.scrollHeight);
+      if (chatLog) {
+        chatLog.scrollTo(0, chatLog.scrollHeight);
+      }
     }, 1000);
   });
   const showToast = (title, body, duration, type) => {
@@ -235,7 +239,7 @@
         }; // stores formatted AI text in message
 
         messages = [...messages, message]; // appends formatted text to messages
-        writeDataInDb(prompt, formattedText);
+        writeDataInDb(prompt, text);
       } catch (error) {
         console.log(`Error sending message: ${error}`);
       }
@@ -272,7 +276,13 @@
       {#each messages as userMessage}
         <div class={userMessage.sender}>
           <h3>{userMessage.sender}:</h3>
-          <p style="margin-left:35px;">{@html userMessage.content}</p>
+          {#if userMessage.sender === "Gemini"}
+            <div style="margin-left:35px;">
+              <HighlightedContent content={userMessage.content} />
+            </div>
+          {:else}
+            <p style="margin-left:35px;">{userMessage.content}</p>
+          {/if}
         </div>
       {/each}
       {#if shouldload}
