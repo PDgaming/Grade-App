@@ -4,6 +4,7 @@
   import "./index.css";
   import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
   import { supabase } from "../supabaseClient";
+  import { toasts, ToastContainer, FlatToast } from "svelte-toasts";
 
   // config for firebase
   const firebaseConfig = {
@@ -30,30 +31,37 @@
   auth.useDeviceLanguage();
   const provider = new GoogleAuthProvider();
 
+  const showToast = (title, body, duration, type) => {
+    const toast = toasts.add({
+      title: title,
+      description: body,
+      duration: duration, // 0 or negative to avoid auto-remove
+      placement: "bottom-right",
+      type: "info",
+      theme: "dark",
+      placement: "bottom-right",
+      showProgress: true,
+      type: type,
+      theme: "dark",
+      onClick: () => {},
+      onRemove: () => {},
+      // component: BootstrapToast, // allows to override toast component/template per toast
+    });
+  };
   async function checkIfUserExistsInDatabase(email) {
     try {
       const { data, error } = await supabase
         .from("Users")
         .insert({ Email: email, Member: false });
-      if (error) {
-        console.log(error);
-        if (
-          error.details == `Failing row contains (null, ${email}, f).` ||
-          `Key ("Email")=(${email}) already exists.`
-        ) {
-          console.log("User already exists in Database");
-          alert("Login Successfull!!"); // shows success message
-          goto("/dashboard");
-        } else {
-          console.error("There was an error", error);
-        }
-      }
+
+      showToast("Success", "Login Successfull!!", 2500, "success");
+      setTimeout(() => {
+        goto("/dashboard");
+      }, 2500);
     } catch (error) {
-      console.error("Unexpected error:", error);
-      // Handle unexpected errors gracefully
+      console.log(error);
     }
   }
-
   async function loginWithGoogle() {
     signInWithPopup(auth, provider)
       .then((result) => {
@@ -67,6 +75,7 @@
         sessionStorage.setItem("Display Name", user.displayName);
         sessionStorage.setItem("Email", user.email);
         checkIfUserExistsInDatabase(user.email);
+        checkIfUserExistsInDatabase("produnyadehingia12345@gmail.com");
       })
       .catch((error) => {
         // Handle Errors here.
@@ -79,6 +88,10 @@
   }
 </script>
 
+<ToastContainer let:data>
+  <FlatToast {data} />
+</ToastContainer>
+
 <svelte:head>
   <title>Grade App - Login</title>
 </svelte:head>
@@ -86,7 +99,6 @@
 <center id="login-text">
   <h1>Login</h1>
 </center>
-
 <center id="normal">
   <div class="container">
     <h2>We have migrated to Google only login</h2>

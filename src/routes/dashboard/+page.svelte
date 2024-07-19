@@ -33,14 +33,7 @@
         .single()
         .select("Member");
       if (error) {
-        if (error.details == "The result contains 0 rows") {
-          alert(
-            "Your email is not found in the database! If you do not have a premium account, please go to /premium-register to use Grade-AI"
-          );
-          goto("/premium-register");
-        } else {
-          alert("There was an error!!");
-        }
+        alert("There was an error!!");
         // Handle the error appropriately
         return; // Or throw an exception if needed
       } else {
@@ -60,9 +53,6 @@
       // Handle unexpected errors gracefully
     }
   }
-  function register() {
-    goto("/premium-register");
-  }
 </script>
 
 <svelte:head>
@@ -74,8 +64,7 @@
   <div class="buttons">
     <span class="buttonsContainer">
       <h4>Use our Grade App AI:</h4>
-
-      <a class="btn grade-app" on:click={gradeAi(userEmail)}
+      <a class="btn grade-app" on:click={gradeAi(userEmail)} href="/"
         ><h6>Grade_AI</h6></a
       >
     </span><br />

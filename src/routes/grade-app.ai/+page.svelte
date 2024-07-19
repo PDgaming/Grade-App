@@ -9,6 +9,7 @@
   import { supabase } from "../supabaseClient";
   import { onMount } from "svelte";
   import NotLoggedIn from "../components/notLoggedIn.svelte";
+  import { toasts, ToastContainer, FlatToast } from "svelte-toasts";
 
   let notLoggedIn = false;
   let messages = []; // array to store user and ai messages
@@ -35,7 +36,17 @@
           stopButton = false;
         };
       } catch {
-        alert("Speech synthesis could not be generated");
+        showToast(
+          "Error",
+          "Speech synthesis could not be generated",
+          3000,
+          "failure"
+        );
+        setTimeout(() => {
+          pauseButton = false;
+          resumeButton = false;
+          stopButton = false;
+        }, 3000);
       }
     }
   }
@@ -67,6 +78,23 @@
     }
     getUserMessagesFromDb(userEmail);
   });
+  const showToast = (title, body, duration, type) => {
+    const toast = toasts.add({
+      title: title,
+      description: body,
+      duration: duration, // 0 or negative to avoid auto-remove
+      placement: "bottom-right",
+      type: "info",
+      theme: "dark",
+      placement: "bottom-right",
+      showProgress: true,
+      type: type,
+      theme: "dark",
+      onClick: () => {},
+      onRemove: () => {},
+      // component: BootstrapToast, // allows to override toast component/template per toast
+    });
+  };
   function speakText() {
     if (messages[messages.length - 1].sender == "Gemini") {
       speak(messages[messages.length - 1].content);
@@ -208,6 +236,9 @@
   }
 </script>
 
+<ToastContainer let:data>
+  <FlatToast {data} />
+</ToastContainer>
 <svelte:head>
   <title>Grade-App AI (powered by Google's Gemini)</title>
 </svelte:head>
@@ -231,7 +262,7 @@
       {#each messages as userMessage}
         <div class={userMessage.sender}>
           <h3>{userMessage.sender}:</h3>
-          <p style="margin-left:35px;">{@html userMessage.content}</p>
+          <p style="margin-left:35px;">{userMessage.content}</p>
         </div>
       {/each}
       {#if shouldload}

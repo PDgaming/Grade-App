@@ -20,7 +20,7 @@
 </script>
 
 <center>
-  <h1>Leaderboard</h1>
+  <h1><u> Leaderboard </u></h1>
 </center>
 {#if leaderBoardData}
   <center>
@@ -36,7 +36,7 @@
           <tr>
             <td key={index + 1}>{index + 1}</td>
             <td>
-              {data.User}
+              {data.User.replace("@gmail.com", "")}
             </td>
             <td>
               {data.Grade}

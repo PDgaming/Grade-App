@@ -24,7 +24,9 @@
     "@supabase/supabase-js": "^2.43.2",
     "bootstrap": "^5.3.2",
     "firebase": "^10.11.0",
+    "highlight.js": "^11.10.0",
     "stripe": "^15.6.0",
+    "svelte-toasts": "^1.1.2",
     "workbox-strategies": "^7.0.0"
   }
 }
