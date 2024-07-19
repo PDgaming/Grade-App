@@ -10,6 +10,7 @@
   import { onMount } from "svelte";
   import NotLoggedIn from "../components/notLoggedIn.svelte";
   import { toasts, ToastContainer, FlatToast } from "svelte-toasts";
+  import Highlight, { HighlightAuto } from "svelte-highlight";
 
   let notLoggedIn = false;
   let messages = []; // array to store user and ai messages
@@ -58,7 +59,11 @@
     if (data) {
       for (const row of data) {
         messages = [...messages, { content: row.prompt, sender: "User" }];
-        messages = [...messages, { content: row.response, sender: "Gemini" }];
+        messages = [
+          ...messages,
+          { content: row.response.replace(/\*\*/g, "<br>"), sender: "Gemini" },
+        ];
+        console.log(row.response.replace(/\*\*/g, ""));
       }
     } else {
       console.log(
@@ -77,6 +82,10 @@
       console.log(error);
     }
     getUserMessagesFromDb(userEmail);
+    const chatLog = document.getElementById("chatlog");
+    setTimeout(() => {
+      chatLog.scrollTo(0, chatLog.scrollHeight);
+    }, 1000);
   });
   const showToast = (title, body, duration, type) => {
     const toast = toasts.add({
@@ -226,7 +235,7 @@
         }; // stores formatted AI text in message
 
         messages = [...messages, message]; // appends formatted text to messages
-        writeDataInDb(prompt, text);
+        writeDataInDb(prompt, formattedText);
       } catch (error) {
         console.log(`Error sending message: ${error}`);
       }
@@ -239,6 +248,7 @@
 <ToastContainer let:data>
   <FlatToast {data} />
 </ToastContainer>
+
 <svelte:head>
   <title>Grade-App AI (powered by Google's Gemini)</title>
 </svelte:head>
@@ -247,7 +257,7 @@
     <div class="header">
       <h3>Gemini</h3>
     </div>
-    <div class="chatLog">
+    <div class="chatLog" id="chatlog">
       <!-- Shows welcome message -->
       {#if shouldShowWelcomeMessage}
         <!-- shows welcome message if shouldShowWelcomeMessage if true -->
@@ -262,7 +272,7 @@
       {#each messages as userMessage}
         <div class={userMessage.sender}>
           <h3>{userMessage.sender}:</h3>
-          <p style="margin-left:35px;">{userMessage.content}</p>
+          <p style="margin-left:35px;">{@html userMessage.content}</p>
         </div>
       {/each}
       {#if shouldload}

@@ -2,6 +2,7 @@
   import Navbar from "./components/navbar.svelte";
   import "./index.css";
   import { goto } from "$app/navigation";
+  import { onMount } from "svelte";
 
   // Takes to login page
   function loginPage() {
