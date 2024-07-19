@@ -117,59 +117,64 @@
   function takeQuiz() {
     selectClassAndSubject = false;
     isLoading = true;
-    // run(
-    //   chatSession,
-    //   `Can you please generate 5 questions for a quiz based on these information:{ grade: ${grade}, subject: ${subject}, Board: "CBSE NCERT" }`
-    // );
+    run(
+      chatSession,
+      `Can you please generate 5 questions for a quiz based on these information:{ grade: ${grade}, subject: ${subject}, Board: "CBSE NCERT" }`
+    );
   }
-
   checkAnswer();
   async function checkAnswer() {
     correctAnswers = [];
     for (const row of parsedJSONResponse) {
       correctAnswers = [...correctAnswers, row.answer];
     }
-    console.log(correctAnswers);
     let scoreIncrement = 0;
-    // Loop through the selected answers and check if they match the correct answers
-    selectedAnswers = ["Photosynthesis", "Lungs", "Jupiter", "Cow", "Sun"];
-    for (let i = 0; i < 5; i++) {
-      if (selectedAnswers[i] == correctAnswers[i]) {
-        scoreIncrement += 3;
-      } else {
-        console.error("Sorry, your answer is wrong.");
-      }
+    console.log("Correct Answers", correctAnswers);
+    console.log("Selected Answers", selectedAnswers);
+    console.log("Score Increment", scoreIncrement);
+
+    if (
+      correctAnswers[0] == selectedAnswers[0] &&
+      correctAnswers[1] == selectedAnswers[1] &&
+      correctAnswers[2] == selectedAnswers[2] &&
+      correctAnswers[3] == selectedAnswers[3] &&
+      correctAnswers[4] == selectedAnswers[4]
+    ) {
+      console.log("All Answers are Correct.");
+    } else {
+      console.log("All Answers are wrong.");
     }
-    if (scoreIncrement > 0) {
-      try {
-        // First, get the current Rank
-        let { data, error } = await supabase
-          .from("Leaderboard")
-          .select("Rank")
-          .eq("User", userEmail);
-
-        if (error) {
-          console.error(error);
-        } else {
-          console.log(data);
-        }
-
-        const currentRank = data.Rank || 0;
-        const newRank = currentRank + scoreIncrement;
-
-        // Then, update the Rank
-        const { data: updateData, error: updateError } = await supabase
-          .from("Leaderboard")
-          .update({ Rank: newRank })
-          .eq("User", userEmail);
-
-        if (updateError) throw updateError;
-
-        console.log("Score updated successfully", updateData);
-      } catch (error) {
-        console.error("There was an error updating your score.", error);
-      }
+    if (correctAnswers[0] == selectedAnswers[0]) {
+      console.log("First Answer Is Correct!!");
+      scoreIncrement += 3;
+    } else {
+      console.log("First Answer Is Wrong");
     }
+    if (correctAnswers[1] == selectedAnswers[1]) {
+      console.log("Second Answer Is Correct!!");
+      scoreIncrement += 3;
+    } else {
+      console.log("Second Answer Is Wrong");
+    }
+    if (correctAnswers[2] == selectedAnswers[2]) {
+      console.log("Third Answer Is Correct!!");
+      scoreIncrement += 3;
+    } else {
+      console.log("Third Answer Is Wrong");
+    }
+    if (correctAnswers[3] == selectedAnswers[3]) {
+      console.log("Fourth Answer Is Correct!!");
+      scoreIncrement += 3;
+    } else {
+      console.log("Fourth Answer Is Wrong");
+    }
+    if (correctAnswers[4] == selectedAnswers[4]) {
+      console.log("Fifth Answer Is Correct!!");
+      scoreIncrement += 3;
+    } else {
+      console.log("Fifth Answer Is Wrong");
+    }
+    console.log("Final Score Increment", scoreIncrement);
   }
 </script>
 

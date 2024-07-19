@@ -74,7 +74,7 @@
     </span><br />
     <span class="buttonsContainer">
       <h4 id="register-text">Try our AI powered quizes:</h4>
-      <a class="btn register" href="/quizzes"><h6>Quiz</h6></a>
+      <a class="btn register" href="/quizzes"><h6>Quiz</h6> </a>
     </span><br />
     <span class="buttonsContainer">
       <h4 id="register-text">Register for a premium account:</h4>
