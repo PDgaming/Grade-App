@@ -69,6 +69,7 @@
   let selectedAnswers = [];
   let correctAnswers = [];
   let userEmail;
+  let currentRank;
 
   onMount(() => {
     userEmail = sessionStorage.getItem("Email");
@@ -122,7 +123,9 @@
       `Can you please generate 5 questions for a quiz based on these information:{ grade: ${grade}, subject: ${subject}, Board: "CBSE NCERT" }`
     );
   }
-  checkAnswer();
+  setTimeout(() => {
+    checkAnswer();
+  }, 1000);
   async function checkAnswer() {
     correctAnswers = [];
     for (const row of parsedJSONResponse) {
@@ -175,6 +178,24 @@
       console.log("Fifth Answer Is Wrong");
     }
     console.log("Final Score Increment", scoreIncrement);
+
+    const { data, error } = await supabase
+      .from("Leaderboard")
+      .select()
+      .eq("User", userEmail);
+    if (data) {
+      currentRank = data[0].Rank;
+    }
+    const newRank = currentRank + scoreIncrement;
+
+    try {
+      await supabase
+        .from("Leaderboard")
+        .update({ Rank: newRank })
+        .eq("User", userEmail);
+    } catch (error) {
+      console.error(error);
+    }
   }
 </script>
 
