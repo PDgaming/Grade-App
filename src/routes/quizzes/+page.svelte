@@ -29,9 +29,7 @@
   <div class="buttons">
     <span class="buttonsContainer">
       <h4>Take a quiz:</h4>
-      <a class="btn grade-app" href="/quizzes/quiz/"
-        ><h6>Quiz (Coming Soon!!)</h6></a
-      >
+      <a class="btn grade-app" href="/quizzes/quiz/"><h6>Quiz</h6></a>
     </span><br />
     <span class="buttonsContainer">
       <h4>View Leaderboard:</h4>

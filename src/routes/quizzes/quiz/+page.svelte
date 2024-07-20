@@ -106,9 +106,6 @@
       correctAnswers = [...correctAnswers, row.answer];
     }
     let scoreIncrement = 0;
-    console.log("Correct Answers", correctAnswers);
-    console.log("Selected Answers", selectedAnswers);
-    console.log("Score Increment", scoreIncrement);
 
     if (
       correctAnswers[0] == selectedAnswers[0] &&
