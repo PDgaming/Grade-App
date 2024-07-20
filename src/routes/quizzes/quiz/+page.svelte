@@ -97,9 +97,6 @@
       `Can you please generate 5 questions for a quiz based on these information:{ grade: ${grade}, subject: ${subject}, Board: "CBSE NCERT" }`
     );
   }
-  setTimeout(() => {
-    checkAnswer();
-  }, 1000);
   async function checkAnswer() {
     correctAnswers = [];
     for (const row of parsedJSONResponse) {
