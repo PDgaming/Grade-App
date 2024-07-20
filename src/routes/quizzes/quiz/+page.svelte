@@ -11,33 +11,7 @@
   let notLoggedIn = false;
   let grade;
   let subject;
-  let parsedJSONResponse = [
-    {
-      question: "What is the process by which plants make their own food?",
-      options: ["Photosynthesis", "Respiration", "Digestion", "Evaporation"],
-      answer: "Photosynthesis",
-    },
-    {
-      question: "Which of these is NOT a part of the human digestive system?",
-      options: ["Stomach", "Lungs", "Intestine", "Mouth"],
-      answer: "Lungs",
-    },
-    {
-      question: "What is the name of the largest planet in our solar system?",
-      options: ["Mars", "Jupiter", "Saturn", "Venus"],
-      answer: "Jupiter",
-    },
-    {
-      question: "Which of these animals is a herbivore?",
-      options: ["Lion", "Tiger", "Cow", "Eagle"],
-      answer: "Cow",
-    },
-    {
-      question: "What is the main source of energy for most living things?",
-      options: ["Wind", "Water", "Sun", "Earth"],
-      answer: "Sun",
-    },
-  ];
+  let parsedJSONResponse = [];
   let isLoading = false;
   let error = null;
   const generationConfig = {
@@ -177,7 +151,6 @@
     } else {
       console.log("Fifth Answer Is Wrong");
     }
-    console.log("Final Score Increment", scoreIncrement);
 
     const { data, error } = await supabase
       .from("Leaderboard")
