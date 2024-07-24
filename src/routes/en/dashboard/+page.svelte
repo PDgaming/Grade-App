@@ -1,5 +1,4 @@
 <script>
-  import "../index.css";
   import { goto } from "$app/navigation";
   import { onMount } from "svelte";
   import { supabase } from "../../supabaseClient";
@@ -21,9 +20,6 @@
     }
     userEmail = sessionStorage.getItem("Email");
   });
-  function freeTrial() {
-    goto("/free-trial");
-  }
   async function gradeAi(email) {
     try {
       const { data, error } = await supabase
@@ -38,9 +34,9 @@
         return; // Or throw an exception if needed
       } else {
         if (data) {
-          const memberOrNot = data.Member;
-          if (memberOrNot) {
-            goto("/grade-app.ai");
+          const member = data.Member;
+          if (member) {
+            goto("/en/grade-app.ai");
           } else {
             alert(
               "You have an account but your account is inactive. Contact gradeappbyapp@gmail.com to reactivate your account"
@@ -70,15 +66,15 @@
     </span><br />
     <span class="buttonsContainer">
       <h4 id="trial-text">Try our Grade App AI for free:</h4>
-      <a class="btn try-it" href="/free-trial"><h6>Trial</h6></a>
+      <a class="btn try-it" href="/en/free-trial"><h6>Trial</h6></a>
     </span><br />
     <span class="buttonsContainer">
       <h4 id="register-text">Try our AI powered quizes:</h4>
-      <a class="btn register" href="/quizzes"><h6>Quiz</h6> </a>
+      <a class="btn register" href="/en/quizzes"><h6>Quiz</h6> </a>
     </span><br />
     <span class="buttonsContainer">
       <h4 id="register-text">Register for a premium account:</h4>
-      <a class="btn register" href="/premium-register"><h6>Register</h6></a>
+      <a class="btn register" href="/en/premium-register"><h6>Register</h6></a>
     </span>
   </div>
 {/if}

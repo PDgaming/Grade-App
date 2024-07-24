@@ -8,7 +8,6 @@
   import { browser } from "$app/environment";
 
   registerServiceWorker();
-
   // let statusCode;
   // async function getStatus() {
   //   try {

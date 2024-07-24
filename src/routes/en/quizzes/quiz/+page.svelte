@@ -6,7 +6,7 @@
     HarmBlockThreshold,
   } from "@google/generative-ai";
   import { onMount } from "svelte";
-  import { supabase } from "../../supabaseClient";
+  import { supabase } from "../../../supabaseClient";
 
   let notLoggedIn = false;
   let grade;

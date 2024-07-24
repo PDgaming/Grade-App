@@ -1,5 +1,5 @@
 <script>
-  import "../index.css";
+  import "../../index.css";
   import { onMount } from "svelte";
   import NotLoggedIn from "../components/notLoggedIn.svelte";
 
@@ -29,11 +29,11 @@
   <div class="buttons">
     <span class="buttonsContainer">
       <h4>Take a quiz:</h4>
-      <a class="btn grade-app" href="/quizzes/quiz/"><h6>Quiz</h6></a>
+      <a class="btn grade-app" href="/en/quizzes/quiz/"><h6>Quiz</h6></a>
     </span><br />
     <span class="buttonsContainer">
       <h4>View Leaderboard:</h4>
-      <a class="btn grade-app" href="/quizzes/leaderboard/"
+      <a class="btn grade-app" href="/en/quizzes/leaderboard/"
         ><h6>Leaderboard</h6></a
       >
     </span><br />

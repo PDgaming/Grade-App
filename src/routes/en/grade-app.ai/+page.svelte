@@ -64,7 +64,6 @@
           content: row.response.replace(/\*\*/g, "<br>"),
           sender: "Gemini",
         });
-        console.log(row);
       }
       messages = [...messages, ...newMessages]; // This triggers reactivity
     } else {
