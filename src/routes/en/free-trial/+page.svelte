@@ -3,7 +3,7 @@
   import "./chatWindow.css"; // imports css stylesheet
   import { GoogleGenerativeAI } from "@google/generative-ai"; // imports GoogleGenerativeAI
   import { onMount } from "svelte";
-  import { supabase } from "../supabaseClient";
+  import { supabase } from "../../supabaseClient";
   import NotLoggedIn from "../components/notLoggedIn.svelte";
 
   // import { getFirestore, doc, getDoc, updateDoc } from "firebase/firestore";

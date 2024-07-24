@@ -5,12 +5,12 @@
 
   // Takes to login page
   function loginPage() {
-    goto("/login");
+    goto("/en/login");
   }
 
   // Takes to register page
   function registerPage() {
-    goto("/register");
+    goto("/en/register");
   }
 </script>
 

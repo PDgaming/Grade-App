@@ -14,7 +14,7 @@
         <li>Safari 16.1+</li>
       </ul>
       We have migrated to Google only login<br />
-      <a href="/login">login</a>
+      <a href="/en/login">login</a>
     </h2>
   </div>
 </span>

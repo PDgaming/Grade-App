@@ -3,7 +3,7 @@
   import { initializeApp } from "firebase/app";
   import "./index.css";
   import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-  import { supabase } from "../supabaseClient";
+  import { supabase } from "../../supabaseClient";
   import { toasts, ToastContainer, FlatToast } from "svelte-toasts";
 
   // config for firebase

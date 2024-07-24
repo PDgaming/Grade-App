@@ -2,7 +2,7 @@
   import "../index.css";
   import { goto } from "$app/navigation";
   import { onMount } from "svelte";
-  import { supabase } from "../supabaseClient";
+  import { supabase } from "../../supabaseClient";
   import NotLoggedIn from "../components/notLoggedIn.svelte";
   import "./index.css";
 

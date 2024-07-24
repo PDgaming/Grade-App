@@ -3,7 +3,7 @@
   import { initializeApp } from "firebase/app";
   import "./index.css";
   import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-  import { supabase } from "../supabaseClient";
+  import { supabase } from "../../supabaseClient";
   import { toasts, ToastContainer, FlatToast } from "svelte-toasts";
 
   // config for firebase
@@ -56,7 +56,7 @@
 
       showToast("Success", "Login Successfull!!", 2500, "success");
       setTimeout(() => {
-        goto("/dashboard");
+        goto("/en/dashboard");
       }, 2500);
     } catch (error) {
       console.log(error);
@@ -116,7 +116,7 @@
       ></button
     ><br />
     <span id="register">
-      <a href="/register">Register</a>
+      <a href="/en/register">Register</a>
     </span>
   </div>
 </center>
