@@ -15,6 +15,7 @@
     "@sveltejs/vite-plugin-svelte": "^3.0.0",
     "svelte": "^4.2.7",
     "svelte-highlight": "^7.7.0",
+    "typescript": "^5.5.4",
     "vite": "^5.0.3"
   },
   "type": "module",
@@ -25,6 +26,7 @@
     "@supabase/supabase-js": "^2.43.2",
     "bootstrap": "^5.3.2",
     "firebase": "^10.11.0",
+    "posthog-js": "^1.149.0",
     "stripe": "^15.6.0",
     "svelte-toasts": "^1.1.2",
     "workbox-strategies": "^7.0.0"

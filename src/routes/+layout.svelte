@@ -4,6 +4,8 @@
   import "bootstrap/dist/css/bootstrap.min.css";
   import { registerServiceWorker } from "../registerServiceWorker";
   import { afterNavigate } from "$app/navigation";
+  import posthog from "posthog-js";
+  import { browser } from "$app/environment";
 
   registerServiceWorker();
 
@@ -22,6 +24,16 @@
   // afterNavigate(() => {
   //   getStatus();
   // });
+
+  // export const load = async () => {
+  //   if (browser) {
+  //     posthog.init("phc_i3hWQZpgjcNd9f1WfNQEj5QfjzbZYS4ZegNui55fvLE", {
+  //       api_host: "https://us.i.posthog.com",
+  //       person_profiles: "identified_only", // or 'always' to create profiles for anonymous users as well
+  //     });
+  //   }
+  //   return;
+  // };
 </script>
 
 <div class="app">

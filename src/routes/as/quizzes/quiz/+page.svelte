@@ -81,7 +81,6 @@
       );
       const response = await result.response.text();
       parsedJSONResponse = JSON.parse(response);
-      console.log(parsedJSONResponse);
     } catch (err) {
       console.error(err);
       error = "Failed to parse response";
@@ -155,14 +154,10 @@
     }
     const newRank = currentRank + scoreIncrement;
 
-    try {
-      await supabase
-        .from("Leaderboard")
-        .update({ Rank: newRank })
-        .eq("User", userEmail);
-    } catch (error) {
-      console.error(error);
-    }
+    await supabase
+      .from("Leaderboard")
+      .update({ Rank: newRank })
+      .eq("User", userEmail);
   }
 </script>
 
