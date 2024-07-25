@@ -1,4 +1,5 @@
-<script>
+<script lang="ts">
+  //@ts-ignore
   import { goto } from "$app/navigation";
   import { initializeApp } from "firebase/app";
   import "./index.css";
@@ -31,24 +32,33 @@
   auth.useDeviceLanguage();
   const provider = new GoogleAuthProvider();
 
-  const showToast = (title, body, duration, type) => {
+  const showToast = (
+    title: string,
+    body: string,
+    duration: number,
+    type: string
+  ) => {
     const toast = toasts.add({
       title: title,
       description: body,
       duration: duration, // 0 or negative to avoid auto-remove
       placement: "bottom-right",
+      //@ts-ignore
       type: "info",
       theme: "dark",
+      //@ts-ignore
       placement: "bottom-right",
       showProgress: true,
+      //@ts-ignore
       type: type,
+      //@ts-ignore
       theme: "dark",
       onClick: () => {},
       onRemove: () => {},
       // component: BootstrapToast, // allows to override toast component/template per toast
     });
   };
-  async function checkIfUserExistsInDatabase(email) {
+  async function checkIfUserExistsInDatabase(email: string) {
     try {
       const { data, error } = await supabase
         .from("Users")
@@ -75,7 +85,6 @@
         sessionStorage.setItem("Display Name", user.displayName);
         sessionStorage.setItem("Email", user.email);
         checkIfUserExistsInDatabase(user.email);
-        checkIfUserExistsInDatabase("produnyadehingia12345@gmail.com");
       })
       .catch((error) => {
         // Handle Errors here.
