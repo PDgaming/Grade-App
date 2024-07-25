@@ -5,7 +5,6 @@ const config = {
   kit: {
     adapter: adapter(),
   },
-
   package: {
     files: (file) => file === "static/sw.js",
   },
