@@ -25,12 +25,12 @@
     try {
       const { data, error } = await supabase
         .from("Users")
-        .select("Email") // Select both email and member columns
+        .select("Email, Member") // Select both email and member columns
         .eq("Email", email)
-        .single()
-        .select("Member");
+        .single();
       if (error) {
         console.log("There was an error!!");
+        console.log(error);
         // Handle the error appropriately
         return; // Or throw an exception if needed
       } else {
