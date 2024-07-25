@@ -1,4 +1,5 @@
-<script>
+<script lang="ts">
+  //@ts-ignore
   import { goto } from "$app/navigation";
   import { onMount } from "svelte";
   import { supabase } from "../../supabaseClient";
@@ -20,7 +21,7 @@
     }
     userEmail = sessionStorage.getItem("Email");
   });
-  async function gradeAi(email) {
+  async function gradeAi(email: string) {
     try {
       const { data, error } = await supabase
         .from("Users")
@@ -29,7 +30,7 @@
         .single()
         .select("Member");
       if (error) {
-        alert("There was an error!!");
+        console.log("There was an error!!");
         // Handle the error appropriately
         return; // Or throw an exception if needed
       } else {
