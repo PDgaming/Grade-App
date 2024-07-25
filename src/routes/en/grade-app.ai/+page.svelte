@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import Loader from "../components/loader.svelte"; // imports Loader from components
   import "./chatWindow.css"; // imports css stylesheet
   import {
@@ -22,8 +22,9 @@
   let speakButton = true;
   let pauseButton = false;
   let resumeButton = false;
+  let stopButton = false;
 
-  function speak(text) {
+  function speak(text: string) {
     const utterance = new SpeechSynthesisUtterance(text);
     const voices = speechSynthesis.getVoices();
     utterance.voice = voices[18];
@@ -51,7 +52,7 @@
       }
     }
   }
-  async function getUserMessagesFromDb(userEmail) {
+  async function getUserMessagesFromDb(userEmail: string) {
     const { data, error } = await supabase
       .from("User-messages")
       .select()
@@ -90,17 +91,26 @@
       }
     }, 1000);
   });
-  const showToast = (title, body, duration, type) => {
+  const showToast = (
+    title: string,
+    body: string,
+    duration: number,
+    type: string
+  ) => {
     const toast = toasts.add({
       title: title,
       description: body,
       duration: duration, // 0 or negative to avoid auto-remove
       placement: "bottom-right",
+      //@ts-ignore
       type: "info",
       theme: "dark",
+      //@ts-ignore
       placement: "bottom-right",
       showProgress: true,
+      //@ts-ignore
       type: type,
+      //@ts-ignore
       theme: "dark",
       onClick: () => {},
       onRemove: () => {},
@@ -122,14 +132,14 @@
     pauseButton = true;
     speechSynthesis.resume();
   }
-  function handleKeyDown(event) {
+  function handleKeyDown(event: any) {
     // function to handle key down
     if (event.key === "Enter") {
       // condition to check if key pressed is Enter
       sendMessage(); // if condition is true sendMessage function runs
     }
   }
-  async function writeDataInDb(prompt, response) {
+  async function writeDataInDb(prompt: string, response: string) {
     const email = sessionStorage.getItem("Email");
     try {
       const { data, error } = await supabase.from("User-messages").insert({
@@ -150,7 +160,12 @@
   function sendMessage() {
     // function to send messages to API
     shouldShowWelcomeMessage = false; // sets shouldShowWelcomeMessage to false to not show welcome message
-    const userInput = document.getElementById("userInput").value.trim(); // gets user input
+
+    const userInputElement = document.getElementById(
+      "userInput"
+    ) as HTMLInputElement; // gets user input
+    const userInput = userInputElement.value.trim(); // gets user input
+
     messages = [...messages, { content: userInput, sender: "User" }]; // add user input to messages
     if (userInput == "") {
       // checks if userInput is empty
@@ -162,7 +177,7 @@
       // if userInput is not empty
       run(userInput); // userInput goes to run to get response from API
     }
-    document.getElementById("userInput").value = ""; // removes old message from the input
+    userInputElement.value = ""; // removes old message from the input
   }
   const generationConfig = {
     temperature: 1,
@@ -188,7 +203,7 @@
       threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
     },
   ];
-  let chatSession;
+  let chatSession: any;
   async function getApiKey() {
     const { data, error } = await supabase.from("API-Key").select();
     if (data) {
@@ -219,7 +234,7 @@
       console.log(`Error initializing AI: ${error}`);
     }
   }
-  async function run(prompt) {
+  async function run(prompt: string) {
     if (chatSession) {
       try {
         shouldload = true; // sets shouldload to true to show loader

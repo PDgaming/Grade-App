@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import NotLoggedIn from "../../components/notLoggedIn.svelte";
   import {
     GoogleGenerativeAI,
@@ -9,8 +9,8 @@
   import { supabase } from "../../../supabaseClient";
 
   let notLoggedIn = false;
-  let grade;
-  let subject;
+  let grade: string;
+  let subject: string;
   let parsedJSONResponse = [];
   let isLoading = false;
   let error = null;
@@ -39,11 +39,11 @@
     },
   ];
   let selectClassAndSubject = true;
-  let chatSession;
+  let chatSession: any;
   let selectedAnswers = [];
   let correctAnswers = [];
-  let userEmail;
-  let currentRank;
+  let userEmail: string;
+  let currentRank: number;
 
   onMount(() => {
     userEmail = sessionStorage.getItem("Email");
@@ -62,7 +62,6 @@
       const genAI = new GoogleGenerativeAI(apiKey);
       const model = genAI.getGenerativeModel({
         model: "gemini-1.5-flash",
-        systemInstruction: "",
       });
       chatSession = model.startChat({
         generationConfig,
@@ -74,7 +73,7 @@
       error = "Failed to fetch API key or generate questions";
     }
   }
-  async function run(chatSession, prompt) {
+  async function run(chatSession: any, prompt: string) {
     try {
       const result = await chatSession.sendMessage(
         `you are an educational AI model designed for generating questions with options for the answer and the correct answer as well for a quiz in a simple json format. Also please provide only the json format and no other text since that will make my job easier so please help me and just return the json, and also you don't have to put the markup like the little ticks in the top and bottom of your response and the "json" at the top ${prompt}`
@@ -111,39 +110,43 @@
       correctAnswers[4] == selectedAnswers[4]
     ) {
       console.log("All Answers are Correct.");
+      alert("All answers are correct.");
     } else {
-      console.log("All Answers are wrong.");
+      if (correctAnswers[0] == selectedAnswers[0]) {
+        console.log("First Answer Is Correct!!");
+        scoreIncrement += 3;
+      } else {
+        console.log("First Answer Is Wrong");
+      }
+      if (correctAnswers[1] == selectedAnswers[1]) {
+        console.log("Second Answer Is Correct!!");
+        scoreIncrement += 3;
+      } else {
+        console.log("Second Answer Is Wrong");
+      }
+      if (correctAnswers[2] == selectedAnswers[2]) {
+        console.log("Third Answer Is Correct!!");
+        scoreIncrement += 3;
+      } else {
+        console.log("Third Answer Is Wrong");
+      }
+      if (correctAnswers[3] == selectedAnswers[3]) {
+        console.log("Fourth Answer Is Correct!!");
+        scoreIncrement += 3;
+      } else {
+        console.log("Fourth Answer Is Wrong");
+      }
+      if (correctAnswers[4] == selectedAnswers[4]) {
+        console.log("Fifth Answer Is Correct!!");
+        scoreIncrement += 3;
+      } else {
+        console.log("Fifth Answer Is Wrong");
+      }
     }
-    if (correctAnswers[0] == selectedAnswers[0]) {
-      console.log("First Answer Is Correct!!");
-      scoreIncrement += 3;
-    } else {
-      console.log("First Answer Is Wrong");
-    }
-    if (correctAnswers[1] == selectedAnswers[1]) {
-      console.log("Second Answer Is Correct!!");
-      scoreIncrement += 3;
-    } else {
-      console.log("Second Answer Is Wrong");
-    }
-    if (correctAnswers[2] == selectedAnswers[2]) {
-      console.log("Third Answer Is Correct!!");
-      scoreIncrement += 3;
-    } else {
-      console.log("Third Answer Is Wrong");
-    }
-    if (correctAnswers[3] == selectedAnswers[3]) {
-      console.log("Fourth Answer Is Correct!!");
-      scoreIncrement += 3;
-    } else {
-      console.log("Fourth Answer Is Wrong");
-    }
-    if (correctAnswers[4] == selectedAnswers[4]) {
-      console.log("Fifth Answer Is Correct!!");
-      scoreIncrement += 3;
-    } else {
-      console.log("Fifth Answer Is Wrong");
-    }
+    // else {
+    //   console.log("All Answers are wrong.");
+    //   alert("All answers are wrong.");
+    // }
 
     const { data, error } = await supabase
       .from("Leaderboard")
@@ -208,8 +211,9 @@
     </center>
   {:else if parsedJSONResponse.length > 0}
     {#each parsedJSONResponse as question, index}
+      {@const rowID = index + 1}
       <div class="questions">
-        <h3>Question {index++}: {question.question}</h3>
+        <h3>Question {rowID}: {question.question}</h3>
         <select bind:value={selectedAnswers[index]}>
           {#each question.options as option}
             <option value={option}>{option}</option>

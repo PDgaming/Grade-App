@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import Loader from "../components/loader.svelte"; // imports Loader from components
   import "./chatWindow.css"; // imports css stylesheet
   import { GoogleGenerativeAI } from "@google/generative-ai"; // imports GoogleGenerativeAI
@@ -6,24 +6,6 @@
   import { supabase } from "../../supabaseClient";
   import NotLoggedIn from "../components/notLoggedIn.svelte";
 
-  // import { getFirestore, doc, getDoc, updateDoc } from "firebase/firestore";
-  const firebaseConfig = {
-    apiKey: "AIzaSyB_MSh9YlBu7GGN5wxZjY7kGN4bU697GO4",
-
-    authDomain: "grade-app-16e2d.firebaseapp.com",
-
-    databaseURL: "https://grade-app-16e2d-default-rtdb.firebaseio.com",
-
-    projectId: "grade-app-16e2d",
-
-    storageBucket: "grade-app-16e2d.appspot.com",
-
-    messagingSenderId: "942886540823",
-
-    appId: "1:942886540823:web:29caeac2695fecc3d4ee52",
-
-    measurementId: "G-XCTQN883KL",
-  };
   // Variables
   let notLoggedIn = false;
   let messages = []; // array to store user and ai messages
@@ -33,7 +15,7 @@
   let shouldload = false; // shouldload is false by default to not show loader
   let queriesLeft = 5;
 
-  function handleKeyDown(event) {
+  function handleKeyDown(event: any) {
     // function to handle key down
     if (event.key === "Enter") {
       // condition to check if key pressed is Enter
@@ -43,9 +25,14 @@
   function sendMessage() {
     // function to send messages to API
     shouldShowWelcomeMessage = false; // sets shouldShowWelcomeMessage to false to not show welcome message
-    const userInput = document.getElementById("userInput").value.trim(); // gets user input
+
+    const userInputElement = document.getElementById(
+      "userInput"
+    ) as HTMLInputElement; // gets user input
+    const userInput = userInputElement.value.trim(); // gets user input
+
     messages = [...messages, { content: userInput, sender: "User" }]; // add user input to messages
-    document.getElementById("userInput").value = ""; // removes old message from the input
+    userInputElement.value = ""; // removes old message from the input
     if (userInput == "") {
       // checks if userInput is empty
       messages = [
@@ -54,14 +41,17 @@
       ]; // add userinput to messages
     } else {
       // if userInput is not empty
-      if (queriesLeft == 0 || sessionStorage.getItem("Queries Left") == 0) {
+      if (
+        queriesLeft == 0 ||
+        Number(sessionStorage.getItem("Queries Left")) == 0
+      ) {
         alert(
           "0 Queries Left! Please contact gradeappbyapp@gmail.com to create an account to enjoy the full app and ask as many questions as you want."
         );
       } else if (queriesLeft != 0) {
         run(userInput); // userInput goes to run to get response from API
         queriesLeft = queriesLeft - 1;
-        sessionStorage.setItem("Queries Left", queriesLeft);
+        sessionStorage.setItem("Queries Left", String(queriesLeft));
       }
     }
   }
@@ -73,7 +63,7 @@
       console.log(error);
     }
   }
-  let model;
+  let model: any;
   async function initializeAI() {
     try {
       const API_KEY = await getApiKey();
@@ -92,7 +82,7 @@
       console.error("Error setting up model:", error);
     }
   }
-  async function run(prompt) {
+  async function run(prompt: string) {
     if (model) {
       try {
         shouldload = true; // sets shouldload to true to show loader
@@ -114,7 +104,7 @@
         messages = [...messages, message]; // appends formatted text to messages
         writeDataInDb(prompt, text);
       } catch (error) {
-        console.log(errro);
+        console.log(error);
       }
     } else {
       console.log("Model not initialized");
@@ -126,7 +116,7 @@
     .catch((error) => {
       console.log(error);
     });
-  async function writeDataInDb(prompt, response) {
+  async function writeDataInDb(prompt: string, response: string) {
     const email = sessionStorage.getItem("Email");
     try {
       const { data, error } = await supabase
@@ -147,7 +137,7 @@
     }
   }
   onMount(() => {
-    sessionStorage.setItem("Queries Left", queriesLeft);
+    sessionStorage.setItem("Queries Left", String(queriesLeft));
 
     if (!sessionStorage.getItem("Email")) {
       notLoggedIn = true;

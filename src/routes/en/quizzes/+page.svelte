@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import "../../index.css";
   import { onMount } from "svelte";
   import NotLoggedIn from "../components/notLoggedIn.svelte";

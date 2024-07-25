@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { supabase } from "../../../supabaseClient";
   import { onMount } from "svelte";
 
@@ -33,8 +33,9 @@
           <th>Rank</th>
         </tr>
         {#each leaderBoardData as data, index}
+          {@const rowID = index + 1}
           <tr>
-            <td key={index + 1}>{index + 1}</td>
+            <td>{rowID}</td>
             <td>
               {data.User.replace("@gmail.com", "")}
             </td>
