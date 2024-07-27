@@ -40,7 +40,7 @@ More details soon.
 
 ## Acknowledgments
 
-- Thanks to CodyAI for providing the GPT-3 API.
+- Thanks to Google for providing the Gemini API.
 - The Grade App team for their hard work and dedication in developing this educational tool.
 
 ## Contact
