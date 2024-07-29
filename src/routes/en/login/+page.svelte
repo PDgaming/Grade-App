@@ -77,13 +77,17 @@
       .then((result) => {
         // This gives you a Google Access Token. You can use it to access the Google API.
         const credential = GoogleAuthProvider.credentialFromResult(result);
+        //@ts-ignore
         const token = credential.accessToken;
         // The signed-in user info.
         const user = result.user;
         // IdP data available using getAdditionalUserInfo(result)
         // ...
+        //@ts-ignore
         sessionStorage.setItem("Display Name", user.displayName);
+        //@ts-ignore
         sessionStorage.setItem("Email", user.email);
+        //@ts-ignore
         checkIfUserExistsInDatabase(user.email);
       })
       .catch((error) => {

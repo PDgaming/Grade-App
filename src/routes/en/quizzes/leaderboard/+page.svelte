@@ -2,7 +2,7 @@
   import { supabase } from "../../../supabaseClient";
   import { onMount } from "svelte";
 
-  let leaderBoardData = null;
+  let leaderBoardData: any = null;
   onMount(() => {
     getLeaderBoardData();
   });

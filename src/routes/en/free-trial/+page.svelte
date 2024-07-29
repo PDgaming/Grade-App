@@ -8,7 +8,7 @@
 
   // Variables
   let notLoggedIn = false;
-  let messages = []; // array to store user and ai messages
+  let messages: any = []; // array to store user and ai messages
   let userInput = ""; // variable to store user message
   let GeminiInput = ""; // variable to store ai message
   let shouldShowWelcomeMessage = true; // shouldShowWelcomeMessage is true by default to show shouldShouldWelcomeMessage
@@ -77,6 +77,7 @@
   async function setupModel() {
     try {
       const genAI = await initializeAI();
+      //@ts-ignore
       model = genAI.getGenerativeModel({ model: "gemini-pro" }); // generates a new model using genAI
     } catch (error) {
       console.error("Error setting up model:", error);

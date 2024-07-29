@@ -11,7 +11,7 @@
   let notLoggedIn = false;
   let grade: string;
   let subject: string;
-  let parsedJSONResponse = [];
+  let parsedJSONResponse: any = [];
   let isLoading = false;
   let error = null;
   const generationConfig = {
@@ -40,12 +40,13 @@
   ];
   let selectClassAndSubject = true;
   let chatSession: any;
-  let selectedAnswers = [];
-  let correctAnswers = [];
+  let selectedAnswers: any = [];
+  let correctAnswers: any = [];
   let userEmail: string;
   let currentRank: number;
 
   onMount(() => {
+    //@ts-ignore
     userEmail = sessionStorage.getItem("Email");
     if (!userEmail) {
       notLoggedIn = true;

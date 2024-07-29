@@ -12,13 +12,16 @@
   let userEmail = "";
   onMount(() => {
     if (sessionStorage.getItem("Display Name")) {
+      //@ts-ignore
       name = sessionStorage.getItem("Display Name");
     } else {
+      //@ts-ignore
       name = sessionStorage.getItem("Email");
     }
     if (name == null) {
       notLoggedIn = true;
     }
+    //@ts-ignore
     userEmail = sessionStorage.getItem("Email");
   });
   async function gradeAi(email: string) {

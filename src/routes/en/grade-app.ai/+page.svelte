@@ -13,7 +13,7 @@
   import HighlightedContent from "../components/highlightedContent.svelte";
 
   let notLoggedIn = false;
-  let messages = []; // array to store user and ai messages
+  let messages: any = []; // array to store user and ai messages
   let messagesForTTS = [];
   let userInput = ""; // variable to store user message
   let GeminiInput = ""; // variable to store ai message
@@ -83,6 +83,7 @@
     } catch (error) {
       console.log(error);
     }
+    //@ts-ignore
     getUserMessagesFromDb(userEmail);
     const chatLog = document.getElementById("chatlog");
     setTimeout(() => {
