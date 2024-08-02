@@ -5,31 +5,17 @@
 <span id="normal">
   <div class="container">
     <h2>
-      We are so sorry for the inconvinience caused.<br /><br />
-      But since Cross Origin redirect sign-in is no longer supported on many modern
-      browsers including<br />
-      <ul>
-        <li>Google Chrome M115+</li>
-        <li>Firefox 109+</li>
-        <li>Safari 16.1+</li>
-      </ul>
-      We have migrated to Google only login<br />
-      <a href="/en/login">login</a>
+      You can directly login and there is no need to register.<br /><a
+        href="/en/login">login</a
+      >
     </h2>
   </div>
 </span>
 <span id="responsive">
   <h2>
-    We are so sorry for the inconvinience caused.<br /><br />
-    But since Cross Origin redirect sign-in is no longer supported on many modern
-    browsers including<br />
-    <ul>
-      <li>Google Chrome M115+</li>
-      <li>Firefox 109+</li>
-      <li>Safari 16.1+</li>
-    </ul>
-    We have migrated to Google only login<br />
-    <a href="/login">login</a>
+    You can directly login and there is no need to register.<br /><a
+      href="/en/login">login</a
+    >
   </h2>
 </span>
 

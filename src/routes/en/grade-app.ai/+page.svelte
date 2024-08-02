@@ -6,7 +6,7 @@
     HarmCategory,
     HarmBlockThreshold,
   } from "@google/generative-ai"; // imports GoogleGenerativeAI
-  import { supabase } from "../../supabaseClient";
+  import { GradeAppDatabase } from "../../supabaseClient";
   import { onMount } from "svelte";
   import NotLoggedIn from "../components/notLoggedIn.svelte";
   import { toasts, ToastContainer, FlatToast } from "svelte-toasts";
@@ -53,24 +53,29 @@
     }
   }
   async function getUserMessagesFromDb(userEmail: string) {
-    const { data, error } = await supabase
-      .from("User-messages")
-      .select()
-      .eq("user", userEmail);
-    if (data) {
-      let newMessages = []; // Declare newMessages here
-      for (const row of data) {
-        newMessages.push({ content: row.prompt, sender: "User" });
-        newMessages.push({
-          content: row.response.replace(/\*\*/g, "<br>"),
-          sender: "Gemini",
-        });
+    try {
+      const { data, error } =
+        await GradeAppDatabase.from("User-messages").select();
+      if (data) {
+        let newMessages = []; // Declare newMessages here
+        for (const row of data) {
+          newMessages.push({ content: row.prompt, sender: "User" });
+          newMessages.push({
+            content: row.response.replace(/\*\*/g, "<br>"),
+            sender: "Gemini",
+          });
+        }
+        messages = [...messages, ...newMessages]; // This triggers reactivity
+      } else {
+        showToast(
+          "Error",
+          "There was an error getting your Messages from Database",
+          2500,
+          "error"
+        );
       }
-      messages = [...messages, ...newMessages]; // This triggers reactivity
-    } else {
-      console.log(
-        `There was an error getting your Messages from Database, ${error}`
-      );
+    } catch (error) {
+      console.log(error);
     }
   }
   onMount(() => {
@@ -143,7 +148,9 @@
   async function writeDataInDb(prompt: string, response: string) {
     const email = sessionStorage.getItem("Email");
     try {
-      const { data, error } = await supabase.from("User-messages").insert({
+      const { data, error } = await GradeAppDatabase.from(
+        "User-messages"
+      ).insert({
         user: email,
         prompt: prompt,
         response: response,
@@ -206,7 +213,7 @@
   ];
   let chatSession: any;
   async function getApiKey() {
-    const { data, error } = await supabase.from("API-Key").select();
+    const { data, error } = await GradeAppDatabase.from("API-Key").select();
     if (data) {
       return data[0].API_KEY;
     } else {

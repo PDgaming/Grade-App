@@ -3,7 +3,7 @@
   import "./chatWindow.css"; // imports css stylesheet
   import { GoogleGenerativeAI } from "@google/generative-ai"; // imports GoogleGenerativeAI
   import { onMount } from "svelte";
-  import { supabase } from "../../supabaseClient";
+  import { GradeAppDatabase } from "../../supabaseClient";
   import NotLoggedIn from "../components/notLoggedIn.svelte";
 
   // Variables
@@ -56,7 +56,7 @@
     }
   }
   async function getApiKey() {
-    const { data, error } = await supabase.from("API-Key").select();
+    const { data, error } = await GradeAppDatabase.from("API-Key").select();
     if (data) {
       return data[0].API_KEY;
     } else {
@@ -120,13 +120,13 @@
   async function writeDataInDb(prompt: string, response: string) {
     const email = sessionStorage.getItem("Email");
     try {
-      const { data, error } = await supabase
-        .from("Free-trial-messages")
-        .insert({
-          user: email,
-          prompt: prompt,
-          response: response,
-        });
+      const { data, error } = await GradeAppDatabase.from(
+        "Free-trial-messages"
+      ).insert({
+        user: email,
+        prompt: prompt,
+        response: response,
+      });
       if (error) {
         console.log(error);
         // Handle the error appropriately

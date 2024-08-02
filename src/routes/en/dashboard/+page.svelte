@@ -2,11 +2,12 @@
   //@ts-ignore
   import { goto } from "$app/navigation";
   import { onMount } from "svelte";
-  import { supabase } from "../../supabaseClient";
   import NotLoggedIn from "../components/notLoggedIn.svelte";
   import "./index.css";
+  import { toasts, ToastContainer, FlatToast } from "svelte-toasts";
 
   let name = "User";
+  let member = "false";
   let notLoggedIn = false;
 
   let userEmail = "";
@@ -14,9 +15,11 @@
     if (sessionStorage.getItem("Display Name")) {
       //@ts-ignore
       name = sessionStorage.getItem("Display Name");
+      member = String(sessionStorage.getItem("Member"));
     } else {
       //@ts-ignore
       name = sessionStorage.getItem("Email");
+      member = String(sessionStorage.getItem("Member"));
     }
     if (name == null) {
       notLoggedIn = true;
@@ -24,33 +27,13 @@
     //@ts-ignore
     userEmail = sessionStorage.getItem("Email");
   });
-  async function gradeAi(email: string) {
-    try {
-      const { data, error } = await supabase
-        .from("Users")
-        .select("Email, Member") // Select both email and member columns
-        .eq("Email", email)
-        .single();
-      if (error) {
-        console.log("There was an error!!");
-        console.log(error);
-        // Handle the error appropriately
-        return; // Or throw an exception if needed
-      } else {
-        if (data) {
-          const member = data.Member;
-          if (member) {
-            goto("/en/grade-app.ai");
-          } else {
-            alert(
-              "You have an account but your account is inactive. Contact gradeappbyapp@gmail.com to reactivate your account"
-            );
-          }
-        }
-      }
-    } catch (error) {
-      console.error("Unexpected error:", error);
-      // Handle unexpected errors gracefully
+  async function gradeAi() {
+    if (member == "true") {
+      goto("/en/grade-app.ai");
+    } else {
+      alert(
+        "You have an account but your account is inactive. Contact gradeappbyapp@gmail.com to reactivate your account"
+      );
     }
   }
 </script>
@@ -58,28 +41,20 @@
 <svelte:head>
   <title>Grade App - Dashboard</title>
 </svelte:head>
+
 {#if !notLoggedIn}
   <h1>Hello There {name}, <br />welcome To Your Dashboard!!</h1>
   <h2>So what would you like to do today?</h2>
   <div class="buttons">
     <span class="buttonsContainer">
       <h4>Use our Grade App AI:</h4>
-      <a
-        class="btn grade-app"
-        on:click={(e) => {
-          e.preventDefault();
-          gradeAi(userEmail);
-        }}
-        href="/"><h6>Grade_AI</h6></a
-      >
+      <a class="btn grade-app" href="/" on:click|preventDefault={gradeAi}>
+        <h6>Grade_AI</h6>
+      </a>
     </span><br />
     <span class="buttonsContainer">
       <h4 id="trial-text">Try our Grade App AI for free:</h4>
       <a class="btn try-it" href="/en/free-trial"><h6>Trial</h6></a>
-    </span><br />
-    <span class="buttonsContainer">
-      <h4 id="register-text">Try our AI powered quizes:</h4>
-      <a class="btn register" href="/en/quizzes"><h6>Quiz</h6> </a>
     </span><br />
     <span class="buttonsContainer">
       <h4 id="register-text">Register for a premium account:</h4>

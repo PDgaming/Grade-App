@@ -20,7 +20,7 @@
     }
   }
   afterNavigate(() => {
-    getStatus();
+    // getStatus();
   });
 </script>
 
