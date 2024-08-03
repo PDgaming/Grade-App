@@ -5,6 +5,7 @@
   import { registerServiceWorker } from "../registerServiceWorker";
   //@ts-ignore
   import { afterNavigate } from "$app/navigation";
+  import "../app.css";
 
   registerServiceWorker();
   let statusCode: number;

@@ -29,7 +29,7 @@
   });
   async function gradeAi() {
     if (member == "true") {
-      goto("/en/grade-app.ai");
+      goto("/grade-app.ai");
     } else {
       alert(
         "You have an account but your account is inactive. Contact gradeappbyapp@gmail.com to reactivate your account"
@@ -54,11 +54,11 @@
     </span><br />
     <span class="buttonsContainer">
       <h4 id="trial-text">Try our Grade App AI for free:</h4>
-      <a class="btn try-it" href="/en/free-trial"><h6>Trial</h6></a>
+      <a class="btn try-it" href="/free-trial"><h6>Trial</h6></a>
     </span><br />
     <span class="buttonsContainer">
       <h4 id="register-text">Register for a premium account:</h4>
-      <a class="btn register" href="/en/premium-register"><h6>Register</h6></a>
+      <a class="btn register" href="/premium-register"><h6>Register</h6></a>
     </span>
   </div>
 {/if}
@@ -71,6 +71,9 @@
   }
   h2 {
     margin-top: 15px;
+  }
+  h4 {
+    margin-top: 5px;
   }
   a {
     color: rgb(255, 255, 255);

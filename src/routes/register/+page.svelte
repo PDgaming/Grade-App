@@ -6,7 +6,7 @@
   <div class="container">
     <h2>
       You can directly login and there is no need to register.<br /><a
-        href="/en/login">login</a
+        href="/login">login</a
       >
     </h2>
   </div>
@@ -14,7 +14,7 @@
 <span id="responsive">
   <h2>
     You can directly login and there is no need to register.<br /><a
-      href="/en/login">login</a
+      href="/login">login</a
     >
   </h2>
 </span>

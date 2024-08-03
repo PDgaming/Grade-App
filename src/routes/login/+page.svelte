@@ -4,7 +4,7 @@
   import { initializeApp } from "firebase/app";
   import "./index.css";
   import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-  import { UsersDatabase } from "../../supabaseClient";
+  import { UsersDatabase } from "../supabaseClient";
   import { toasts, ToastContainer, FlatToast } from "svelte-toasts";
   import LoginForm from "../components/loginForm.svelte";
 
@@ -79,7 +79,7 @@
           sessionStorage.setItem("Email", email);
           sessionStorage.setItem("Member", data[0].GradeAppMember);
           setTimeout(() => {
-            goto("/en/dashboard");
+            goto("/dashboard");
           }, 2500);
         } else {
           showToast(
@@ -110,7 +110,7 @@
 
       showToast("Success", "Login Successfull!!", 2500, "success");
       setTimeout(() => {
-        goto("/en/dashboard");
+        goto("/dashboard");
       }, 2500);
     } catch (error) {
       console.log(error);
@@ -181,7 +181,7 @@
 
     <br />
     <span id="register">
-      <a href="/en/register">Register</a>
+      <a href="/register">Register</a>
     </span>
   </div>
 </center>
@@ -209,7 +209,7 @@
 
   <br />
   <span id="register">
-    <a href="/en/register">Register</a>
+    <a href="/register">Register</a>
   </span>
 </center>
 

@@ -69,7 +69,7 @@
     cursor: pointer;
   }
   .nav-item {
-    font-size: 30px;
+    font-size: 20px;
   }
   a {
     transition: ease 500ms all;

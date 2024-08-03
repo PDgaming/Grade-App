@@ -6,7 +6,7 @@
     HarmCategory,
     HarmBlockThreshold,
   } from "@google/generative-ai"; // imports GoogleGenerativeAI
-  import { GradeAppDatabase } from "../../supabaseClient";
+  import { GradeAppDatabase } from "../supabaseClient";
   import { onMount } from "svelte";
   import NotLoggedIn from "../components/notLoggedIn.svelte";
   import { toasts, ToastContainer, FlatToast } from "svelte-toasts";
