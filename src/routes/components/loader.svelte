@@ -1,3 +1,1 @@
-<div class="spinner-border" role="status">
-  <span class="visually-hidden">Loading...</span>
-</div>
+<span class="loading loading-dots loading-md"></span>

@@ -53,7 +53,7 @@
       <li>
         <a href="#contact">Contact</a>
       </li>
-      <li><button class="btn">Login</button></li>
+      <li><a href="/login" class="btn">Login</a></li>
     </ul>
   </div>
 </div>

@@ -89,13 +89,14 @@
       console.log(error);
     }
     //@ts-ignore
-    getUserMessagesFromDb(userEmail);
-    const chatLog = document.getElementById("chatlog");
-    setTimeout(() => {
-      if (chatLog) {
-        chatLog.scrollTo(0, chatLog.scrollHeight);
-      }
-    }, 1000);
+    getUserMessagesFromDb(userEmail).then(() => {
+      const chatLog = document.getElementById("chatlog");
+      setTimeout(() => {
+        if (chatLog) {
+          chatLog.scrollTo(0, chatLog.scrollHeight);
+        }
+      }, 1000);
+    });
   });
   const showToast = (
     title: string,
