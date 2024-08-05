@@ -2,6 +2,7 @@
   import Navbar from "./components/navbar.svelte";
   import "./index.css";
   import { goto } from "$app/navigation";
+  import logo from "./images/logo.webp";
 
   // Takes to login page
   function loginPage() {
@@ -49,7 +50,9 @@
     </div>
   </div>
   <div class="features" id="features">
-    <h7 id="featuresh">Features</h7>
+    <center>
+      <h7 id="featuresh">Features</h7>
+    </center>
     <p>
       - Chat with an AI Assistant: Have real-time conversations with the
       AI-powered assistant that is trained on NCERT books.
@@ -73,7 +76,9 @@
     </p>
   </div>
   <div class="usage" id="usage">
-    <h7 id="usageh">Usage</h7>
+    <center>
+      <h7 id="usageh">Usage</h7>
+    </center>
     <p>
       <b>If you already have an account:</b> <br />
       1. Click on "Login" button above.<br />
@@ -95,7 +100,9 @@
     </p>
   </div>
   <div class="acknowledgments" id="acknowledgments">
-    <h7 id="acknowledgementh">Acknowledgments</h7>
+    <center>
+      <h7 id="acknowledgementh">Acknowledgments</h7>
+    </center>
 
     <p>- Thanks to Google for providing the API for Gemini.</p>
     <p>
@@ -105,7 +112,9 @@
     <p>- And AAB for designing the logo and helping in the design process.</p>
   </div>
   <div class="contact" id="contact">
-    <h7 id="contacth">Contact</h7>
+    <center>
+      <h7 id="contacth">Contact</h7>
+    </center>
     <p>
       If you have any questions or feedback, please feel free to reach out at
       <a href="mailto:gradeappbyapp@gmail.com">gradeappbyapp@gmail.com</a>
@@ -114,40 +123,27 @@
   <h2 id="happy-learning-with-grade-app">
     Happy learning with Grade App! 📚🤖🚀
   </h2>
-  <!-- <div class="footer" id="footer">
+  <hr />
+  <div class="footer" id="footer">
     <div id="footer-top">
       <div class="logo-and-title">
         <img src={logo} alt="logo" id="footer-logo" />
         <h1 id="title">Grade App</h1>
       </div>
-      <div id="footer-content">
-        <div id="footer-acknowledgement">
-          <a href="#acknowledgments">Acknowledgments</a><br />
-          <a href="https://www.google.com">- Google</a><br />
-          <a href="https://github.com/PDgaming/Grade-App/graphs/contributors">
-            - The Grade App team
-          </a><br />
-          <a
-            href="https://www.instagram.com/itz__atif__564?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
-          >
-            - AAB
-          </a><br />
-        </div>
-        <div id="footer-contact">
-          <a href="#contact">Contact</a><br />
-          <p9>
-            <a href="mailto:gradeappbyapp@gmail.com">gradeappbyapp@gmail.com</a>
-          </p9>
-        </div>
+      <div id="footer-contact">
+        <a href="#contact">Contact</a><br />
+        <p9>
+          <a href="mailto:gradeappbyapp@gmail.com">gradeappbyapp@gmail.com</a>
+        </p9>
       </div>
-      <div id="footer-bottom">Copyright © 2024 Grade App</div>
     </div>
-  </div> -->
+  </div>
 </div>
 
 <style>
   :root {
     --laptop-image-size: 550px;
+    --image-size: 50px;
   }
   .hero-section {
     display: inline-flex;
@@ -163,7 +159,6 @@
   }
   .buttons {
     height: 60px;
-    width: 900px;
     margin-top: 40px;
   }
   .buttons button {
@@ -172,6 +167,7 @@
   }
   .buttons .loginButton {
     margin-right: 100px;
+    margin-bottom: 10px;
   }
   h7 {
     display: block;
@@ -201,17 +197,7 @@
   #acknowledgementh,
   #contacth {
     margin-top: 20px;
-    margin-left: 45%;
-    margin-bottom: 55px;
-  }
-  #usageh {
-    margin-left: 47%;
-  }
-  #acknowledgementh {
-    margin-left: 38%;
-  }
-  #contacth {
-    margin-left: 43%;
+    margin-bottom: 50px;
   }
   p {
     font-size: 22px;
@@ -251,37 +237,32 @@
       margin-left: 9px;
     }
   }
-  /* #footer {
+  @media (max-width: 570px) {
+    #home {
+      margin-top: 0;
+      margin-left: 10px;
+    }
+    .hero-section {
+      margin-top: 0;
+    }
+  }
+  #footer {
     background-color: #19191d;
-    height: 200px;
-    color: white;
     display: flex;
     flex-direction: column;
   }
-  #footer-bottom {
-    background-color: #15161b;
-    text-align: center;
-    margin-top: auto;
-  }
   #footer-logo {
-    width: 80px;
+    width: var(--image-size);
+    height: var(--image-size);
     margin-top: 10px;
-    margin-left: 63px;
+    border-radius: 100px;
+    cursor: pointer;
+    margin-left: 10px;
+    margin-bottom: 10px;
   }
   #footer-top {
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
+    align-items: center;
   }
-  #footer-acknowledgement a,
-  #footer-contact a {
-    text-decoration: none;
-    color: white;
-  }
-  #footer-acknowledgement {
-    margin-left: 100px;
-  }
-  #title {
-    margin-left: 10px;
-  } */
 </style>
