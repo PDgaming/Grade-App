@@ -21,34 +21,38 @@
 
 <div class="main">
   <Navbar />
-  <div class="hero-section">
-    <div class="home" id="home">
-      <h8 id="grade-app">Grade App</h8><br />
-      <p id="homep">
-        Grade App is an AI powered educational chatting application that
-        leverages the power of Google's Gemini to provide answers to academic
-        questions based on NCERT (National Council of Educational Research and
-        Training) books.
-      </p>
-      <p>
-        It's designed to help students and educators easily access accurate and
-        reliable information related to their studies in a conversational
-        format.
-      </p>
-      <div class="buttons">
-        <button
-          type="button"
-          class="btn btn-primary loginButton"
-          on:click={loginPage}>Login</button
-        >
-        <button
-          type="button"
-          class="btn btn-primary registerButton"
-          on:click={registerPage}>Register</button
-        >
+
+  <div class="hero min-h-screen">
+    <div class="hero-content flex-col lg:flex-row-reverse">
+      <div>
+        <h8 id="grade-app" class="text-5xl font-bold">Grade App</h8>
+        <p class="py-6" id="homep">
+          Grade App is an AI powered educational chatting application that
+          leverages the power of Google's Gemini to provide answers to academic
+          questions based on NCERT (National Council of Educational Research and
+          Training) books.
+        </p>
+        <p>
+          It's designed to help students and educators easily access accurate
+          and reliable information related to their studies in a conversational
+          format.
+        </p>
+        <div class="buttons">
+          <button
+            type="button"
+            class="btn btn-primary loginButton"
+            on:click={loginPage}>Login</button
+          >
+          <button
+            type="button"
+            class="btn btn-primary registerButton"
+            on:click={registerPage}>Register</button
+          >
+        </div>
       </div>
     </div>
   </div>
+  <hr />
   <div class="features" id="features">
     <center>
       <h7 id="featuresh">Features</h7>
@@ -75,6 +79,7 @@
       and easy to use, making it accessible to students of all ages.
     </p>
   </div>
+  <hr />
   <div class="usage" id="usage">
     <center>
       <h7 id="usageh">Usage</h7>
@@ -99,6 +104,7 @@
       by our AI ChatBot by typing in your questions
     </p>
   </div>
+  <hr />
   <div class="acknowledgments" id="acknowledgments">
     <center>
       <h7 id="acknowledgementh">Acknowledgments</h7>
@@ -111,6 +117,7 @@
     </p>
     <p>- And AAB for designing the logo and helping in the design process.</p>
   </div>
+  <hr />
   <div class="contact" id="contact">
     <center>
       <h7 id="contacth">Contact</h7>
@@ -189,7 +196,6 @@
   }
   .hero-section {
     display: inline-flex;
-    border-bottom: 1px solid #333;
     margin-top: 30px;
     width: 98vw;
   }
@@ -222,7 +228,6 @@
   .usage,
   .acknowledgments,
   .contact {
-    border-bottom: 1px solid #333;
     padding-bottom: 45px;
   }
   .contact {
