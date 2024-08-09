@@ -39,7 +39,7 @@
     <a href="/" class="btn btn-ghost text-xl">Grade App</a>
   </div>
   <div class="navbar-center hidden lg:flex">
-    <ul class="menu menu-horizontal px-1">
+    <ul class="menu menu-horizontal">
       <li><a href="#home">Home</a></li>
       <li>
         <a href="#features">Features</a>
@@ -61,5 +61,8 @@
 <style>
   .btn {
     margin-top: -5px;
+  }
+  .menu {
+    padding-left: 25rem;
   }
 </style>
