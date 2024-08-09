@@ -1,11 +1,10 @@
 <script lang="ts">
-  //@ts-ignore
-  import { goto } from "$app/navigation";
-  import { initializeApp } from "firebase/app";
-  import "./index.css";
-  import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-  import { UsersDatabase } from "../supabaseClient";
-  import { toasts, ToastContainer, FlatToast } from "svelte-toasts";
+  import { goto } from "$app/navigation"; //imports goto for redirecting
+  import { initializeApp } from "firebase/app"; //imports initialize to initialize firebase app
+  import "./index.css"; //imports index.css file
+  import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth"; //imports getAuth, GoogleAuthProvider, signWithPopup for get auth function, google sign in support and signWithPopup to google sign in with a popup
+  import { UsersDatabase } from "../supabaseClient"; //imports UsersDatabase to access the userdatabase for email login
+  import { toasts, ToastContainer, FlatToast } from "svelte-toasts"; //imports toasts, toastContainer and flatToast to show toasts
 
   // config for firebase
   const firebaseConfig = {
@@ -29,9 +28,11 @@
 
   // Initialize Firebase authentication
   const auth = getAuth(app);
+  //uses auth in the device language
   auth.useDeviceLanguage();
+  //declares provider for google
   const provider = new GoogleAuthProvider();
-
+  //function for showing toasts
   const showToast = (
     title: string,
     body: string,
@@ -41,7 +42,7 @@
     const toast = toasts.add({
       title: title,
       description: body,
-      duration: duration, // 0 or negative to avoid auto-remove
+      duration: duration,
       placement: "bottom-right",
       //@ts-ignore
       type: "info",
@@ -55,32 +56,35 @@
       theme: "dark",
       onClick: () => {},
       onRemove: () => {},
-      // component: BootstrapToast, // allows to override toast component/template per toast
     });
   };
+  //function for loggin in with Email
   async function loginWIthEmail() {
-    const emailObject = document.getElementById("email") as HTMLInputElement;
+    const emailObject = document.getElementById("email") as HTMLInputElement; //gets email element
     const passwordObject = document.getElementById(
       "password"
-    ) as HTMLInputElement;
-    const email = emailObject.value;
-    const password = passwordObject.value;
-
+    ) as HTMLInputElement; //gets password element
+    const email = emailObject.value; //gets email
+    const password = passwordObject.value; //gets password
+    //checks if email and password exist and are not empty
     if (email && password) {
+      //gets user data from database
       const { data, error } = await UsersDatabase.from("Users")
-        .select()
-        .eq("Email", email)
-        .eq("Password", password);
-
+        .select() //selects all rows
+        .eq("Email", email) //gets the row that has a value of email in the email column
+        .eq("Password", password); //gets the row that has a value of password in the password column
+      //checks is data exists and is not empty
       if (data) {
+        //checks if users exist
         if (data.length > 0) {
-          showToast("Success", "Login Successfull!!", 2500, "success");
-          sessionStorage.setItem("Email", email);
-          sessionStorage.setItem("Member", data[0].GradeAppMember);
+          showToast("Success", "Login Successfull!!", 2500, "success"); //shows a login successfull toast
+          sessionStorage.setItem("Email", email); //sets email as an item in sessionStorage
+          sessionStorage.setItem("Member", data[0].GradeAppMember); //sets member as an item in sessionStorage
           setTimeout(() => {
             goto("/dashboard");
-          }, 2500);
+          }, 2500); //waits for 2500ms or 2.5s before redirecting to dashboard
         } else {
+          //shows an error toast if user doesn't exist
           showToast(
             "Error",
             "User Doesn't Exist, please Register",
@@ -89,9 +93,11 @@
           );
         }
       } else {
+        //shows error if data does not exist
         console.log(error);
       }
     } else {
+      //shows an error if email and password does not exist or is empty
       showToast(
         "Error",
         "Please enter both your email and password",
@@ -100,7 +106,9 @@
       );
     }
   }
+  //function to check if user exits in database(for google login)
   async function checkIfUserExistsInDatabase(email: string) {
+    //
     try {
       const { data, error } = await UsersDatabase.from("Users").insert({
         Email: email,
@@ -242,9 +250,6 @@
   #register a {
     text-decoration: none;
     color: #007bff;
-  }
-  #responsive {
-    display: none;
   }
   #google-icon {
     width: 30px;

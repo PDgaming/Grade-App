@@ -1,17 +1,17 @@
 <script>
-  import Navbar from "./components/navbar.svelte";
-  import "./index.css";
-  import { goto } from "$app/navigation";
-  import logo from "./images/logo.webp";
+  import Navbar from "./components/navbar.svelte"; //imports navbar component from components
+  import "./index.css"; //imports index.css file
+  import { goto } from "$app/navigation"; //imports goto for redirecting
+  import logo from "./images/logo.webp"; //imports logo image from images
 
-  // Takes to login page
+  //function to redirect to login page
   function loginPage() {
-    goto("/login");
+    goto("/login"); //redirects to login page using goto
   }
 
-  // Takes to register page
+  //function to redirect to register page
   function registerPage() {
-    goto("/register");
+    goto("/register"); //redirects to register page using goto
   }
 </script>
 
