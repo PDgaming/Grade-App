@@ -194,17 +194,6 @@
     --laptop-image-size: 550px;
     --image-size: 90px;
   }
-  .hero-section {
-    display: inline-flex;
-    margin-top: 30px;
-    width: 98vw;
-  }
-  .hero-section .home {
-    width: 50vw;
-    margin-top: 80px;
-    margin-left: 30px;
-    margin-bottom: 140px;
-  }
   .buttons {
     height: 60px;
     margin-top: 40px;
@@ -278,24 +267,10 @@
     border-radius: 100px;
     cursor: pointer;
   }
-  @media (max-width: 1000px) {
-    .hero-section .home {
-      width: 95vw;
-    }
-  }
   @media (max-width: 990px) {
     h7,
     p {
       margin-left: 9px;
-    }
-  }
-  @media (max-width: 570px) {
-    #home {
-      margin-top: 0;
-      margin-left: 10px;
-    }
-    .hero-section {
-      margin-top: 0;
     }
   }
 </style>
