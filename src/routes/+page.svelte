@@ -24,7 +24,7 @@
 
   <div class="hero min-h-screen">
     <div class="hero-content flex-col lg:flex-row-reverse">
-      <div>
+      <div id="home">
         <h8 id="grade-app" class="text-5xl font-bold">Grade App</h8>
         <p class="py-6" id="homep">
           Grade App is an AI powered educational chatting application that
