@@ -82,7 +82,7 @@
           sessionStorage.setItem("Member", data[0].GradeAppMember); //sets member as an item in sessionStorage
           setTimeout(() => {
             goto("/dashboard");
-          }, 2500); //waits for 2500ms or 2.5s before redirecting to dashboard
+          }, 2500); //waits for 2500ms(2.5s) before redirecting to dashboard
         } else {
           //shows an error toast if user doesn't exist
           showToast(
@@ -108,22 +108,24 @@
   }
   //function to check if user exits in database(for google login)
   async function checkIfUserExistsInDatabase(email: string) {
-    //
+    //tries to insert user into database to check if they exist
     try {
       const { data, error } = await UsersDatabase.from("Users").insert({
         Email: email,
         Member: false,
       });
-
+      //shows a toast if user exists, if user does not exists then it will add the user and continue to dashboard
       showToast("Success", "Login Successfull!!", 2500, "success");
       setTimeout(() => {
         goto("/dashboard");
-      }, 2500);
+      }, 2500); //waits for 2500ms(2.5s) before redirecting to dashboard
     } catch (error) {
-      console.log(error);
+      console.log(error); //shows error if there was an error inserting user into database
     }
   }
+  //function to login with google
   async function loginWithGoogle() {
+    //uses the signInWithPopup function from firebase to login with google
     signInWithPopup(auth, provider)
       .then((result) => {
         // This gives you a Google Access Token. You can use it to access the Google API.
@@ -141,13 +143,14 @@
         //@ts-ignore
         checkIfUserExistsInDatabase(user.email);
       })
+      //shows error is there is an error logging in with google
       .catch((error) => {
         // Handle Errors here.
         const errorCode = error.code;
         const errorMessage = error.message;
         // The AuthCredential type that was used.
         const credential = GoogleAuthProvider.credentialFromError(error);
-        console.error(errorMessage);
+        console.error(errorMessage); //logs error message
       });
   }
 </script>

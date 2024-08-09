@@ -2,33 +2,32 @@
   import Loader from "../components/loader.svelte"; // imports Loader from components
   import "./chatWindow.css"; // imports css stylesheet
   import { GoogleGenerativeAI } from "@google/generative-ai"; // imports GoogleGenerativeAI
-  import { onMount } from "svelte";
-  import { GradeAppDatabase } from "../supabaseClient";
-  import NotLoggedIn from "../components/notLoggedIn.svelte";
+  import { onMount } from "svelte"; //imports onMount
+  import { GradeAppDatabase } from "../supabaseClient"; //imports GradeAppDatabase to access grade app database
+  import NotLoggedIn from "../components/notLoggedIn.svelte"; //imports NotLoggedIn component
 
   // Variables
-  let notLoggedIn = false;
-  let messages: any = []; // array to store user and ai messages
-  let userInput = ""; // variable to store user message
-  let GeminiInput = ""; // variable to store ai message
-  let shouldShowWelcomeMessage = true; // shouldShowWelcomeMessage is true by default to show shouldShouldWelcomeMessage
-  let shouldload = false; // shouldload is false by default to not show loader
-  let queriesLeft = 5;
-
+  let notLoggedIn = false; //declares notloggedin variable with default value false
+  let messages: any = []; //declares messages variable with default value []
+  let userInput = ""; //declares userInput variable with default value ""
+  let GeminiInput = ""; //declares GeminiInput variable with default value ""
+  let shouldShowWelcomeMessage = true; //declares shouldShowWelcomeMessage variable with default value true
+  let shouldload = false; //declares shouldload variable with default value false
+  let queriesLeft = 5; //declares queriesLeft variable with default value 5
+  //function to handle key down events
   function handleKeyDown(event: any) {
-    // function to handle key down
+    // checks if key pressed is Enter
     if (event.key === "Enter") {
-      // condition to check if key pressed is Enter
-      sendMessage(); // if condition is true sendMessage function runs
+      sendMessage(); // sendMessage function runs
     }
   }
+  //function to send messages
   function sendMessage() {
-    // function to send messages to API
     shouldShowWelcomeMessage = false; // sets shouldShowWelcomeMessage to false to not show welcome message
 
     const userInputElement = document.getElementById(
       "userInput"
-    ) as HTMLInputElement; // gets user input
+    ) as HTMLInputElement; // gets user input element
     const userInput = userInputElement.value.trim(); // gets user input
 
     messages = [...messages, { content: userInput, sender: "User" }]; // add user input to messages
