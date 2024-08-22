@@ -1,6 +1,5 @@
 <script lang="ts">
   import "./styles.css"; //imports styles.css file
-  import "./index.css"; //imports index.css file
   import { registerServiceWorker } from "../registerServiceWorker"; //imports registerService Worker function from registerServiceWorker to register the service worker
   import { afterNavigate } from "$app/navigation"; //imports afterNavigate
   import "../app.css"; //imports app.css file for tailwindcss support
@@ -34,9 +33,4 @@
 </div>
 
 <style>
-  :global(body) {
-    background: #131314;
-    background-attachment: fixed;
-    color: white;
-  }
 </style>
