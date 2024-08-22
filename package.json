@@ -16,6 +16,7 @@
     "@sveltejs/kit": "^2.0.0",
     "@sveltejs/vite-plugin-svelte": "^3.0.0",
     "@tsconfig/svelte": "^3.0.0",
+    "@types/uuid": "^10.0.0",
     "autoprefixer": "^10.4.19",
     "postcss": "^8.4.38",
     "svelte": "^5.0.0-next.198",
@@ -38,6 +39,7 @@
     "firebase": "^10.11.0",
     "posthog-js": "^1.149.0",
     "stripe": "^15.6.0",
-    "svelte-toasts": "^1.1.2"
+    "svelte-toasts": "^1.1.2",
+    "uuid": "^10.0.0"
   }
 }

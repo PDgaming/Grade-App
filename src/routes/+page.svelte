@@ -1,9 +1,14 @@
-<script>
+<script lang="ts">
   import Navbar from "./components/navbar.svelte"; //imports navbar component from components
   import "./index.css"; //imports index.css file
   import { goto } from "$app/navigation"; //imports goto for redirecting
   import logo from "./images/logo.webp"; //imports logo image from images
+  import { onMount } from "svelte";
+  import { UsersDatabase } from "./supabaseClient";
 
+  onMount(() => {
+    checkSession();
+  });
   //function to redirect to login page
   function loginPage() {
     goto("/login"); //redirects to login page using goto
@@ -13,6 +18,46 @@
   function registerPage() {
     goto("/register"); //redirects to register page using goto
   }
+
+  async function checkSession(): Promise<boolean> {
+    const cookies = document.cookie.split(";");
+
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i].trim();
+
+      if (cookie.startsWith("sessionId=")) {
+        const parts = cookie.split("=");
+
+        if (parts.length === 2) {
+          const sessionId = parts[1];
+
+          const { data: user, error } = await UsersDatabase.from("Users")
+            .select()
+            .eq("session_id", sessionId)
+            .gt("expires_at", new Date().toISOString());
+
+          if (error) {
+            console.log(error);
+            return false;
+          }
+          if (user && user.length > 0) {
+            sessionStorage.setItem("Email", user[0].Email);
+            sessionStorage.setItem("Member", user[0].GradeAppMember);
+
+            return true;
+          }
+        }
+      }
+    }
+    return false;
+  }
+
+  onMount(async () => {
+    const ifLoggedIn = await checkSession();
+    if (ifLoggedIn) {
+      goto("/dashboard");
+    }
+  });
 </script>
 
 <svelte:head>

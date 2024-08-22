@@ -3,7 +3,6 @@
   import { onMount } from "svelte"; //imports onMount
   import NotLoggedIn from "../components/notLoggedIn.svelte"; //imports NotLoggedIn component
   import "./index.css"; //imports index.css
-  import { toasts, ToastContainer, FlatToast } from "svelte-toasts"; //imports toasts
 
   let name = "User"; //declares name variable with default value of "User"
   let member = "false"; //declares member variable with default value of "false"
@@ -48,7 +47,9 @@
 </svelte:head>
 
 {#if !notLoggedIn}
-  <h1>Hello There {name}, <br />welcome To Your Dashboard!!</h1>
+  <h1 class="text-3xl">
+    Hello There {name}, <br />welcome To Your Dashboard!!
+  </h1>
   <h2>So what would you like to do today?</h2>
   <div class="buttons">
     <span class="buttonsContainer">

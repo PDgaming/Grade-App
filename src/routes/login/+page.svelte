@@ -5,6 +5,8 @@
   import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth"; //imports getAuth, GoogleAuthProvider, signWithPopup for get auth function, google sign in support and signWithPopup to google sign in with a popup
   import { UsersDatabase } from "../supabaseClient"; //imports UsersDatabase to access the userdatabase for email login
   import { toasts, ToastContainer, FlatToast } from "svelte-toasts"; //imports toasts, toastContainer and flatToast to show toasts
+  import { onMount } from "svelte";
+  import { v4 as uuid } from "uuid";
 
   // config for firebase
   const firebaseConfig = {
@@ -22,7 +24,31 @@
 
     measurementId: "G-WD1M20G6LX",
   };
+  async function setSessionIDCookie() {
+    const sessionId = uuid();
+    const expirationDate = new Date();
+    expirationDate.setDate(expirationDate.getDate() + 30);
+    document.cookie = `sessionId=${sessionId}; expires=${expirationDate.toUTCString()}; path=/;`;
 
+    try {
+      const userEmail = sessionStorage.getItem("Email");
+      if (userEmail) {
+        const { error } = await UsersDatabase.from("Users")
+          .update({
+            session_id: sessionId,
+            expires_at: expirationDate.toISOString(),
+          })
+          .eq("Email", userEmail);
+        if (error) {
+          console.log(error);
+        }
+      } else {
+        console.log("Email not found in sessionStorage");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
 
@@ -80,6 +106,7 @@
           showToast("Success", "Login Successfull!!", 2500, "success"); //shows a login successfull toast
           sessionStorage.setItem("Email", email); //sets email as an item in sessionStorage
           sessionStorage.setItem("Member", data[0].GradeAppMember); //sets member as an item in sessionStorage
+          setSessionIDCookie();
           setTimeout(() => {
             goto("/dashboard");
           }, 2500); //waits for 2500ms(2.5s) before redirecting to dashboard
@@ -114,6 +141,7 @@
         Email: email,
         Member: false,
       });
+      setSessionIDCookie();
       //shows a toast if user exists, if user does not exists then it will add the user and continue to dashboard
       showToast("Success", "Login Successfull!!", 2500, "success");
       setTimeout(() => {
