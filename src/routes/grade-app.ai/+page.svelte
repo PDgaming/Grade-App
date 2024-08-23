@@ -282,13 +282,13 @@
 {#if !notLoggedIn}
   <div class="main">
     <div class="header">
-      <h3>Gemini</h3>
+      <h3 class="text-2xl">Gemini</h3>
     </div>
     <div class="chatLog" id="chatlog">
       <!-- Shows welcome message -->
       {#if shouldShowWelcomeMessage}
         <!-- shows welcome message if shouldShowWelcomeMessage if true -->
-        <h1 id="hello-message">Hello There!</h1>
+        <h1 id="hello-message" class="text-5xl">Hello There!</h1>
         <p id="how-to">
           Start a conversation with Gemini by typing in a prompt in the text
           input below.
@@ -366,7 +366,6 @@
     color: white;
   }
   h1 {
-    margin-top: 50px;
     font-weight: bold;
   }
   p {
