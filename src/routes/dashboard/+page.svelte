@@ -50,27 +50,73 @@
   <h1 class="text-3xl">
     Hello There {name}, <br />welcome To Your Dashboard!!
   </h1>
-  <h2>So what would you like to do today?</h2>
-  <div class="buttons">
-    <span class="buttonsContainer">
-      <h4>Use our Grade App AI:</h4>
-      <a class="btn grade-app" href="/" on:click|preventDefault={gradeAi}>
-        <h6>Grade_AI</h6>
-      </a>
-    </span><br />
-    <span class="buttonsContainer">
-      <h4 id="trial-text">Try our Grade App AI for free:</h4>
-      <a class="btn try-it" href="/free-trial"><h6>Trial</h6></a>
-    </span><br />
-    <span class="buttonsContainer">
-      <h4 id="register-text">Register for a premium account:</h4>
-      <a class="btn register" href="/premium-register"><h6>Register</h6></a>
-    </span>
+  <h2 class="text-xl">So what would you like to do today?</h2>
+
+  <div class="card-container">
+    <div class="card">
+      <div class="card-content">
+        <h3>Grade App</h3>
+        <p>Use Our Grade App</p>
+        <a href="/dashboard" on:click|preventDefault={gradeAi} class="btn"
+          >Grade App</a
+        >
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-content">
+        <h3>Free Trial</h3>
+        <p>Try Our Grade App for Free</p>
+        <a href="/free-trial" class="btn">Try It</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-content">
+        <h3>Premium</h3>
+        <p>Register for a Premium Account</p>
+        <a href="/premium-register" class="btn">Register</a>
+      </div>
+    </div>
   </div>
 {/if}
 {#if notLoggedIn}<NotLoggedIn />{/if}
 
 <style>
+  .card-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .card {
+    width: 325px;
+    background: #252527;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    margin: 20px;
+    text-align: center;
+  }
+  .card card-title {
+    width: 100%;
+    height: auto;
+  }
+  .card card-content {
+    padding: 16px;
+  }
+  .card-content h3 {
+    font-size: 28px;
+    margin-bottom: 8px;
+  }
+  .card-content p {
+    color: #666;
+    font-size: 15px;
+    line-height: 1.3;
+  }
+  .card-content .btn {
+    background-color: #333;
+    text-decoration: none;
+    margin-top: 16px;
+    margin-bottom: 10px;
+  }
   h1 {
     margin-top: 10px;
     font-weight: bold;
