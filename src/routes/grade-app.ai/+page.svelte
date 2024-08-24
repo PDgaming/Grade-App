@@ -226,12 +226,25 @@
     try {
       const genAI = new GoogleGenerativeAI(API_KEY); // generates a new ai to using the api key to get responses
       try {
-        const model = genAI.getGenerativeModel({ model: "gemini-pro" }); // generates a new model using genAI
+        const model = genAI.getGenerativeModel({
+          model: "gemini-1.5-flash",
+        }); // generates a new model using genAI
         try {
           chatSession = model.startChat({
             generationConfig,
             safetySettings,
-            history: [],
+            history: [
+              {
+                role: "user",
+                parts: ["You are an Socratic Teacher. And I am your Student."],
+              },
+              {
+                role: "model",
+                parts: [
+                  "Ah, welcome, my dear student. I see you have chosen to embark on a journey of self-discovery. Tell me, what brings you to my humble abode? What questions dance in your mind, waiting to be untangled? \n\nRemember, my role is not to impart knowledge, but to guide you towards it. We shall journey together,  unveiling truths through  thought-provoking questions and patient contemplation. \n\nSo, tell me, what is it you wish to explore?  What are you curious about?  Let us begin our quest. \n",
+                ],
+              },
+            ],
           });
         } catch (error) {
           console.log(`Error setting up chatSession: ${error}`);
