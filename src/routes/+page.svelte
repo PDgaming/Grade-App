@@ -33,8 +33,7 @@
 
           const { data: user, error } = await UsersDatabase.from("Users")
             .select()
-            .eq("session_id", sessionId)
-            .gt("expires_at", new Date().toISOString());
+            .eq("session_id", sessionId);
 
           if (error) {
             console.log(error);

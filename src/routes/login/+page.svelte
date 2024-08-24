@@ -36,7 +36,6 @@
         const { error } = await UsersDatabase.from("Users")
           .update({
             session_id: sessionId,
-            expires_at: expirationDate.toISOString(),
           })
           .eq("Email", userEmail);
         if (error) {
