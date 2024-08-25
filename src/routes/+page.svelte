@@ -145,40 +145,52 @@
   <hr />
   <div class="usage" id="usage">
     <center>
-      <h7 id="usageh">Usage</h7>
+      <h7 id="usageh">Unlock the Power of AI for Your Studies</h7>
     </center>
-    <p>
-      <b>If you already have an account:</b> <br />
-      1. Click on "Login" button above.<br />
-      2. Enter your email and password and click "Login".<br />
-    </p>
-    <p>
-      <b>If you don't have an account:</b><br />
-      1. Click on the "Register" Button above.<br />
-      2. Enter your email and password and click "Register".<br />
-      Or<br />
-      Contact our team at
-      <a href="mailto:gradeappbyapp@gmail.com">gradeappbyapp@gmail.com</a> for more
-      information on how you can create an account.
-    </p>
 
+    <b><h1 class="text-2xl ml-1">Already a Grade App user?</h1> </b>
+    <p>Log in now and continue your learning journey! (Link to login)</p>
+
+    <b>
+      <h1 class="text-2xl ml-1">New to Grade App?</h1>
+    </b>
     <p>
-      Enjoy the benefits of instant, accurate, and reliable academic assistance
-      by our AI ChatBot by typing in your questions
+      Register for free today! <a class="btn btn-primary" href="/register"
+        >Register</a
+      >
     </p>
   </div>
   <hr />
   <div class="acknowledgments" id="acknowledgments">
     <center>
-      <h7 id="acknowledgementh">Acknowledgments</h7>
+      <h7 id="acknowledgementh">With Graditude</h7>
     </center>
-
-    <p>- Thanks to Google for providing the API for Gemini.</p>
-    <p>
-      - The Grade App team for their hard work and dedication in developing this
-      educational tool.
-    </p>
-    <p>- And AAB for designing the logo and helping in the design process.</p>
+    <h1 class="text-3xl ml-1">
+      Grade App wouldn't be possible without the support of some amazing people
+      and technologies:
+    </h1>
+    <ul>
+      <li>
+        <p>
+          We extend our deepest gratitude to Google for providing the
+          groundbreaking Gemini API, which forms the heart of Grade App's
+          intelligence.
+        </p>
+      </li>
+      <li>
+        <p>
+          A massive thank you to our dedicated Grade App team! Their passion,
+          creativity, and countless hours of work have brought this vision to
+          life.
+        </p>
+      </li>
+      <li>
+        <p>
+          And a special shout-out to AAB for their incredible design talent,
+          including the creation of our beautiful logo.
+        </p>
+      </li>
+    </ul>
   </div>
   <hr />
   <div class="contact" id="contact">

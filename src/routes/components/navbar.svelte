@@ -36,10 +36,10 @@
         <li><button class="btn">Login</button></li>
       </ul>
     </div>
-    <a href="/" class="btn btn-ghost text-xl">Grade App</a>
+    <a href="/" class="btn btn-ghost text-3xl">Grade App</a>
   </div>
   <div class="navbar-center hidden lg:flex">
-    <ul class="menu menu-horizontal">
+    <ul class="menu menu-horizontal text-xl">
       <li><a href="#home">Home</a></li>
       <li>
         <a href="#features">Features</a>
@@ -53,7 +53,7 @@
       <li>
         <a href="#contact">Contact</a>
       </li>
-      <li><a href="/login" class="btn">Login</a></li>
+      <li><a href="/login" class="text-xl">Login</a></li>
     </ul>
   </div>
 </div>
