@@ -54,11 +54,13 @@
   }
   async function getUserMessagesFromDb(userEmail: string) {
     try {
-      const { data, error } =
-        await GradeAppDatabase.from("User-messages").select();
+      const { data, error } = await GradeAppDatabase.from("User-messages")
+        .select()
+        .eq("user", userEmail);
       if (data) {
         let newMessages = []; // Declare newMessages here
         for (const row of data) {
+          console.log(row);
           newMessages.push({ content: row.prompt, sender: "User" });
           newMessages.push({
             content: row.response.replace(/\*\*/g, "<br>"),
