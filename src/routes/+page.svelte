@@ -101,27 +101,46 @@
     <center>
       <h7 id="featuresh">Features</h7>
     </center>
-    <p>
-      - Chat with an AI Assistant: Have real-time conversations with the
-      AI-powered assistant that is trained on NCERT books.
-    </p>
-
-    <p>
-      - Get Accurate Answers: Receive accurate and relevant answers to your
-      academic questions, ensuring you have the right information at your
-      fingertips.
-    </p>
-
-    <p>
-      - Educational Resource: Use Grade App as a supplementary resource to aid
-      your studies, providing clarification and support on a wide range of
-      academic topics.
-    </p>
-
-    <p>
-      - User-Friendly Interface: The user interface is designed to be intuitive
-      and easy to use, making it accessible to students of all ages.
-    </p>
+    <div class="card-container">
+      <div class="card">
+        <div class="card-content">
+          <h3>Chat with an AI Assistant</h3>
+          <p>
+            Have real-time conversations with the a powerfull AI assistant that
+            is trained to not only answer your questions but also make you
+            understand the concepts.
+          </p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-content">
+          <h3>Get Accurate Answers</h3>
+          <p>
+            Receive accurate and relevant answers to your questions, ensuring
+            you have the right information.
+          </p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-content">
+          <h3>Educational Resource</h3>
+          <p>
+            Use Grade App as a supplementary resource to aid your studies,
+            providing clarification and support on a wide range of academic
+            topics.
+          </p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-content">
+          <h3>User-Friendly Interface</h3>
+          <p>
+            The user interface is designed to be intuitive and easy to use,
+            making it accessible to students of all ages.
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
   <hr />
   <div class="usage" id="usage">
@@ -167,13 +186,13 @@
       <h7 id="contacth">Contact</h7>
     </center>
     <p>
-      If you have any questions or feedback, please feel free to reach out at
-      <a href="mailto:gradeappbyapp@gmail.com">gradeappbyapp@gmail.com</a>
+      Have questions, feedback, or just want to say hi? We'd love to hear from
+      you!
     </p>
+    <a href="mailto:gradeappbyapp@gmail.com" class="btn btn-primary mt-2 ml-5"
+      >Email Us</a
+    >
   </div>
-  <h2 id="happy-learning-with-grade-app">
-    Happy learning with Grade App! 📚🤖🚀
-  </h2>
   <hr />
   <footer class="footer bg-base-200 text-base-content p-10">
     <aside>
@@ -236,11 +255,49 @@
 <style>
   :root {
     --laptop-image-size: 550px;
-    --image-size: 90px;
+    --image-size: 70px;
+  }
+  .card-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .card {
+    width: 325px;
+    background: #252527;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    margin: 20px;
+    text-align: center;
+  }
+  .card card-title {
+    width: 100%;
+    height: auto;
+  }
+  .card card-content {
+    padding: 16px;
+  }
+  .card-content h3 {
+    font-size: 25px;
+    margin-bottom: 8px;
+  }
+  .card-content p {
+    color: #9f9f9f;
+    font-size: 18px;
+    line-height: 1.3;
+    padding-bottom: 20px;
+  }
+  .card-content .btn {
+    background-color: #333;
+    text-decoration: none;
+    margin-top: 16px;
+    margin-bottom: 10px;
   }
   .buttons {
     height: 60px;
     margin-top: 40px;
+    margin-bottom: 50px;
   }
   .buttons button {
     width: 120px;
@@ -302,14 +359,11 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
   }
-  #happy-learning-with-grade-app {
-    color: #ef926e;
-    margin-bottom: 30px;
-  }
   #footer-logo {
     width: var(--image-size);
     border-radius: 100px;
     cursor: pointer;
+    margin-bottom: 10px;
   }
   @media (max-width: 990px) {
     h7,
