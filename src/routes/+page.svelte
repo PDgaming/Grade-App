@@ -283,13 +283,6 @@
     margin: 20px;
     text-align: center;
   }
-  .card card-title {
-    width: 100%;
-    height: auto;
-  }
-  .card card-content {
-    padding: 16px;
-  }
   .card-content h3 {
     font-size: 25px;
     margin-bottom: 8px;
@@ -299,12 +292,6 @@
     font-size: 18px;
     line-height: 1.3;
     padding-bottom: 20px;
-  }
-  .card-content .btn {
-    background-color: #333;
-    text-decoration: none;
-    margin-top: 16px;
-    margin-bottom: 10px;
   }
   .buttons {
     height: 60px;
