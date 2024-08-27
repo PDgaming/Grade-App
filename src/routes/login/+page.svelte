@@ -104,7 +104,7 @@
         if (data.length > 0) {
           showToast("Success", "Login Successfull!!", 2500, "success"); //shows a login successfull toast
           sessionStorage.setItem("Email", email); //sets email as an item in sessionStorage
-          sessionStorage.setItem("Membership", data[0].GradeAppMembership); //sets member as an item in sessionStorage
+          sessionStorage.setItem("Membership", data[0].Membership); //sets member as an item in sessionStorage
           setSessionIDCookie();
           setTimeout(() => {
             goto("/dashboard");
