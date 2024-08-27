@@ -3,23 +3,49 @@
   import { onMount } from "svelte"; //imports onMount
   import NotLoggedIn from "../components/notLoggedIn.svelte"; //imports NotLoggedIn component
   import "./index.css"; //imports index.css
+  import { toasts, ToastContainer, FlatToast } from "svelte-toasts"; //imports toasts, toastContainer and flatToast to show toasts
 
   let name = "User"; //declares name variable with default value of "User"
-  let member = "false"; //declares member variable with default value of "false"
+  let membership = "free"; //declares member variable with default value of "false"
   let notLoggedIn = false; //declares notLoggedIn variable with default value of false
   let userEmail = ""; //declares userEmail variable with default value of ""
   //runs when the page is loaded
+  const showToast = (
+    title: string,
+    body: string,
+    duration: number,
+    type: string
+  ) => {
+    const toast = toasts.add({
+      title: title,
+      description: body,
+      duration: duration,
+      placement: "bottom-right",
+      //@ts-ignore
+      type: "info",
+      theme: "dark",
+      //@ts-ignore
+      placement: "bottom-right",
+      showProgress: true,
+      //@ts-ignore
+      type: type,
+      //@ts-ignore
+      theme: "dark",
+      onClick: () => {},
+      onRemove: () => {},
+    });
+  };
   onMount(() => {
     //checks if user is logged in by is Display Name exists in sessionStorage
     if (sessionStorage.getItem("Display Name")) {
       //@ts-ignore
       name = sessionStorage.getItem("Display Name"); //sets name variable to the display name from sessionstorage
-      member = String(sessionStorage.getItem("Member")); //sets member variable to the member status from sessionstorage
+      membership = String(sessionStorage.getItem("Membership")); //sets member variable to the member status from sessionstorage
     } else {
       //if display name does not exist in sessionStorage
       //@ts-ignore
       name = sessionStorage.getItem("Email"); //sets name variable to the email from sessionstorage
-      member = String(sessionStorage.getItem("Member")); //sets member variable to the member status from sessionstorage
+      membership = String(sessionStorage.getItem("Membership")); //sets member variable to the member status from sessionstorage
     }
     //checks if name is null
     if (name == null) {
@@ -29,15 +55,30 @@
     userEmail = sessionStorage.getItem("Email"); //sets userEmail to the email from sessionstorage
   });
   //function for redirecting to gradeApp
-  async function gradeAi() {
+  async function gradeAiSocratic() {
     //checks if member is true
-    if (member == "true") {
-      goto("/grade-app.ai"); //redirects to grade-app.ai
+    if (membership == "tier-2") {
+      goto("/grade-app.ai/socratic-model"); //redirects to grade-app.ai
     } else {
-      //if member is active
-      alert(
-        "You have an account but your account is inactive. Contact gradeappbyapp@gmail.com to reactivate your account"
-      ); //shows error if member is not active
+      showToast(
+        "Error",
+        "Sorry you do not own a tier-2 account needed to access this model.",
+        3500,
+        "error"
+      );
+    }
+  }
+  async function gradeAiBase() {
+    //checks if member is true
+    if (membership == "tier-1" || membership == "tier-2") {
+      goto("/grade-app.ai/base-model"); //redirects to grade-app.ai
+    } else {
+      showToast(
+        "Error",
+        "Sorry you do not own a tier-1 account needed to access this model.",
+        3500,
+        "error"
+      );
     }
   }
 </script>
@@ -45,7 +86,9 @@
 <svelte:head>
   <title>Grade App - Dashboard</title>
 </svelte:head>
-
+<ToastContainer let:data>
+  <FlatToast {data} />
+</ToastContainer>
 {#if !notLoggedIn}
   <h1 class="text-3xl">
     Hello There {name}, <br />welcome To Your Dashboard!!
@@ -55,10 +98,21 @@
   <div class="card-container">
     <div class="card">
       <div class="card-content">
-        <h3>Grade App</h3>
-        <p>Use Our Grade App</p>
-        <a href="/dashboard" on:click|preventDefault={gradeAi} class="btn"
-          >Grade App</a
+        <h3>Grade AI</h3>
+        <p>Use Our Grade AI(Socractic)</p>
+        <a
+          href="/dashboard"
+          on:click|preventDefault={gradeAiSocratic}
+          class="btn">Use It</a
+        >
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-content">
+        <h3>Grade AI</h3>
+        <p>Use Our Grade AI(base model)</p>
+        <a href="/dashboard" on:click|preventDefault={gradeAiBase} class="btn"
+          >Use It</a
         >
       </div>
     </div>
@@ -107,7 +161,7 @@
     margin-bottom: 8px;
   }
   .card-content p {
-    color: #666;
+    color: #9a9a9a;
     font-size: 15px;
     line-height: 1.3;
   }

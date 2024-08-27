@@ -1,16 +1,16 @@
 <script lang="ts">
-  import Loader from "../components/loader.svelte"; // imports Loader from components
+  import Loader from "../../components/loader.svelte"; // imports Loader from components
   import "./chatWindow.css"; // imports css stylesheet
   import {
     GoogleGenerativeAI,
     HarmCategory,
     HarmBlockThreshold,
   } from "@google/generative-ai"; // imports GoogleGenerativeAI
-  import { GradeAppDatabase } from "../supabaseClient";
+  import { GradeAppDatabase } from "../../supabaseClient";
   import { onMount } from "svelte";
-  import NotLoggedIn from "../components/notLoggedIn.svelte";
+  import NotLoggedIn from "../../components/notLoggedIn.svelte";
   import { toasts, ToastContainer, FlatToast } from "svelte-toasts";
-  import HighlightedContent from "../components/highlightedContent.svelte";
+  import HighlightedContent from "../../components/highlightedContent.svelte";
 
   let notLoggedIn = false;
   let messages: any = []; // array to store user and ai messages
@@ -60,7 +60,6 @@
       if (data) {
         let newMessages = []; // Declare newMessages here
         for (const row of data) {
-          console.log(row);
           newMessages.push({ content: row.prompt, sender: "User" });
           newMessages.push({
             content: row.response.replace(/\*\*/g, "<br>"),
@@ -235,18 +234,7 @@
           chatSession = model.startChat({
             generationConfig,
             safetySettings,
-            history: [
-              {
-                role: "user",
-                parts: ["You are an Socratic Teacher. And I am your Student."],
-              },
-              {
-                role: "model",
-                parts: [
-                  "Ah, welcome, my dear student. I see you have chosen to embark on a journey of self-discovery. Tell me, what brings you to my humble abode? What questions dance in your mind, waiting to be untangled? \n\nRemember, my role is not to impart knowledge, but to guide you towards it. We shall journey together,  unveiling truths through  thought-provoking questions and patient contemplation. \n\nSo, tell me, what is it you wish to explore?  What are you curious about?  Let us begin our quest. \n",
-                ],
-              },
-            ],
+            history: [],
           });
         } catch (error) {
           console.log(`Error setting up chatSession: ${error}`);
