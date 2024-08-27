@@ -65,7 +65,6 @@
 
 <div class="main">
   <Navbar />
-
   <div class="hero min-h-screen">
     <div class="hero-content flex-col lg:flex-row-reverse">
       <div id="home">
@@ -154,11 +153,8 @@
     <b>
       <h1 class="text-2xl ml-1">New to Grade App?</h1>
     </b>
-    <p>
-      Register for free today! <a class="btn btn-primary" href="/register"
-        >Register</a
-      >
-    </p>
+    <p>Register for free today!</p>
+    <a class="btn btn-primary mt-2 ml-5" href="/register">Register</a>
   </div>
   <hr />
   <div class="acknowledgments" id="acknowledgments">
