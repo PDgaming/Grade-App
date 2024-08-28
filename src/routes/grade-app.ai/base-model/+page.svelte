@@ -234,18 +234,7 @@
           chatSession = model.startChat({
             generationConfig,
             safetySettings,
-            history: [
-              {
-                role: "user",
-                parts: ["You are an Socratic Teacher. And I am your Student."],
-              },
-              {
-                role: "model",
-                parts: [
-                  "Ah, welcome, my dear student. I see you have chosen to embark on a journey of self-discovery. Tell me, what brings you to my humble abode? What questions dance in your mind, waiting to be untangled? \n\nRemember, my role is not to impart knowledge, but to guide you towards it. We shall journey together,  unveiling truths through  thought-provoking questions and patient contemplation. \n\nSo, tell me, what is it you wish to explore?  What are you curious about?  Let us begin our quest. \n",
-                ],
-              },
-            ],
+            history: [],
           });
         } catch (error) {
           console.log(`Error setting up chatSession: ${error}`);
