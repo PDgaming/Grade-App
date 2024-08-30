@@ -6,6 +6,7 @@
     "dev-host": "vite dev --host 0.0.0.0",
     "build": "vite build",
     "preview": "vite preview",
+    "preview-host": "vite preview --host 0.0.0.0",
     "check": "svelte-check --tsconfig ./tsconfig.json"
   },
   "devDependencies": {
