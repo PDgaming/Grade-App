@@ -86,9 +86,11 @@
 <svelte:head>
   <title>Grade App - Dashboard</title>
 </svelte:head>
+
 <ToastContainer let:data>
   <FlatToast {data} />
 </ToastContainer>
+
 {#if !notLoggedIn}
   <h1 class="text-3xl">
     Hello There {name}, <br />welcome To Your Dashboard!!

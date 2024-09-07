@@ -9,15 +9,6 @@
   onMount(() => {
     checkSession();
   });
-  //function to redirect to login page
-  function loginPage() {
-    goto("/login"); //redirects to login page using goto
-  }
-
-  //function to redirect to register page
-  function registerPage() {
-    goto("/register"); //redirects to register page using goto
-  }
 
   async function checkSession(): Promise<boolean> {
     const cookies = document.cookie.split(";");
@@ -84,12 +75,12 @@
           <a
             type="button"
             class="btn btn-primary loginButton"
-            on:click={loginPage}>Login</a
+            href="/login">Login</a
           >
           <a
             type="button"
             class="btn btn-primary registerButton"
-            on:click={registerPage}>Register</a
+            href="/register">Register</a
           >
         </div>
       </div>
