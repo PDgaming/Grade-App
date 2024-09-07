@@ -81,15 +81,15 @@
           format.
         </p>
         <div class="buttons">
-          <button
+          <a
             type="button"
             class="btn btn-primary loginButton"
-            on:click={loginPage}>Login</button
+            on:click={loginPage}>Login</a
           >
-          <button
+          <a
             type="button"
             class="btn btn-primary registerButton"
-            on:click={registerPage}>Register</button
+            on:click={registerPage}>Register</a
           >
         </div>
       </div>

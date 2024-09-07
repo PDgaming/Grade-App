@@ -57,29 +57,29 @@
   //function for redirecting to gradeApp
   async function gradeAiSocratic() {
     //checks if member is true
-    if (membership == "tier-2") {
-      goto("/grade-app.ai/socratic-model"); //redirects to grade-app.ai
-    } else {
-      showToast(
-        "Error",
-        "Sorry you do not own a tier-2 account needed to access this model.",
-        3500,
-        "error"
-      );
-    }
+    // if (membership == "tier-2") {
+    goto("/grade-app.ai/socratic-model"); //redirects to grade-app.ai
+    // } else {
+    //   showToast(
+    //     "Error",
+    //     "Sorry you do not own a tier-2 account needed to access this model.",
+    //     3500,
+    //     "error"
+    //   );
+    // }
   }
   async function gradeAiBase() {
     //checks if member is true
-    if (membership == "tier-1" || membership == "tier-2") {
-      goto("/grade-app.ai/base-model"); //redirects to grade-app.ai
-    } else {
-      showToast(
-        "Error",
-        "Sorry you do not own a tier-1 account needed to access this model.",
-        3500,
-        "error"
-      );
-    }
+    // if (membership == "tier-1" || membership == "tier-2") {
+    goto("/grade-app.ai/base-model"); //redirects to grade-app.ai
+    // } else {
+    //   showToast(
+    //     "Error",
+    //     "Sorry you do not own a tier-1 account needed to access this model.",
+    //     3500,
+    //     "error"
+    //   );
+    // }
   }
 </script>
 
@@ -149,13 +149,6 @@
     margin: 20px;
     text-align: center;
   }
-  .card card-title {
-    width: 100%;
-    height: auto;
-  }
-  .card card-content {
-    padding: 16px;
-  }
   .card-content h3 {
     font-size: 28px;
     margin-bottom: 8px;
@@ -178,79 +171,11 @@
   h2 {
     margin-top: 15px;
   }
-  h4 {
-    margin-top: 5px;
-  }
   a {
     color: rgb(255, 255, 255);
     text-decoration: underline;
   }
   a:hover {
     color: rgb(204, 204, 204);
-  }
-  .buttons {
-    margin-top: 10px;
-  }
-  .try-it,
-  .grade-app,
-  .register {
-    font-size: 15px;
-  }
-  .buttonsContainer {
-    display: inline-flex;
-  }
-  @media (max-width: 1000px) {
-    h1 {
-      font-size: 30px;
-    }
-    h2 {
-      font-size: 25px;
-    }
-    h4 {
-      font-size: 20px;
-    }
-    h6 {
-      margin-top: -2px;
-      font-size: 15px;
-    }
-  }
-  @media (max-width: 850px) {
-    h1 {
-      font-size: 28px;
-    }
-    h6 {
-      margin-top: -3px;
-    }
-  }
-  @media (max-width: 700px) {
-    h1 {
-      font-size: 25px;
-    }
-    h2 {
-      font-size: 24px;
-    }
-    h6 {
-      margin-top: -3px;
-    }
-  }
-  @media (max-width: 600px) {
-    h1 {
-      font-size: 23px;
-    }
-    h2 {
-      font-size: 22px;
-    }
-  }
-  @media (max-width: 375px) {
-    h1,
-    h2 {
-      font-size: 20px;
-    }
-    h4 {
-      font-size: 19px;
-    }
-    h6 {
-      font-size: 14px;
-    }
   }
 </style>
