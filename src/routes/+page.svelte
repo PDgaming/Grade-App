@@ -1,53 +1,7 @@
 <script lang="ts">
   import Navbar from "./components/navbar.svelte"; //imports navbar component from components
   import "./index.css"; //imports index.css file
-  import { goto } from "$app/navigation"; //imports goto for redirecting
-  import { onMount } from "svelte";
-  import { UsersDatabase } from "./supabaseClient";
   import Footer from "./components/footer.svelte";
-
-  onMount(() => {
-    checkSession();
-  });
-
-  async function checkSession(): Promise<boolean> {
-    const cookies = document.cookie.split(";");
-
-    for (let i = 0; i < cookies.length; i++) {
-      const cookie = cookies[i].trim();
-
-      if (cookie.startsWith("sessionId=")) {
-        const parts = cookie.split("=");
-
-        if (parts.length === 2) {
-          const sessionId = parts[1];
-
-          const { data: user, error } = await UsersDatabase.from("Users")
-            .select()
-            .eq("session_id", sessionId);
-
-          if (error) {
-            console.log(error);
-            return false;
-          }
-          if (user && user.length > 0) {
-            sessionStorage.setItem("Email", user[0].Email);
-            sessionStorage.setItem("Member", user[0].GradeAppMember);
-
-            return true;
-          }
-        }
-      }
-    }
-    return false;
-  }
-
-  onMount(async () => {
-    const ifLoggedIn = await checkSession();
-    if (ifLoggedIn) {
-      goto("/dashboard");
-    }
-  });
 </script>
 
 <svelte:head>
@@ -72,15 +26,8 @@
           format.
         </p>
         <div class="buttons">
-          <a
-            type="button"
-            class="btn btn-primary loginButton"
-            href="/login">Login</a
-          >
-          <a
-            type="button"
-            class="btn btn-primary registerButton"
-            href="/register">Register</a
+          <a class="btn btn-primary loginButton" href="/login">Login</a>
+          <a class="btn btn-primary registerButton" href="/register">Register</a
           >
         </div>
       </div>
@@ -228,10 +175,6 @@
     height: 60px;
     margin-top: 40px;
     margin-bottom: 50px;
-  }
-  .buttons button {
-    width: 120px;
-    height: 40px;
   }
   .buttons .loginButton {
     margin-right: 100px;

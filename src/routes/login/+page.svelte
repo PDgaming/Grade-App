@@ -93,35 +93,8 @@
     const password = passwordObject.value; //gets password
     //checks if email and password exist and are not empty
     if (email && password) {
-      //gets user data from database
-      const { data, error } = await UsersDatabase.from("Users")
-        .select() //selects all rows
-        .eq("Email", email) //gets the row that has a value of email in the email column
-        .eq("Password", password); //gets the row that has a value of password in the password column
-      //checks is data exists and is not empty
-      if (data) {
-        //checks if users exist
-        if (data.length > 0) {
-          showToast("Success", "Login Successfull!!", 2500, "success"); //shows a login successfull toast
-          sessionStorage.setItem("Email", email); //sets email as an item in sessionStorage
-          sessionStorage.setItem("Membership", data[0].Membership); //sets member as an item in sessionStorage
-          setSessionIDCookie();
-          setTimeout(() => {
-            goto("/dashboard");
-          }, 2500); //waits for 2500ms(2.5s) before redirecting to dashboard
-        } else {
-          //shows an error toast if user doesn't exist
-          showToast(
-            "Error",
-            "User Doesn't Exist, please Register",
-            2500,
-            "error"
-          );
-        }
-      } else {
-        //shows error if data does not exist
-        console.log(error);
-      }
+      sessionStorage.setItem("Email", email);
+      checkIfUserExistsInDatabase(email);
     } else {
       //shows an error if email and password does not exist or is empty
       showToast(
@@ -138,7 +111,7 @@
     try {
       const { data, error } = await UsersDatabase.from("Users").insert({
         Email: email,
-        Member: false,
+        Member: "free",
       });
       setSessionIDCookie();
       //shows a toast if user exists, if user does not exists then it will add the user and continue to dashboard
@@ -254,9 +227,6 @@
           on:click={loginWIthEmail}>Login</button
         >
       </form>
-      <span id="register">
-        <a href="/register">Register</a>
-      </span>
     </center>
   </div>
 </center>
@@ -276,10 +246,6 @@
   #loginButton {
     font-size: 25px;
     margin-bottom: 10px;
-  }
-  #register a {
-    text-decoration: none;
-    color: #007bff;
   }
   #google-icon {
     width: 30px;
