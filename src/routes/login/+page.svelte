@@ -24,6 +24,8 @@
 
     measurementId: "G-WD1M20G6LX",
   };
+  let email: string;
+  let password: string;
   async function setSessionIDCookie() {
     const sessionId = uuid();
     const expirationDate = new Date();
@@ -85,12 +87,6 @@
   };
   //function for loggin in with Email
   async function loginWIthEmail() {
-    const emailObject = document.getElementById("email") as HTMLInputElement; //gets email element
-    const passwordObject = document.getElementById(
-      "password"
-    ) as HTMLInputElement; //gets password element
-    const email = emailObject.value; //gets email
-    const password = passwordObject.value; //gets password
     //checks if email and password exist and are not empty
     if (email && password) {
       sessionStorage.setItem("Email", email);
@@ -199,7 +195,13 @@
               d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z"
             />
           </svg>
-          <input type="text" class="grow" placeholder="Email" id="email" />
+          <input
+            type="text"
+            class="grow"
+            placeholder="Email"
+            id="email"
+            bind:value={email}
+          />
         </label>
         <label class="input input-bordered flex items-center gap-2">
           <svg
@@ -219,6 +221,7 @@
             class="grow"
             placeholder="Password"
             id="password"
+            bind:value={password}
           />
         </label>
         <button
