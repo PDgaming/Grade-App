@@ -5,8 +5,6 @@
   import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth"; //imports getAuth, GoogleAuthProvider, signWithPopup for get auth function, google sign in support and signWithPopup to google sign in with a popup
   import { UsersDatabase } from "../supabaseClient"; //imports UsersDatabase to access the userdatabase for email login
   import { toasts, ToastContainer, FlatToast } from "svelte-toasts"; //imports toasts, toastContainer and flatToast to show toasts
-  import { onMount } from "svelte";
-  import { v4 as uuid } from "uuid";
 
   // config for firebase
   const firebaseConfig = {
@@ -26,30 +24,6 @@
   };
   let email: string;
   let password: string;
-  async function setSessionIDCookie() {
-    const sessionId = uuid();
-    const expirationDate = new Date();
-    expirationDate.setDate(expirationDate.getDate() + 30);
-    document.cookie = `sessionId=${sessionId}; expires=${expirationDate.toUTCString()}; path=/;`;
-
-    try {
-      const userEmail = sessionStorage.getItem("Email");
-      if (userEmail) {
-        const { error } = await UsersDatabase.from("Users")
-          .update({
-            session_id: sessionId,
-          })
-          .eq("Email", userEmail);
-        if (error) {
-          console.log(error);
-        }
-      } else {
-        console.log("Email not found in sessionStorage");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
 
@@ -90,6 +64,7 @@
     //checks if email and password exist and are not empty
     if (email && password) {
       sessionStorage.setItem("Email", email);
+      // checkIfUserExistsInDatabase(email);
       checkIfUserExistsInDatabase(email);
     } else {
       //shows an error if email and password does not exist or is empty
@@ -105,16 +80,23 @@
   async function checkIfUserExistsInDatabase(email: string) {
     //tries to insert user into database to check if they exist
     try {
-      const { data, error } = await UsersDatabase.from("Users").insert({
-        Email: email,
-        Member: "free",
+      const response = await fetch("/api/auth", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email: email, password: password }),
       });
-      setSessionIDCookie();
-      //shows a toast if user exists, if user does not exists then it will add the user and continue to dashboard
-      showToast("Success", "Login Successfull!!", 2500, "success");
-      setTimeout(() => {
-        goto("/dashboard");
-      }, 2500); //waits for 2500ms(2.5s) before redirecting to dashboard
+      const result = await response.json();
+      if (result.status == 200) {
+        //shows a toast if user exists, if user does not exists then it will add the user and continue to dashboard
+        showToast("Success", "Login Successfull!!", 2500, "success");
+        setTimeout(() => {
+          // goto("/dashboard");
+        }, 2500); //waits for 2500ms(2.5s) before redirecting to dashboard
+      } else {
+        showToast("Error", "There was an error", 2500, "Error");
+      }
     } catch (error) {
       console.log(error); //shows error if there was an error inserting user into database
     }

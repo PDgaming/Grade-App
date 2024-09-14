@@ -2,6 +2,16 @@
   import Navbar from "./components/navbar.svelte"; //imports navbar component from components
   import "./index.css"; //imports index.css file
   import Footer from "./components/footer.svelte";
+  import { onMount } from "svelte";
+  import { goto } from "$app/navigation";
+
+  onMount(async () => {
+    const sessionCookie = decodeURIComponent(document.cookie);
+    console.log(sessionCookie);
+    if (sessionCookie.includes("Session_id")) {
+      goto("/dashboard");
+    }
+  });
 </script>
 
 <svelte:head>
