@@ -18,6 +18,11 @@
 </svelte:head>
 
 <div class="main">
+  <center>
+    <div class="banner text-red-600 font-bold">
+      We might be shutting down soon!!
+    </div>
+  </center>
   <Navbar />
   <div class="hero min-h-screen">
     <div class="hero-content flex-col lg:flex-row-reverse">

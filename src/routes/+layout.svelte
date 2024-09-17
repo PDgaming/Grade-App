@@ -8,11 +8,6 @@
 </script>
 
 <div class="app">
-  <center>
-    <div class="banner text-red-600 font-bold">
-      We might be shutting down soon!!
-    </div>
-  </center>
   <main>
     <slot></slot>
   </main>
