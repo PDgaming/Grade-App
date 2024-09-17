@@ -1,6 +1,5 @@
 <script lang="ts">
   import Loader from "../../components/loader.svelte"; // imports Loader from components
-  import "./chatWindow.css"; // imports css stylesheet
   import {
     GoogleGenerativeAI,
     HarmCategory,
