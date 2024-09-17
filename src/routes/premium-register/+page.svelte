@@ -17,10 +17,10 @@
   });
   async function getCurrentPlan(email: string) {
     const { data, error } = await UsersDatabase.from("Users")
-      .select("GradeAppMembership")
+      .select("Membership")
       .eq("Email", email);
     if (data) {
-      switch (data[0].GradeAppMembership) {
+      switch (data[0].Membership) {
         case "free":
           freePlan = "Current Plan";
           freeIsDisabled = true;

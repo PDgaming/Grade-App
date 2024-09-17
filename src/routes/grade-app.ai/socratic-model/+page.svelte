@@ -52,33 +52,6 @@
       }
     }
   }
-  async function getUserMessagesFromDb(userEmail: string) {
-    try {
-      const { data, error } = await GradeAppDatabase.from("User-messages")
-        .select()
-        .eq("user", userEmail);
-      if (data) {
-        let newMessages = []; // Declare newMessages here
-        for (const row of data) {
-          newMessages.push({ content: row.prompt, sender: "User" });
-          newMessages.push({
-            content: row.response.replace(/\*\*/g, "<br>"),
-            sender: "Gemini",
-          });
-        }
-        messages = [...messages, ...newMessages]; // This triggers reactivity
-      } else {
-        showToast(
-          "Error",
-          "There was an error getting your Messages from Database",
-          2500,
-          "error"
-        );
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
   onMount(() => {
     const userEmail = sessionStorage.getItem("Email");
     if (!userEmail) {
@@ -99,6 +72,34 @@
       }, 1000);
     });
   });
+  async function getUserMessagesFromDb(userEmail: string) {
+    try {
+      const { data, error } = await GradeAppDatabase.from("User-messages")
+        .select()
+        .eq("user", userEmail);
+      if (data) {
+        let newMessages = []; // Declare newMessages here
+        for (const row of data) {
+          newMessages.push({ content: row.prompt, sender: "User" });
+          newMessages.push({
+            content: row.response.replace(/\*\*/g, "<br>"),
+            sender: "Gemini",
+          });
+        }
+        messages = [...messages, ...newMessages]; // This triggers reactivity
+        shouldShowWelcomeMessage = false;
+      } else {
+        showToast(
+          "Error",
+          "There was an error getting your Messages from Database",
+          2500,
+          "error"
+        );
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
   const showToast = (
     title: string,
     body: string,
@@ -142,8 +143,9 @@
   }
   function handleKeyDown(event: any) {
     // function to handle key down
-    if (event.key === "Enter") {
+    if (event.key === "Enter" && !event.shiftKey) {
       // condition to check if key pressed is Enter
+      event.preventDefault();
       sendMessage(); // if condition is true sendMessage function runs
     }
   }
@@ -237,7 +239,9 @@
             history: [
               {
                 role: "user",
-                parts: ["You are an Socratic Teacher. And I am your Student."],
+                parts: [
+                  "You are an Socratic Teacher. And I am your Student. Also please try to keep your replies as short as possible.",
+                ],
               },
               {
                 role: "model",
@@ -272,9 +276,8 @@
         // Create a single message with line breaks
         const message = {
           content: formattedText,
-          sender: "Gemini",
+          sender: "model",
         }; // stores formatted AI text in message
-
         messages = [...messages, message]; // appends formatted text to messages
         writeDataInDb(prompt, text);
       } catch (error) {
@@ -283,6 +286,11 @@
     } else {
       initializeEverything();
     }
+  }
+  function autoResize(event: Event) {
+    const textarea = event.target as HTMLTextAreaElement;
+    textarea.style.height = "auto";
+    textarea.style.height = textarea.scrollHeight + "px";
   }
 </script>
 
@@ -293,148 +301,101 @@
 <svelte:head>
   <title>Grade-App AI (powered by Google's Gemini)</title>
 </svelte:head>
+
 {#if !notLoggedIn}
   <div class="main">
-    <div class="header">
-      <h3 class="text-2xl">Gemini</h3>
-    </div>
-    <div class="chatLog" id="chatlog">
-      <!-- Shows welcome message -->
-      {#if shouldShowWelcomeMessage}
-        <!-- shows welcome message if shouldShowWelcomeMessage if true -->
-        <h1 id="hello-message" class="text-5xl">Hello There!</h1>
-        <p id="how-to">
-          Start a conversation with Gemini by typing in a prompt in the text
-          input below.
-        </p>
-
-        <!-- Adds messages to the DOM -->
-      {/if}
+    <div class="chatlog">
+      <div class="welcome-message p-2">
+        {#if shouldShowWelcomeMessage}
+          <h1 id="hello-message" class="text-5xl text-white">Hello There!</h1>
+          <p id="how-to" class="text-2xl">
+            Start a conversation with Gemini by typing in a prompt in the text
+            input below.
+          </p>
+        {/if}
+      </div>
       {#each messages as userMessage}
         <div class={userMessage.sender}>
-          <h3>{userMessage.sender}:</h3>
-          {#if userMessage.sender === "Gemini"}
-            <div style="margin-left:35px;">
-              <HighlightedContent content={userMessage.content} />
-            </div>
-          {:else}
-            <p style="margin-left:35px;">{userMessage.content}</p>
-          {/if}
+          <div class="senders">
+            <h3 class="text-white pl-2">{userMessage.sender}:</h3>
+          </div>
+          <div class="content pl-5 text-gray-200">
+            {#if userMessage.sender === "Gemini"}
+              <div>
+                <HighlightedContent content={userMessage.content} />
+              </div>
+            {:else}
+              <p>{userMessage.content}</p>
+            {/if}
+          </div>
         </div>
       {/each}
       {#if shouldload}
-        <!-- shows loader id shouldload is true -->
-        <Loader />
-      {/if}
-      <center>
-        <div class="input-area">
-          <input
-            type="text"
-            id="userInput"
-            placeholder="Enter a prompt here"
-            on:keydown={handleKeyDown}
-          />
-          <button type="button" on:click={sendMessage}>Send</button>
-          {#if speakButton}
-            <button type="button" on:click={speakText}>Speak</button>
-          {/if}
-          {#if pauseButton}
-            <button type="button" on:click={pauseSpeech}>Pause</button>
-          {/if}
-          {#if resumeButton}
-            <button type="button" on:click={resumeSpeech}>Resume</button>
-          {/if}
+        <div class="loader pl-2 mt-3">
+          <Loader />
         </div>
-      </center>
+      {/if}
     </div>
-    <center>
-      <h6 id="gemini-safety">
-        Gemini may display inaccurate info about people, so double-check its
-        responses.
-      </h6>
-    </center>
+    <div class="input-area">
+      <textarea
+        id="userInput"
+        placeholder="Enter a prompt here"
+        on:keydown={handleKeyDown}
+        on:input={autoResize}
+        rows="1"
+      ></textarea>
+      <button type="button" class="btn" on:click={sendMessage}>Send</button>
+      {#if speakButton}
+        <button type="button" class="btn" on:click={speakText}>Speak</button>
+      {/if}
+      {#if pauseButton}
+        <button type="button" class="btn" on:click={pauseSpeech}>Pause</button>
+      {/if}
+      {#if resumeButton}
+        <button type="button" class="btn" on:click={resumeSpeech}>Resume</button
+        >
+      {/if}
+    </div>
   </div>
 {/if}
 {#if notLoggedIn}<NotLoggedIn />{/if}
 
 <style>
-  :root {
-    @media (prefers-reduced-motion: no-preference) {
-      overflow: hidden;
-    }
+  .senders {
+    font-size: 1.6em;
   }
-  .header {
-    height: 50px;
+  .content {
+    font-size: 1.3em;
   }
-  .User {
-    color: white;
-    font-size: 25px;
+  .chatlog {
+    height: 88vh;
+    overflow-y: scroll;
+    margin-bottom: 5px;
   }
-
-  .Gemini {
-    color: white;
-    font-size: 25px;
-  }
-  h1,
-  h3 {
-    color: white;
-  }
-  h1 {
-    font-weight: bold;
-  }
-  p {
-    font-size: 21px;
-  }
-
-  h3 {
-    margin-top: 5px;
-    margin-left: 10px;
-  }
-
-  input {
-    position: relative;
-    top: 15px;
-    height: 55px;
-    width: 65vw;
+  textarea {
+    min-height: 8vh;
+    max-height: 80px;
+    height: 8vh;
+    width: 60vw;
+    border-radius: 10px;
     border: 1px solid white;
-    border-radius: 15px;
     background-color: #1e1f20;
     color: white;
     padding-left: 15px;
     padding-right: 15px;
-  }
-  input:focus {
-    border: none;
+    resize: none;
+    overflow-y: scroll;
   }
   button {
-    position: relative;
-    top: 15px;
-    background-color: #131314;
-    color: white;
-    height: 40px;
-    width: 70px;
-    border: 1px solid white;
     border-radius: 10px;
+    margin-left: 5px;
   }
   .input-area {
-    position: fixed;
-    top: 80vh;
-    height: 87px;
-    width: 96vw;
-    background-color: transparent;
-  }
-  .chatLog {
-    overflow-y: scroll;
-    overflow-x: hidden;
-    margin-left: 10px;
-    height: 84vh;
-    width: 98vw;
-    background-color: transparent;
-    padding-bottom: 100px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
     align-items: center;
-    padding-left: 10px;
-  }
-  #gemini-safety {
-    color: white;
   }
 </style>

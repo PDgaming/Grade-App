@@ -120,13 +120,6 @@
     </div>
     <div class="card">
       <div class="card-content">
-        <h3>Free Trial</h3>
-        <p>Try Our Grade App for Free</p>
-        <a href="/free-trial" class="btn">Try It</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-content">
         <h3>Premium</h3>
         <p>Register for a Premium Account</p>
         <a href="/premium-register" class="btn">Register</a>
