@@ -1,10 +1,9 @@
 <script lang="ts">
-  import { goto } from "$app/navigation"; //imports goto for redirecting
   import { initializeApp } from "firebase/app"; //imports initialize to initialize firebase app
   import "./index.css"; //imports index.css file
   import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth"; //imports getAuth, GoogleAuthProvider, signWithPopup for get auth function, google sign in support and signWithPopup to google sign in with a popup
-  import { UsersDatabase } from "../supabaseClient"; //imports UsersDatabase to access the userdatabase for email login
   import { toasts, ToastContainer, FlatToast } from "svelte-toasts"; //imports toasts, toastContainer and flatToast to show toasts
+  import { goto } from "$app/navigation";
 
   // config for firebase
   const firebaseConfig = {
@@ -64,8 +63,7 @@
     //checks if email and password exist and are not empty
     if (email && password) {
       sessionStorage.setItem("Email", email);
-      // checkIfUserExistsInDatabase(email);
-      checkIfUserExistsInDatabase(email);
+      login(email);
     } else {
       //shows an error if email and password does not exist or is empty
       showToast(
@@ -77,10 +75,10 @@
     }
   }
   //function to check if user exits in database(for google login)
-  async function checkIfUserExistsInDatabase(email: string) {
+  async function login(email: string) {
     //tries to insert user into database to check if they exist
     try {
-      const response = await fetch("/api/auth", {
+      const response = await fetch("/api/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -92,10 +90,17 @@
         //shows a toast if user exists, if user does not exists then it will add the user and continue to dashboard
         showToast("Success", "Login Successfull!!", 2500, "success");
         setTimeout(() => {
-          // goto("/dashboard");
+          goto("/dashboard");
         }, 2500); //waits for 2500ms(2.5s) before redirecting to dashboard
+      } else if (result.status == 404) {
+        showToast(
+          "Error",
+          "User does not exist in Database, please register!!",
+          2500,
+          "error"
+        );
       } else {
-        showToast("Error", "There was an error", 2500, "Error");
+        showToast("Error", "There was an error", 2500, "error");
       }
     } catch (error) {
       console.log(error); //shows error if there was an error inserting user into database
@@ -119,7 +124,7 @@
         //@ts-ignore
         sessionStorage.setItem("Email", user.email);
         //@ts-ignore
-        checkIfUserExistsInDatabase(user.email);
+        login(user.email);
       })
       //shows error is there is an error logging in with google
       .catch((error) => {
@@ -211,6 +216,7 @@
           class="btn btn-primary"
           on:click={loginWIthEmail}>Login</button
         >
+        <span><a href="/register">Register</a></span>
       </form>
     </center>
   </div>

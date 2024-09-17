@@ -7,7 +7,6 @@
 
   onMount(async () => {
     const sessionCookie = decodeURIComponent(document.cookie);
-    console.log(sessionCookie);
     if (sessionCookie.includes("Session_id")) {
       goto("/dashboard");
     }
