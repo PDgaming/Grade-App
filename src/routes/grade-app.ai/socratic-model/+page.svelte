@@ -303,7 +303,7 @@
 
 {#if !notLoggedIn}
   <div class="main">
-    <div class="chatlog">
+    <div class="chatlog" id="chatlog">
       <div class="welcome-message p-2">
         {#if shouldShowWelcomeMessage}
           <h1 id="hello-message" class="text-5xl text-white">Hello There!</h1>
