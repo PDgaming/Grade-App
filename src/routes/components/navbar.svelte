@@ -33,7 +33,7 @@
         <li>
           <a href="#contact">Contact</a>
         </li>
-        <li><button class="btn">Login</button></li>
+        <li><a class="btn" href="/login">Login</a></li>
       </ul>
     </div>
     <a href="/" class="btn btn-ghost text-3xl">Grade App</a>
