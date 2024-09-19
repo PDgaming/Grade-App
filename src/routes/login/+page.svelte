@@ -90,7 +90,7 @@
         //shows a toast if user exists, if user does not exists then it will add the user and continue to dashboard
         showToast("Success", "Login Successfull!!", 2500, "success");
         setTimeout(() => {
-          // goto("/dashboard");
+          goto("/dashboard");
         }, 2500); //waits for 2500ms(2.5s) before redirecting to dashboard
       } else if (result.status == 404) {
         showToast(
