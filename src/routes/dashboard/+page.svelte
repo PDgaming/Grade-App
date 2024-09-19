@@ -3,7 +3,11 @@
   import { onMount } from "svelte"; //imports onMount
   import NotLoggedIn from "../components/notLoggedIn.svelte"; //imports NotLoggedIn component
   import "./index.css"; //imports index.css
-  import { toasts, ToastContainer, FlatToast } from "svelte-toasts"; //imports toasts, toastContainer and flatToast to show toasts
+  import {
+    toasts,
+    ToastContainer as ToastContainerAny,
+    FlatToast as FlatToastAny,
+  } from "svelte-toasts"; //imports toasts, toastContainer and flatToast to show toasts
 
   let name = "User"; //declares name variable with default value of "User"
   let membership = "free"; //declares member variable with default value of "false"
@@ -35,6 +39,8 @@
       onRemove: () => {},
     });
   };
+  const ToastContainer = ToastContainerAny as any;
+  const FlatToast = FlatToastAny as any;
   onMount(() => {
     //checks if user is logged in by is Display Name exists in sessionStorage
     if (sessionStorage.getItem("Display Name")) {
@@ -87,9 +93,9 @@
   <title>Grade App - Dashboard</title>
 </svelte:head>
 
-<ToastContainer let:data>
-  <FlatToast {data} />
-</ToastContainer>
+<svelte:component this={ToastContainer} let:data>
+  <svelte:component this={FlatToast} {data} />
+</svelte:component>
 
 {#if !notLoggedIn}
   <h1 class="text-3xl">

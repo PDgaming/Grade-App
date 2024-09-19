@@ -8,7 +8,11 @@
   import { GradeAppDatabase } from "../../supabaseClient";
   import { onMount } from "svelte";
   import NotLoggedIn from "../../components/notLoggedIn.svelte";
-  import { toasts, ToastContainer, FlatToast } from "svelte-toasts";
+  import {
+    toasts,
+    ToastContainer as ToastContainerAny,
+    FlatToast as FlatToastAny,
+  } from "svelte-toasts";
   import HighlightedContent from "../../components/highlightedContent.svelte";
 
   let notLoggedIn = false;
@@ -125,6 +129,8 @@
       // component: BootstrapToast, // allows to override toast component/template per toast
     });
   };
+  const ToastContainer = ToastContainerAny as any;
+  const FlatToast = FlatToastAny as any;
   function speakText() {
     if (messages[messages.length - 1].sender == "Gemini") {
       speak(messages[messages.length - 1].content);
@@ -293,9 +299,9 @@
   }
 </script>
 
-<ToastContainer let:data>
-  <FlatToast {data} />
-</ToastContainer>
+<svelte:component this={ToastContainer} let:data>
+  <svelte:component this={FlatToast} {data} />
+</svelte:component>
 
 <svelte:head>
   <title>Grade-App AI (powered by Google's Gemini)</title>

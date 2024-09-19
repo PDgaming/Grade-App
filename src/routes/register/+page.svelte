@@ -1,5 +1,9 @@
 <script lang="ts">
-  import { toasts, ToastContainer, FlatToast } from "svelte-toasts"; //imports toasts, toastContainer and flatToast to show toasts
+  import {
+    toasts,
+    ToastContainer as ToastContainerAny,
+    FlatToast as FlatToastAny,
+  } from "svelte-toasts"; //imports toasts, toastContainer and flatToast to show toasts
   import { goto } from "$app/navigation";
 
   let email: string;
@@ -31,7 +35,8 @@
       onRemove: () => {},
     });
   };
-
+  const ToastContainer = ToastContainerAny as any;
+  const FlatToast = FlatToastAny as any;
   function registerWithGoogle() {
     showToast("Success", "You registered with google", 2500, "success");
   }
@@ -82,9 +87,9 @@
   <title>Grade App - Register</title>
 </svelte:head>
 
-<ToastContainer let:data>
-  <FlatToast {data} />
-</ToastContainer>
+<svelte:component this={ToastContainer} let:data>
+  <svelte:component this={FlatToast} {data} />
+</svelte:component>
 
 <center id="login-text">
   <h1>Register</h1>

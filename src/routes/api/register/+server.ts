@@ -10,8 +10,7 @@ export const POST: RequestHandler = async ({ request }) => {
   const body = await request.json();
   const { data, error } = await UsersDatabase.from("Users")
     .select()
-    .eq("Email", body.email)
-    .eq("Password", body.password);
+    .eq("Email", body.email);
   if (error) {
     return json({
       status: 500,

@@ -2,7 +2,11 @@
   import { initializeApp } from "firebase/app"; //imports initialize to initialize firebase app
   import "./index.css"; //imports index.css file
   import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth"; //imports getAuth, GoogleAuthProvider, signWithPopup for get auth function, google sign in support and signWithPopup to google sign in with a popup
-  import { toasts, ToastContainer, FlatToast } from "svelte-toasts"; //imports toasts, toastContainer and flatToast to show toasts
+  import {
+    toasts,
+    ToastContainer as ToastContainerAny,
+    FlatToast as FlatToastAny,
+  } from "svelte-toasts"; //imports toasts, toastContainer and flatToast to show toasts
   import { goto } from "$app/navigation";
 
   // config for firebase
@@ -25,7 +29,6 @@
   let password: string;
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
-
   // Initialize Firebase authentication
   const auth = getAuth(app);
   //uses auth in the device language
@@ -58,6 +61,8 @@
       onRemove: () => {},
     });
   };
+  const ToastContainer = ToastContainerAny as any;
+  const FlatToast = FlatToastAny as any;
   //function for loggin in with Email
   async function loginWIthEmail() {
     //checks if email and password exist and are not empty
@@ -138,9 +143,9 @@
   }
 </script>
 
-<ToastContainer let:data>
-  <FlatToast {data} />
-</ToastContainer>
+<svelte:component this={ToastContainer} let:data>
+  <svelte:component this={FlatToast} {data} />
+</svelte:component>
 
 <svelte:head>
   <title>Grade App - Login</title>
