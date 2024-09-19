@@ -4,10 +4,24 @@
   import Footer from "./components/footer.svelte";
   import { onMount } from "svelte";
   import { goto } from "$app/navigation";
+  import { UsersDatabase } from "./supabaseClient";
 
   onMount(async () => {
     const sessionCookie = decodeURIComponent(document.cookie);
     if (sessionCookie.includes("Session_id")) {
+      try {
+        const { data, error } = await UsersDatabase.from("Users")
+          .select()
+          .eq("session_id", sessionCookie.split("=")[1]);
+        if (data) {
+          sessionStorage.setItem("Email", data[0].Email);
+          sessionStorage.setItem("Membership", data[0].Membership);
+        } else {
+          console.log(error);
+        }
+      } catch (error) {
+        console.log(error);
+      }
       goto("/dashboard");
     }
   });
@@ -18,11 +32,6 @@
 </svelte:head>
 
 <div class="main">
-  <center>
-    <div class="banner text-red-600 font-bold">
-      We might be shutting down soon!!
-    </div>
-  </center>
   <Navbar />
   <div class="hero min-h-screen">
     <div class="hero-content flex-col lg:flex-row-reverse">

@@ -6,44 +6,45 @@ import { UsersDatabase } from "../../supabaseClient"; //imports UsersDatabase to
 //@ts-ignore
 export const POST: RequestHandler = async ({ request }) => {
   const body = await request.json();
-  const { data, error } = await UsersDatabase.from("Users")
-    .select()
-    .eq("Email", body.email)
-    .eq("Password", body.password);
-  if (error) {
-    return json({
-      status: 500,
-      message: "There was an error",
-    });
-  }
-  if (data) {
-    const cookieID = uuidv4();
-    await UsersDatabase.from("Users")
-      .update({
-        session_id: cookieID,
-      })
+  try {
+    const { data, error } = await UsersDatabase.from("Users")
+      .select()
       .eq("Email", body.email);
-    const headers = {
-      "Set-Cookie": cookie.serialize("Session_id", cookieID, {
-        httpOnly: false,
-        maxAge: 60 * 60 * 24 * 7,
-        secure: true,
-        sameSite: "lax",
-        path: "/",
-      }),
-    };
-    return json(
-      {
-        status: 200,
-        message: "Login Successful.",
-      },
-      { headers }
-    );
-  }
-  if (!data) {
-    return json({
-      status: 404,
-      message: "User not found in Database.",
-    });
+    if (data) {
+      const cookieID = uuidv4();
+      try {
+        await UsersDatabase.from("Users")
+          .update({
+            session_id: cookieID,
+          })
+          .eq("Email", body.email);
+      } catch (error) {
+        return json({ status: 500, message: "There was an error" });
+      }
+      const headers = {
+        "Set-Cookie": cookie.serialize("Session_id", cookieID, {
+          httpOnly: false,
+          maxAge: 60 * 60 * 24 * 7,
+          secure: true,
+          sameSite: "lax",
+          path: "/",
+        }),
+      };
+      return json(
+        {
+          status: 200,
+          message: "Login Successful.",
+        },
+        { headers }
+      );
+    }
+    if (!data) {
+      return json({
+        status: 404,
+        message: "User not found in Database.",
+      });
+    }
+  } catch (error) {
+    return json({ status: 500, message: "There was an error" });
   }
 };
