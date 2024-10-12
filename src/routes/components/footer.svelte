@@ -1,15 +1,17 @@
 <script>
-  import logo from "../images/logo.webp"; //imports logo image from images
+  import companyLogo from "../images/company-logo.png"; //imports logo image from images
 </script>
 
 <footer class="footer bg-base-200 text-base-content p-10">
   <aside>
-    <img src={logo} alt="logo" id="footer-logo" />
-    <p>
-      PD Enterprise
-      <br />
-      Providing reliable tech tools for students since 2024
-    </p>
+    <a href="https://pd-enterprise.pages.dev" class="link link-hover">
+      <img src={companyLogo} alt="logo" id="footer-logo" />
+      <p>
+        PD Enterprise
+        <br />
+        Providing reliable tech tools for students since 2024
+      </p>
+    </a>
   </aside>
   <nav>
     <h6 class="footer-title">Services</h6>
@@ -28,7 +30,7 @@
   <nav>
     <h6 class="footer-title">Social</h6>
     <div class="grid grid-flow-col gap-4">
-      <a href="https://x.com/grade_app">
+      <a href="https://x.com/pd-enterprise">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -41,7 +43,7 @@
           ></path>
         </svg>
       </a>
-      <a href="https://www.youtube.com/channel/UC7Fbtm9fpj1pMK-5iiNfz5w">
+      <a href="https://www.youtube.com/">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -60,12 +62,13 @@
 
 <style>
   :root {
-    --image-size: 70px;
+    --image-size: 80px;
   }
   #footer-logo {
     width: var(--image-size);
     border-radius: 100px;
     cursor: pointer;
     margin-bottom: 10px;
+    filter: brightness(0) invert(1);
   }
 </style>

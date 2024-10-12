@@ -57,3 +57,13 @@
     </ul>
   </div>
 </div>
+
+<style>
+  .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: var(--base-100);
+    backdrop-filter: blur(20px);
+  }
+</style>
