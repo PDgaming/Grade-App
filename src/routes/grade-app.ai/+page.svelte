@@ -104,15 +104,19 @@
         console.log(error);
       }
     }
-    //@ts-ignore
-    getUserMessagesFromDb(userEmail).then(() => {
-      const chatLog = document.getElementById("chatlog");
-      setTimeout(() => {
-        if (chatLog) {
-          chatLog.scrollTo(0, chatLog.scrollHeight);
-        }
-      }, 1000);
-    });
+    try {
+      // @ts-ignore
+      getUserMessagesFromDb(userEmail).then(() => {
+        const chatLog = document.getElementById("chatlog");
+        setTimeout(() => {
+          if (chatLog) {
+            chatLog.scrollTo(0, chatLog.scrollHeight);
+          }
+        }, 1000);
+      });
+    } catch (error) {
+      console.log(error);
+    }
   });
   function speak(text: string) {
     const utterance = new SpeechSynthesisUtterance(text);
@@ -157,6 +161,7 @@
           });
         }
         messages = [...messages, ...newMessages]; // This triggers reactivity
+        localStorage.setItem("messages", JSON.stringify(messages));
         shouldShowWelcomeMessage = false;
       } else {
         showToast(
@@ -165,6 +170,16 @@
           2500,
           "error"
         );
+        const messagesInLocalStorage = localStorage.getItem("messages");
+        if (messagesInLocalStorage) {
+          showToast(
+            "Warning",
+            "Showing Messages stored in Local Storage.",
+            2500,
+            "warning"
+          );
+          messages = JSON.parse(messagesInLocalStorage);
+        }
       }
     } catch (error) {
       console.log(error);
@@ -231,7 +246,14 @@
       ]; // add userinput to messages
     } else {
       // if userInput is not empty
-      run(userInput); // userInput goes to run to get response from API
+      run(userInput).then(() => {
+        const chatLog = document.getElementById("chatlog");
+        setTimeout(() => {
+          if (chatLog) {
+            chatLog.scrollTo(0, chatLog.scrollHeight);
+          }
+        }, 1000);
+      });
     }
     userInputElement.value = ""; // removes old message from the input
   }
