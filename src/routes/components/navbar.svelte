@@ -1,3 +1,16 @@
+<script lang="ts">
+  function smoothScroll(event: Event) {
+    event.preventDefault();
+    const target = (event.target as HTMLAnchorElement).getAttribute("href");
+    if (target && target.startsWith("#")) {
+      const element = document.querySelector(target);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }
+</script>
+
 <div class="navbar bg-base-200">
   <div class="navbar-start">
     <div class="dropdown">
@@ -20,18 +33,18 @@
       <ul
         class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 p-2 shadow"
       >
-        <li><a href="#home">Home</a></li>
+        <li><a href="#home" on:click={smoothScroll}>Home</a></li>
         <li>
-          <a href="#features">Features</a>
+          <a href="#features" on:click={smoothScroll}>Features</a>
         </li>
         <li>
-          <a href="#usage">Usage</a>
+          <a href="#usage" on:click={smoothScroll}>Usage</a>
         </li>
         <li>
-          <a href="#acknowledgments">Acknowledgments</a>
+          <a href="#acknowledgments" on:click={smoothScroll}>Acknowledgments</a>
         </li>
         <li>
-          <a href="#contact">Contact</a>
+          <a href="#contact" on:click={smoothScroll}>Contact</a>
         </li>
         <li><a class="btn" href="/login">Login</a></li>
       </ul>

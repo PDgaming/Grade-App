@@ -25,6 +25,17 @@
       }
     }
   });
+
+  function smoothScroll(event: Event) {
+    event.preventDefault();
+    const target = (event.target as HTMLAnchorElement).getAttribute("href");
+    if (target && target.startsWith("#")) {
+      const element = document.querySelector(target);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }
 </script>
 
 <svelte:head>
