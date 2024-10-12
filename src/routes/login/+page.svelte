@@ -152,15 +152,15 @@
 </svelte:head>
 
 <center id="login-text">
-  <h1>Login</h1>
+  <h1 class="text-6xl mb-10">Login</h1>
 </center>
 <center id="normal">
-  <div class="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl mt-4">
+  <div class="card bg-base-200 w-full max-w-sm shrink-0 shadow-2xl mt-4">
     <center>
       <div class="oAuthLoginButtons">
         <button
           id="loginWithGoogleButton"
-          class="btn btn-primary"
+          class="btn btn-primary mt-5"
           on:click={loginWithGoogle}
           ><svg
             xmlns="http://www.w3.org/2000/svg"
@@ -173,7 +173,7 @@
         >
       </div>
       <form class="card-body" style="color: white">
-        <label class="input input-bordered flex items-center gap-2">
+        <label class="input input-bordered flex items-center gap-2 mb-1">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 16 16"
@@ -195,7 +195,7 @@
             bind:value={email}
           />
         </label>
-        <label class="input input-bordered flex items-center gap-2">
+        <label class="input input-bordered flex items-center gap-2 mb-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 16 16"
@@ -231,17 +231,12 @@
   #login-text {
     margin-top: 30px;
   }
-  h1 {
-    font-size: 55px;
-  }
   .oAuthLoginButtons {
     display: inline-flex;
     gap: 10px;
-    margin-top: 10px;
   }
   #loginButton {
-    font-size: 25px;
-    margin-bottom: 10px;
+    font-size: 1.5em;
   }
   #google-icon {
     width: 30px;
