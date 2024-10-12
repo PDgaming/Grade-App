@@ -1,21 +1,27 @@
 <script lang="ts">
-  import Loader from "../../components/loader.svelte"; // imports Loader from components
+  import { onMount } from "svelte"; //imports onMount
+  import NotLoggedIn from "../components/notLoggedIn.svelte"; //imports NotLoggedIn component
+  import "./index.css"; //imports index.css
+  import {
+    toasts,
+    ToastContainer as ToastContainerAny,
+    FlatToast as FlatToastAny,
+  } from "svelte-toasts"; //imports toasts, toastContainer and flatToast to show toasts
+
+  import Loader from "../components/loader.svelte"; // imports Loader from components
   import {
     GoogleGenerativeAI,
     HarmCategory,
     HarmBlockThreshold,
   } from "@google/generative-ai"; // imports GoogleGenerativeAI
-  import { GradeAppDatabase } from "../../supabaseClient";
-  import { onMount } from "svelte";
-  import NotLoggedIn from "../../components/notLoggedIn.svelte";
-  import {
-    toasts,
-    ToastContainer as ToastContainerAny,
-    FlatToast as FlatToastAny,
-  } from "svelte-toasts";
-  import HighlightedContent from "../../components/highlightedContent.svelte";
+  import { GradeAppDatabase } from "../supabaseClient";
+  import HighlightedContent from "../components/highlightedContent.svelte";
 
-  let notLoggedIn = false;
+  let name = "User"; //declares name variable with default value of "User"
+  let membership = "free"; //declares member variable with default value of "false"
+  let notLoggedIn = false; //declares notLoggedIn variable with default value of false
+  let userEmail = ""; //declares userEmail variable with default value of ""
+
   let messages: any = []; // array to store user and ai messages
   let messagesForTTS = [];
   let userInput = ""; // variable to store user message
@@ -26,7 +32,88 @@
   let pauseButton = false;
   let resumeButton = false;
   let stopButton = false;
+  let selectedModel: string;
 
+  const socraticModelSystemPrompt = [
+    {
+      role: "user",
+      parts: [
+        "You are an Socratic Teacher. And I am your Student. Also please try to keep your replies as short as possible.",
+      ],
+    },
+  ];
+  const baseModelSystemPrompt = [
+    {
+      role: "user",
+      parts: ["Please try to keep your replies as short as possible."],
+    },
+  ];
+  let systemPrompt = baseModelSystemPrompt;
+
+  const showToast = (
+    title: string,
+    body: string,
+    duration: number,
+    type: string
+  ) => {
+    const toast = toasts.add({
+      title: title,
+      description: body,
+      duration: duration,
+      placement: "bottom-right",
+      //@ts-ignore
+      type: "info",
+      theme: "dark",
+      //@ts-ignore
+      placement: "bottom-right",
+      showProgress: true,
+      //@ts-ignore
+      type: type,
+      //@ts-ignore
+      theme: "dark",
+      onClick: () => {},
+      onRemove: () => {},
+    });
+  };
+  const ToastContainer = ToastContainerAny as any;
+  const FlatToast = FlatToastAny as any;
+  onMount(() => {
+    //checks if user is logged in by is Display Name exists in sessionStorage
+    if (sessionStorage.getItem("Display Name")) {
+      //@ts-ignore
+      name = sessionStorage.getItem("Display Name"); //sets name variable to the display name from sessionstorage
+      membership = String(sessionStorage.getItem("Membership")); //sets member variable to the member status from sessionstorage
+    } else {
+      //if display name does not exist in sessionStorage
+      //@ts-ignore
+      name = sessionStorage.getItem("Email"); //sets name variable to the email from sessionstorage
+      membership = String(sessionStorage.getItem("Membership")); //sets member variable to the member status from sessionstorage
+      //@ts-ignore
+      userEmail = sessionStorage.getItem("Email"); //sets userEmail to the email from sessionstorage
+    }
+    //checks if name is null
+    if (name == null) {
+      notLoggedIn = true; //sets notLoggedIn to true
+    }
+    if (!userEmail) {
+      notLoggedIn = true;
+    } else {
+      try {
+        initializeEverything();
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    //@ts-ignore
+    getUserMessagesFromDb(userEmail).then(() => {
+      const chatLog = document.getElementById("chatlog");
+      setTimeout(() => {
+        if (chatLog) {
+          chatLog.scrollTo(0, chatLog.scrollHeight);
+        }
+      }, 1000);
+    });
+  });
   function speak(text: string) {
     const utterance = new SpeechSynthesisUtterance(text);
     const voices = speechSynthesis.getVoices();
@@ -55,26 +142,6 @@
       }
     }
   }
-  onMount(() => {
-    const userEmail = sessionStorage.getItem("Email");
-    if (!userEmail) {
-      notLoggedIn = true;
-    }
-    try {
-      initializeEverything();
-    } catch (error) {
-      console.log(error);
-    }
-    //@ts-ignore
-    getUserMessagesFromDb(userEmail).then(() => {
-      const chatLog = document.getElementById("chatlog");
-      setTimeout(() => {
-        if (chatLog) {
-          chatLog.scrollTo(0, chatLog.scrollHeight);
-        }
-      }, 1000);
-    });
-  });
   async function getUserMessagesFromDb(userEmail: string) {
     try {
       const { data, error } = await GradeAppDatabase.from("User-messages")
@@ -103,34 +170,6 @@
       console.log(error);
     }
   }
-  const showToast = (
-    title: string,
-    body: string,
-    duration: number,
-    type: string
-  ) => {
-    const toast = toasts.add({
-      title: title,
-      description: body,
-      duration: duration, // 0 or negative to avoid auto-remove
-      placement: "bottom-right",
-      //@ts-ignore
-      type: "info",
-      theme: "dark",
-      //@ts-ignore
-      placement: "bottom-right",
-      showProgress: true,
-      //@ts-ignore
-      type: type,
-      //@ts-ignore
-      theme: "dark",
-      onClick: () => {},
-      onRemove: () => {},
-      // component: BootstrapToast, // allows to override toast component/template per toast
-    });
-  };
-  const ToastContainer = ToastContainerAny as any;
-  const FlatToast = FlatToastAny as any;
   function speakText() {
     if (messages[messages.length - 1].sender == "Gemini") {
       speak(messages[messages.length - 1].content);
@@ -241,20 +280,7 @@
           chatSession = model.startChat({
             generationConfig,
             safetySettings,
-            history: [
-              {
-                role: "user",
-                parts: [
-                  "You are an Socratic Teacher. And I am your Student. Also please try to keep your replies as short as possible.",
-                ],
-              },
-              {
-                role: "model",
-                parts: [
-                  "Ah, welcome, my dear student. I see you have chosen to embark on a journey of self-discovery. Tell me, what brings you to my humble abode? What questions dance in your mind, waiting to be untangled? \n\nRemember, my role is not to impart knowledge, but to guide you towards it. We shall journey together,  unveiling truths through  thought-provoking questions and patient contemplation. \n\nSo, tell me, what is it you wish to explore?  What are you curious about?  Let us begin our quest. \n",
-                ],
-              },
-            ],
+            history: systemPrompt,
           });
         } catch (error) {
           console.log(`Error setting up chatSession: ${error}`);
@@ -281,8 +307,9 @@
         // Create a single message with line breaks
         const message = {
           content: formattedText,
-          sender: "model",
+          sender: "Gemini",
         }; // stores formatted AI text in message
+
         messages = [...messages, message]; // appends formatted text to messages
         writeDataInDb(prompt, text);
       } catch (error) {
@@ -297,6 +324,42 @@
     textarea.style.height = "auto";
     textarea.style.height = textarea.scrollHeight + "px";
   }
+
+  //function for redirecting to gradeApp
+  async function gradeAiSocratic() {
+    //checks if member is true
+    // if (membership == "tier-2") {
+    systemPrompt = socraticModelSystemPrompt;
+    // } else {
+    //   showToast(
+    //     "Error",
+    //     "Sorry you do not own a tier-2 account needed to access this model.",
+    //     3500,
+    //     "error"
+    //   );
+    // }
+  }
+  async function gradeAiBase() {
+    //checks if member is true
+    // if (membership == "tier-1" || membership == "tier-2") {
+    systemPrompt = baseModelSystemPrompt;
+    // } else {
+    //   showToast(
+    //     "Error",
+    //     "Sorry you do not own a tier-1 account needed to access this model.",
+    //     3500,
+    //     "error"
+    //   );
+    // }
+  }
+  function changeModel() {
+    console.log(selectedModel);
+    if (selectedModel == "Socratic Model") {
+      gradeAiSocratic();
+    } else if (selectedModel == "Base Model") {
+      gradeAiBase();
+    }
+  }
 </script>
 
 <svelte:component this={ToastContainer} let:data>
@@ -304,21 +367,24 @@
 </svelte:component>
 
 <svelte:head>
-  <title>Grade-App AI (powered by Google's Gemini)</title>
+  <title>Grade App - Grade AI</title>
 </svelte:head>
 
 {#if !notLoggedIn}
   <div class="main">
+    <div class="model-selection">
+      <select bind:value={selectedModel} on:change={changeModel}>
+        <option>Base Model</option>
+        <option>Socratic Model</option>
+      </select>
+    </div>
     <div class="chatlog" id="chatlog">
-      <div class="welcome-message p-2">
-        {#if shouldShowWelcomeMessage}
+      {#if shouldShowWelcomeMessage}
+        <div class="welcome-message">
           <h1 id="hello-message" class="text-5xl text-white">Hello There!</h1>
-          <p id="how-to" class="text-2xl">
-            Start a conversation with Gemini by typing in a prompt in the text
-            input below.
-          </p>
-        {/if}
-      </div>
+          <p class="text-2xl">How may i help you today?</p>
+        </div>
+      {/if}
       {#each messages as userMessage}
         <div class={userMessage.sender}>
           <div class="senders">
@@ -366,6 +432,13 @@
 {#if notLoggedIn}<NotLoggedIn />{/if}
 
 <style>
+  .welcome-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+  }
   .senders {
     font-size: 1.6em;
   }
@@ -373,16 +446,16 @@
     font-size: 1.3em;
   }
   .chatlog {
-    height: 88vh;
+    height: 87vh;
     overflow-y: scroll;
     margin-bottom: 5px;
   }
   textarea {
     min-height: 8vh;
     max-height: 80px;
-    height: 8vh;
+    height: 20px;
     width: 60vw;
-    border-radius: 10px;
+    border-radius: 5px;
     border: 1px solid white;
     background-color: #1e1f20;
     color: white;

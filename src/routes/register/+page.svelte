@@ -5,6 +5,8 @@
     FlatToast as FlatToastAny,
   } from "svelte-toasts"; //imports toasts, toastContainer and flatToast to show toasts
   import { goto } from "$app/navigation";
+  import { onMount } from "svelte";
+  import { UsersDatabase } from "../supabaseClient";
 
   let email: string;
   let password: string;
@@ -37,6 +39,25 @@
   };
   const ToastContainer = ToastContainerAny as any;
   const FlatToast = FlatToastAny as any;
+  onMount(async () => {
+    const sessionCookie = decodeURIComponent(document.cookie);
+    if (sessionCookie.includes("Session_id")) {
+      try {
+        const { data, error } = await UsersDatabase.from("Users")
+          .select()
+          .eq("session_id", sessionCookie.split("=")[1]);
+        if (data) {
+          sessionStorage.setItem("Email", data[0].Email);
+          sessionStorage.setItem("Membership", data[0].Membership);
+          goto("/grade-app.ai");
+        } else {
+          console.log(error);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  });
   function registerWithGoogle() {
     showToast(
       "We don't suppot Google Sign Up yet",
@@ -77,7 +98,7 @@
         //shows a toast if user exists, if user does not exists then it will add the user and continue to dashboard
         showToast("Success", "Registration Successfull!!", 2500, "success");
         setTimeout(() => {
-          goto("/dashboard");
+          goto("/grade-app.ai");
         }, 2500); //waits for 2500ms(2.5s) before redirecting to dashboard
       } else {
         showToast("Error", "There was an error", 2500, "error");

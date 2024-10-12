@@ -8,6 +8,8 @@
     FlatToast as FlatToastAny,
   } from "svelte-toasts"; //imports toasts, toastContainer and flatToast to show toasts
   import { goto } from "$app/navigation";
+  import { onMount } from "svelte";
+  import { UsersDatabase } from "../supabaseClient";
 
   // config for firebase
   const firebaseConfig = {
@@ -63,6 +65,25 @@
   };
   const ToastContainer = ToastContainerAny as any;
   const FlatToast = FlatToastAny as any;
+  onMount(async () => {
+    const sessionCookie = decodeURIComponent(document.cookie);
+    if (sessionCookie.includes("Session_id")) {
+      try {
+        const { data, error } = await UsersDatabase.from("Users")
+          .select()
+          .eq("session_id", sessionCookie.split("=")[1]);
+        if (data) {
+          sessionStorage.setItem("Email", data[0].Email);
+          sessionStorage.setItem("Membership", data[0].Membership);
+          goto("/grade-app.ai");
+        } else {
+          console.log(error);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  });
   //function for loggin in with Email
   async function loginWIthEmail() {
     //checks if email and password exist and are not empty
@@ -95,7 +116,7 @@
         //shows a toast if user exists, if user does not exists then it will add the user and continue to dashboard
         showToast("Success", "Login Successfull!!", 2500, "success");
         setTimeout(() => {
-          goto("/dashboard");
+          goto("/grade-app.ai");
         }, 2500); //waits for 2500ms(2.5s) before redirecting to dashboard
       } else if (result.status == 404) {
         showToast(

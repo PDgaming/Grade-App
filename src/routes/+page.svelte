@@ -16,7 +16,7 @@
         if (data) {
           sessionStorage.setItem("Email", data[0].Email);
           sessionStorage.setItem("Membership", data[0].Membership);
-          goto("/dashboard");
+          goto("/grade-app.ai");
         } else {
           console.log(error);
         }
