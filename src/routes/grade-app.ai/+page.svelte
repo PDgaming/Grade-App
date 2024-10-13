@@ -358,6 +358,10 @@
 
         messages = [...messages, message]; // appends formatted text to messages
         writeDataInDb(prompt, text);
+        const chatLog = document.getElementById("chatlog");
+        if (chatLog) {
+          chatLog.scrollTo(0, chatLog.scrollHeight);
+        }
       } catch (error) {
         console.log(`Error sending message: ${error}`);
       }
