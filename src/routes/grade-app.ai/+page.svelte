@@ -17,6 +17,8 @@
   import { GradeAppDatabase } from "../supabaseClient";
   import HighlightedContent from "../components/highlightedContent.svelte";
 
+  import { race } from "./utils";
+
   let name = "User"; //declares name variable with default value of "User"
   let membership = "free"; //declares member variable with default value of "false"
   let notLoggedIn = false; //declares notLoggedIn variable with default value of false
@@ -148,9 +150,19 @@
   }
   async function getUserMessagesFromDb(userEmail: string) {
     try {
-      const { data, error } = await GradeAppDatabase.from("User-messages")
-        .select()
-        .eq("user", userEmail);
+      const fetchMessages = async () => {
+        const { data, error } = await GradeAppDatabase.from("User-messages")
+          .select()
+          .eq("user", userEmail);
+        if (error) throw error;
+        return data;
+      };
+      const timeout = new Promise((_, reject) =>
+        setTimeout(() => reject(new Error("Timeout")), 5000)
+      );
+
+      const data = await race([fetchMessages(), timeout]);
+
       if (data) {
         let newMessages = []; // Declare newMessages here
         for (const row of data) {
@@ -163,26 +175,38 @@
         messages = [...messages, ...newMessages]; // This triggers reactivity
         localStorage.setItem("messages", JSON.stringify(messages));
         shouldShowWelcomeMessage = false;
-      } else {
-        showToast(
-          "Error",
-          "There was an error getting your Messages from Database",
-          2500,
-          "error"
-        );
-        const messagesInLocalStorage = localStorage.getItem("messages");
-        if (messagesInLocalStorage) {
-          showToast(
-            "Warning",
-            "Showing Messages stored in Local Storage.",
-            2500,
-            "warning"
-          );
-          messages = JSON.parse(messagesInLocalStorage);
-        }
       }
+      // else {
+      //   showToast(
+      //     "Error",
+      //     "There was an error getting your Messages from Database",
+      //     2500,
+      //     "error"
+      //   );
+      //   const messagesInLocalStorage = localStorage.getItem("messages");
+      //   if (messagesInLocalStorage) {
+      //     showToast(
+      //       "Warning",
+      //       "Showing Messages stored in Local Storage.",
+      //       2500,
+      //       "warning"
+      //     );
+      //     messages = JSON.parse(messagesInLocalStorage);
+      //   }
+      // }
     } catch (error) {
       console.log(error);
+      showToast(
+        "Warning",
+        "Fetching messages took too long. Using local messages.",
+        2500,
+        "warning"
+      );
+      const messagesInLocalStorage = localStorage.getItem("messages");
+      if (messagesInLocalStorage) {
+        messages = JSON.parse(messagesInLocalStorage);
+        shouldShowWelcomeMessage = false;
+      }
     }
   }
   function speakText() {
@@ -395,7 +419,11 @@
 {#if !notLoggedIn}
   <div class="main">
     <div class="model-selection">
-      <select bind:value={selectedModel} on:change={changeModel}>
+      <select
+        bind:value={selectedModel}
+        on:change={changeModel}
+        class="dropdown-content menu bg-base-500 z-[1] p-2 shadow"
+      >
         <option>Base Model</option>
         <option>Socratic Model</option>
       </select>
@@ -403,8 +431,8 @@
     <div class="chatlog" id="chatlog">
       {#if shouldShowWelcomeMessage}
         <div class="welcome-message">
-          <h1 id="hello-message" class="text-5xl text-white">Hello There!</h1>
-          <p class="text-2xl">How may i help you today?</p>
+          <h1 id="hello-message" class="text-7xl text-white">Hello There!</h1>
+          <p class="text-2xl">How Can I Help You Today?</p>
         </div>
       {/if}
       {#each messages as userMessage}
@@ -454,12 +482,40 @@
 {#if notLoggedIn}<NotLoggedIn />{/if}
 
 <style>
+  .User {
+    width: 50em;
+    background-color: #1e1f20;
+    border-radius: 10px;
+    align-self: flex-end;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    margin-left: auto;
+    margin-bottom: 20px;
+  }
+  .Gemini {
+    width: fit-content;
+    background-color: #2a2b2d;
+    border-radius: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    margin-bottom: 20px;
+  }
+  #hello-message {
+    background: linear-gradient(
+      90deg,
+      rgba(72, 148, 229) 0%,
+      rgba(138, 121, 203) 70%
+    );
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
   .welcome-message {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     gap: 10px;
+    height: 100%;
   }
   .senders {
     font-size: 1.6em;
@@ -468,7 +524,7 @@
     font-size: 1.3em;
   }
   .chatlog {
-    height: 87vh;
+    height: 84vh;
     overflow-y: scroll;
     margin-bottom: 5px;
   }
