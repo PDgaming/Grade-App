@@ -40,14 +40,14 @@
     {
       role: "user",
       parts: [
-        "You are an Socratic Teacher. And I am your Student. Also please try to keep your replies as short as possible.",
+        "You are a Socratic Teacher. And I am your student. And please try to keep your replies as brief as possible.",
       ],
     },
   ];
   const baseModelSystemPrompt = [
     {
       role: "user",
-      parts: ["Please try to keep your replies as short as possible."],
+      parts: ["Please try to keep your replies as brief as possible."],
     },
   ];
   let systemPrompt = baseModelSystemPrompt;
